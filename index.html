@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title><!-- TODO: Event Name --> | Official Event Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="<!-- TODO: Short event pitch: what/when/where -->" />
+    <meta name="theme-color" content="#FF2D2D" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="<!-- TODO: Event Name -->" />
+    <meta property="og:description" content="Join us <!-- TODO: date + location -->" />
+    <meta property="og:image" content="images/hero-bg.jpg" />
+    <meta property="og:type" content="website" />
+
+    <!-- Fonts (self-host or CDN; swap link as needed) -->
+    <!-- Example: -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" /> -->
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/c285d7f716.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="theme-dark">
+    <a class="skip-link sr-only" href="#main">Skip to content</a>
+
+    <header class="site-header" data-sticky>
+        <div class="container header-inner">
+            <a href="#home" class="logo">
+                <img src="images/logo.png" alt="<!-- TODO: Event Name --> logo" />
+            </a>
+            <nav class="site-nav" aria-label="Primary">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+                <ul id="primary-menu" class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#video">Highlights</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#tickets" class="btn btn-accent">Tickets</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact" class="btn-outline">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- 1. Hero Section -->
+        <section id="home" class="hero" aria-label="Hero">
+            <div class="hero-bg" role="img" aria-label="Event background image"></div>
+            <div class="container hero-content">
+                <h1 class="hero-title">Biggest Developer Conference 2025</h1>
+                <p class="hero-meta">
+                    <span class="hero-date"><i class="fa-solid fa-calendar-days"></i> August 24 to 27, 2025 ||</span>
+                    <span class="hero-location"><i class="fa-solid fa-location-dot"></i> College Campus</span>
+                </p>
+                <div class="hero-cta">
+                    <a href="#tickets" class="btn btn-accent">Get Tickets</a>
+                    <a href="#about" class="btn btn-secondary">Join Us</a>
+                </div>
+                <div id="countdown" class="countdown" hidden>
+                    <!-- JS inject countdown segments -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About Section -->
+        <section id="about" class="section about">
+            <div class="container">
+                <header class="section-header">
+                    <h2>About the Event</h2>
+                    <p class="section-tagline">Where Innovation Meets Collaboration</p>
+                </header>
+                <div class="about-grid">
+                    <div class="about-desc">
+                        <p>Biggest Developer Conference 2025 is a premier technology and innovation festival that brings together developers, tech enthusiasts, and industry leaders under one roof. It’s a dynamic platform to showcase cutting-edge technologies, attend insightful sessions, and participate in exciting challenges.</p>
+                        <p>The event is designed to inspire creativity, foster networking, and provide hands-on learning opportunities in the rapidly evolving world of technology. Whether you’re a student, professional, or startup enthusiast, this conference offers the perfect environment to learn, share, and grow.</p>
+                        <p>Developers, designers, entrepreneurs, tech companies, and innovators from across the country. With participants ranging from beginners to experts, it’s the ultimate tech experience for anyone passionate about shaping the future.</p>
+                    </div>
+                    <aside class="about-history">
+                        <h3>History & Impact</h3>
+                        <ul class="about-stats">
+                            <li><strong>10+</strong> years running</li>
+                            <li><strong>50000+</strong> attendees</li>
+                            <li><strong>200+ colleges and participants from 20+ states</strong></li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Video / Highlights -->
+        <section id="video" class="section video">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Highlights</h2>
+                </header>
+                <div class="video-embed-wrapper">
+                    <!-- Preferred: YouTube embed -->
+                    <!-- Replace VIDEO_ID -->
+                    <iframe class="video-embed" src="https://www.youtube.com/embed/VIDEO_ID" title="Event Promo Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <p class="video-caption">Top moments from last year’s event.</p>
+            </div>
+        </section>
+
+        <!-- 4. Schedule -->
+        <section id="schedule" class="section schedule">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Schedule</h2>
+                </header>
+
+                <div class="schedule-tabs" role="tablist" aria-label="Event Days">
+                    <!-- JS builds tabs dynamically based on data.json -->
+                    <!-- Example static fallback -->
+                    <button role="tab" aria-selected="true" aria-controls="day1-panel" id="day1-tab">Day 1</button>
+                    <button role="tab" aria-selected="false" aria-controls="day2-panel" id="day2-tab">Day 2</button>
+                    <button role="tab" aria-selected="false" aria-controls="day3-panel" id="day3-tab">Day 3</button>
+                </div>
+
+                <div id="day1-panel" role="tabpanel" aria-labelledby="day1-tab" class="schedule-day is-active">
+                    <ul class="schedule-list">
+                        <li><time datetime="09:00">09:00</time> Opening Ceremony</li>
+                        <li><time datetime="10:00">10:00</time> Keynote: Future Tech</li>
+                    </ul>
+                </div>
+                <div id="day2-panel" role="tabpanel" aria-labelledby="day2-tab" hidden></div>
+                <div id="day3-panel" role="tabpanel" aria-labelledby="day3-tab" hidden></div>
+
+                <p class="schedule-download">
+                    <a href="docs/schedule.pdf" download>Download Full Agenda (PDF)</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Event Categories -->
+        <section id="events" class="section events">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Event Categories</h2>
+                </header>
+                <ul class="event-category-grid">
+                    <!-- Example card -->
+                    <li class="event-category-card">
+                        <span class="event-icon" aria-hidden="true">🖥️</span>
+                        <h3>Tech Events</h3>
+                        <p>Talks, demos, hackathons.</p>
+                    </li>
+                    <li class="event-category-card">
+                        <span class="event-icon" aria-hidden="true">🎭</span>
+                        <h3>Cultural Events</h3>
+                        <p>Music, dance, performances.</p>
+                    </li>
+                    <!-- etc -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- 6. Speakers & Guests -->
+        <section id="speakers" class="section speakers">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Speakers & Guests</h2>
+                </header>
+                <ul class="speaker-grid" data-populate="speakers"><!-- JS populate --></ul>
+            </div>
+            <!-- Speaker Modal -->
+            <dialog id="speaker-modal" class="speaker-modal" aria-labelledby="speaker-modal-name">
+                <button class="modal-close" data-close-modal>&times;</button>
+                <img id="speaker-modal-img" alt="" />
+                <h3 id="speaker-modal-name"></h3>
+                <p id="speaker-modal-role"></p>
+                <p id="speaker-modal-bio"></p>
+                <p id="speaker-modal-social"></p>
+            </dialog>
+        </section>
+
+        <!-- 7. News & Announcements -->
+        <section id="news" class="section news">
+            <div class="container">
+                <header class="section-header">
+                    <h2>News & Announcements</h2>
+                </header>
+                <form class="news-filter" role="search">
+                    <label for="news-search" class="sr-only">Search news</label>
+                    <input id="news-search" name="q" type="search" placeholder="Search news..." />
+                    <select id="news-category" name="category">
+                        <option value="">All</option>
+                        <option value="announcement">Announcements</option>
+                        <option value="press">Press Release</option>
+                        <option value="update">Updates</option>
+                    </select>
+                </form>
+                <div class="news-cards" data-populate="news"><!-- JS populate --></div>
+            </div>
+        </section>
+
+        <!-- 8. Tickets -->
+        <section id="tickets" class="section tickets">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Tickets</h2>
+                </header>
+                <div class="ticket-grid" data-populate="tickets"><!-- JS populate --></div>
+                <div class="ticket-faq">
+                    <h3>Ticket FAQs</h3>
+                    <details>
+                        <summary>Are student discounts available?</summary>
+                        <p><!-- answer --></p>
+                    </details>
+                    <details>
+                        <summary>Refund policy?</summary>
+                        <p><!-- answer --></p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Team & Volunteers -->
+        <section id="team" class="section team">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Team</h2>
+                </header>
+                <h3>Core Committee</h3>
+                <ul class="team-grid" data-populate="team-core"><!-- JS populate --></ul>
+
+                <h3>Management & Volunteers</h3>
+                <ul class="team-grid" data-populate="team-volunteers"><!-- JS populate --></ul>
+
+                <p class="team-join">
+                    Interested in helping? <a href="#contact" data-scroll>Join us</a>.
+                </p>
+            </div>
+        </section>
+
+        <!-- 10. Gallery -->
+        <section id="gallery" class="section gallery">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Gallery</h2>
+                </header>
+                <ul class="gallery-grid" data-populate="gallery"><!-- JS populate --></ul>
+            </div>
+        </section>
+
+        <!-- 11. FAQ -->
+        <section id="faq" class="section faq">
+            <div class="container">
+                <header class="section-header">
+                    <h2>FAQs</h2>
+                </header>
+                <div class="faq-groups">
+                    <div class="faq-group">
+                        <h3>Tickets</h3>
+                        <div class="accordion" data-accordion="tickets"><!-- JS populate or inline --></div>
+                    </div>
+                    <div class="faq-group">
+                        <h3>Events</h3>
+                        <div class="accordion" data-accordion="events"></div>
+                    </div>
+                    <div class="faq-group">
+                        <h3>Location</h3>
+                        <div class="accordion" data-accordion="location"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Contact -->
+        <section id="contact" class="section contact">
+            <div class="container contact-grid">
+                <div class="contact-form-wrapper">
+                    <header class="section-header">
+                        <h2>Contact Us</h2>
+                    </header>
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <div class="form-field">
+                            <label for="contact-name">Name</label>
+                            <input id="contact-name" name="name" type="text" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-email">Email</label>
+                            <input id="contact-email" name="email" type="email" required />
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-accent">Send Message</button>
+                        <p class="form-status" role="status" aria-live="polite"></p>
+                    </form>
+                    <div class="contact-social">
+                        <h3>Follow Us</h3>
+                        <ul class="social-list">
+                            <li><a href="#" aria-label="Instagram">IG</a></li>
+                            <li><a href="#" aria-label="Facebook">FB</a></li>
+                            <li><a href="#" aria-label="LinkedIn">IN</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="contact-map-wrapper">
+                    <!-- Replace with actual map embed -->
+                    <iframe class="contact-map" src="https://www.google.com/maps/embed?pb=<!-- TODO MAP EMBED CODE -->"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        aria-label="Map to event location"></iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 13. Footer -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#tickets">Tickets</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="docs/terms.pdf">Terms &amp; Conditions</a></li>
+                    <li><a href="docs/privacy.pdf">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col footer-branding">
+                <p>Built by XYZ.</p>
+                <p>&copy; <span id="footer-year"></span> <!-- TODO: Event Org -->. All rights reserved.</p>
+            </div>
+            <div class="footer-col">
+                <ul class="social-list">
+                    <li><a href="#" aria-label="Instagram">IG</a></li>
+                    <li><a href="#" aria-label="Facebook">FB</a></li>
+                    <li><a href="#" aria-label="LinkedIn">IN</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="js/main.js" defer></script>
+</body>
+
+</html>

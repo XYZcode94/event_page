@@ -1,0 +1,117 @@
+{
+    "event": {
+        "name": "TechFest 2025",
+        "start": "2025-12-01T09:00:00+05:30", 
+        "end": "2025-12-03T20:00:00+05:30",
+        "location": "IIT Campus, Mumbai, India"
+    },
+    "speakers": [
+        {
+            "name": "Dr. Asha Menon",
+            "role": "AI Research Lead, XYZ Labs",
+            "bio": "Leading applied AI for healthcare diagnostics.",
+            "image": "images/speakers/asha-menon.jpg",
+            "social": {
+                "twitter": "https://twitter.com/asha_ai",
+                "linkedin": "https://www.linkedin.com/in/ashamenon/"
+            }
+        }
+    ],
+    "tickets": [
+        {
+            "name": "General",
+            "price": "1999",
+            "currency": "₹",
+            "desc": "Full 3-day access",
+            "cta": "https://tickets.example.com/gen"
+        },
+        {
+            "name": "Student",
+            "price": "999",
+            "currency": "₹",
+            "desc": "Requires valid ID",
+            "cta": "https://tickets.example.com/student"
+        },
+        {
+            "name": "VIP",
+            "price": "4999",
+            "currency": "₹",
+            "desc": "Priority seating + lounge",
+            "cta": "https://tickets.example.com/vip"
+        }
+    ],
+    "news": [
+        {
+            "title": "Early Bird Tickets Now Open",
+            "date": "2025-07-10",
+            "category": "announcement",
+            "summary": "Save 20% on passes purchased before Aug 15.",
+            "link": "https://blog.example.com/early-bird"
+        }
+    ],
+    "team": {
+        "core": [
+            {
+                "name": "Priya Shah",
+                "role": "Event Director",
+                "image": "images/team/priya.jpg"
+            }
+        ],
+        "volunteers": [
+            {
+                "name": "Rahul Mehta",
+                "role": "Volunteer",
+                "image": "images/team/rahul.jpg"
+            }
+        ]
+    },
+    "gallery": [
+        {
+            "thumb": "images/gallery/thumbs/img1.jpg",
+            "full": "images/gallery/full/img1.jpg",
+            "alt": "Opening ceremony lights"
+        }
+    ],
+    "faq": {
+        "tickets": [
+            {
+                "q": "Do you offer group discounts?",
+                "a": "Yes, groups of 10+ qualify. Contact us."
+            }
+        ],
+        "events": [
+            {
+                "q": "Are workshops free?",
+                "a": "Some are included; premium workshops require add-on tickets."
+            }
+        ],
+        "location": [
+            {
+                "q": "Is parking available?",
+                "a": "Limited onsite parking. Use public transport where possible."
+            }
+        ]
+    },
+    "schedule": {
+        "Day 1": [
+            {
+                "time": "09:00",
+                "title": "Opening Ceremony",
+                "location": "Main Hall"
+            },
+            {
+                "time": "10:00",
+                "title": "Keynote: Future Tech",
+                "location": "Auditorium"
+            }
+        ],
+        "Day 2": [
+            {
+                "time": "09:30",
+                "title": "AI Workshop",
+                "location": "Lab A"
+            }
+        ],
+        "Day 3": []
+    }
+}
