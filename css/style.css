@@ -136,6 +136,10 @@ body {
     color: #ffffff;
 }
 
+#btn-tickets:hover{
+    color: black ;
+}
+
 .btn-accent:hover,
 .btn-secondary:hover {
     transform: scale(1.03);
