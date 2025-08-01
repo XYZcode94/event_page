@@ -1,105 +1,68 @@
-/* main.js */
-
-import { initCountdown } from './countdown.js';      // optional split
-import { loadDataAndPopulate } from './data-loader.js';
-import { initLightbox } from './lightbox.js';        // optional
-
 document.addEventListener('DOMContentLoaded', () => {
-    initNav();
-    initCountdown({
-        targetDate: '2025-08-01T09:00:00+05:30', // ← EXAMPLE: replace with your real start
-        el: '#countdown'
+
+    // --- 1. Mobile Navigation Toggle (FIXED) ---
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            // Toggle the 'is-open' class on the menu
+            navMenu.classList.toggle('is-open');
+
+            // Toggle the aria-expanded attribute for accessibility
+            const isExpanded = navMenu.classList.contains('is-open');
+            navToggle.setAttribute('aria-expanded', isExpanded);
+        });
+    }
+
+    // --- 2. Scroll-triggered Animations ---
+    // Use a more inclusive selector to grab all elements intended for animation
+    const animatedElements = document.querySelectorAll('.section-header, .about-grid, .video-embed-wrapper, .schedule-tabs, .event-category-card, .speaker-card, .news-card, .ticket-card, .team-card, .gallery-grid li, .faq-groups, .contact-grid, .hero-title, .hero-meta, .hero-cta, .countdown');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: Stop observing after animation to save resources
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1, // Trigger when 10% of the element is visible
     });
-    initScheduleTabs();
-    loadDataAndPopulate('data.json');
-    initSpeakerModal();
-    initLightbox('[data-populate="gallery"] img');
-    initContactForm();
-    setFooterYear();
+
+    animatedElements.forEach(el => {
+        el.classList.add('animate-on-scroll');
+        observer.observe(el);
+    });
+
+    // --- 3. Dynamic Footer Year ---
+    const footerYear = document.getElementById('footer-year');
+    if (footerYear) {
+        footerYear.textContent = new Date().getFullYear();
+    }
+
+    // --- 4. Schedule Tabs Logic ---
+    const tabs = document.querySelectorAll('.schedule-tabs [role="tab"]');
+    const panels = document.querySelectorAll('.schedule-day[role="tabpanel"]');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            // Deactivate all tabs and panels
+            tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+            panels.forEach(p => p.hidden = true);
+
+            // Activate the clicked tab
+            const clickedTab = e.target;
+            clickedTab.setAttribute('aria-selected', 'true');
+
+            // Show the associated panel
+            const panelId = clickedTab.getAttribute('aria-controls');
+            const correspondingPanel = document.getElementById(panelId);
+            if (correspondingPanel) {
+                correspondingPanel.hidden = false;
+            }
+        });
+    });
+
 });
-
-
-/* Mobile Nav */
-function initNav() {
-    const toggle = document.querySelector('.nav-toggle');
-    const menu = document.querySelector('.nav-menu');
-    if (!toggle || !menu) return;
-    toggle.addEventListener('click', () => {
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!expanded));
-        menu.classList.toggle('is-open');
-    });
-    // close after click
-    menu.addEventListener('click', e => {
-        if (e.target.matches('a[href^="#"]')) {
-            menu.classList.remove('is-open');
-            toggle.setAttribute('aria-expanded', 'false');
-        }
-    });
-}
-
-/* Schedule Tabs */
-function initScheduleTabs() {
-    const tablist = document.querySelector('.schedule-tabs');
-    if (!tablist) return;
-    const tabs = [...tablist.querySelectorAll('[role="tab"]')];
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => activateTab(tab, tabs));
-    });
-}
-function activateTab(selected, tabs) {
-    tabs.forEach(tab => {
-        const panelId = tab.getAttribute('aria-controls');
-        const panel = document.getElementById(panelId);
-        const isSel = tab === selected;
-        tab.setAttribute('aria-selected', String(isSel));
-        if (panel) {
-            panel.hidden = !isSel;
-            panel.classList.toggle('is-active', isSel);
-        }
-    });
-}
-
-/* Speakers modal */
-function initSpeakerModal() {
-    const grid = document.querySelector('[data-populate="speakers"]');
-    const modal = document.getElementById('speaker-modal');
-    if (!grid || !modal) return;
-    grid.addEventListener('click', e => {
-        const card = e.target.closest('.speaker-card');
-        if (!card) return;
-        modal.querySelector('#speaker-modal-img').src = card.dataset.img || '';
-        modal.querySelector('#speaker-modal-name').textContent = card.dataset.name || '';
-        modal.querySelector('#speaker-modal-role').textContent = card.dataset.role || '';
-        modal.querySelector('#speaker-modal-bio').textContent = card.dataset.bio || '';
-        modal.querySelector('#speaker-modal-social').innerHTML = card.dataset.social || '';
-        modal.showModal();
-    });
-    modal.querySelector('[data-close-modal]').addEventListener('click', () => modal.close());
-    modal.addEventListener('click', e => {
-        if (e.target === modal) modal.close();
-    });
-}
-
-/* Contact form (simple demo) */
-function initContactForm() {
-    const form = document.getElementById('contact-form');
-    if (!form) return;
-    const statusEl = form.querySelector('.form-status');
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        statusEl.textContent = 'Sending...';
-        // TODO: replace with real submit via fetch()
-        setTimeout(() => {
-            statusEl.textContent = 'Thanks! We will get back to you soon.';
-            form.reset();
-        }, 800);
-    });
-}
-
-/* Footer year */
-function setFooterYear() {
-    const y = new Date().getFullYear();
-    const el = document.getElementById('footer-year');
-    if (el) el.textContent = y;
-}
