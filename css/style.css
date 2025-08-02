@@ -644,7 +644,6 @@ body {
 
 .ticket-badge {
     position: absolute;
-    top: 15px;
     right: -40px;
     background-color: var(--color-accent);
     color: white;
