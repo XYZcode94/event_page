@@ -1,0 +1,58 @@
+{
+  "id": "janmashtami2025",
+  "eventName": "Janmashtami Festivities",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNTC6U7EmChE6li/giphy.gif",
+  "eventStartDate": "2025-08-26T18:00:00+05:30",
+  "eventEndDate": "2025-08-27T01:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Krishna Janmashtami",
+    "dateString": "August 26, 2025",
+    "location": "Campus Temple & Grounds"
+  },
+  "schedule": [
+    {
+      "day": "Main Evening",
+      "date": "Aug 26",
+      "events": [
+        {
+          "time": "18:00",
+          "title": "Bhajan Sandhya",
+          "details": "Devotional songs by the music club"
+        },
+        {
+          "time": "20:00",
+          "title": "Dahi Handi Competition",
+          "details": "Inter-department competition"
+        },
+        {
+          "time": "00:00",
+          "title": "Midnight Aarti & Prasad",
+          "details": "Main Temple"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [],
+  "faq": [],
+  "news": [
+    {
+      "title": "Janmashtami Celebrations Announced",
+      "excerpt": "Witness the Dahi Handi competition and join the midnight aarti.",
+      "date": "2025-08-15",
+      "category": "Announcement"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Cultural Committee",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/222/FFF?text=CC"
+      }
+    ],
+    "volunteers": []
+  }
+}

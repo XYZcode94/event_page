@@ -1,0 +1,75 @@
+{
+  "id": "independence2025",
+  "eventName": "Independence Day 2025",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2025-08-15T09:00:00+05:30",
+  "eventEndDate": "2025-08-15T13:00:00+05:30",
+  "schedulePdfUrl": "https://example.com/path/to/independence_day_schedule.pdf",
+  "hero": {
+    "title": "Independence Day Celebration",
+    "dateString": "August 15, 2025",
+    "location": "Parade Ground"
+  },
+  "schedule": [
+    {
+      "day": "Main Day",
+      "date": "Aug 15",
+      "events": [
+        {
+          "time": "09:00",
+          "title": "Flag Hoisting Ceremony",
+          "details": "Chief Guest: District Magistrate"
+        },
+        {
+          "time": "09:30",
+          "title": "National Anthem & Parade",
+          "details": "NCC Cadets"
+        },
+        {
+          "time": "10:30",
+          "title": "Cultural Programs & Speeches",
+          "details": "Main Stage"
+        },
+        {
+          "time": "12:00",
+          "title": "Sweets Distribution",
+          "details": "All attendees"
+        }
+      ]
+    }
+  ],
+  "speakers": [
+    {
+      "name": "Hon. District Magistrate",
+      "role": "Chief Guest",
+      "img": "https://placehold.co/400x400/222/FFF?text=C.G",
+      "bio": "..."
+    }
+  ],
+  "news": [
+    {
+      "title": "Independence Day Program Announced",
+      "excerpt": "Join us to celebrate the spirit of freedom with a grand parade and cultural events.",
+      "date": "2025-08-01",
+      "category": "Announcement"
+    }
+  ],
+  "tickets": [],
+  "team": {
+    "core": [],
+    "volunteers": []
+  },
+  "gallery": [
+    {
+      "src": "https://placehold.co/600x400/27ae60/FFF?text=Tiranga",
+      "alt": "Indian Flag"
+    }
+  ],
+  "faq": [
+    {
+      "category": "events",
+      "question": "Is the event open to all?",
+      "answer": "Yes, all students, faculty, and local citizens are welcome to attend."
+    }
+  ]
+}

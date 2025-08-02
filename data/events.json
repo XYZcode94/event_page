@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "id": "independence2025",
+      "eventName": "Independence Day 2025",
+      "eventStartDate": "2025-08-15T09:00:00+05:30",
+      "eventEndDate": "2025-08-15T13:00:00+05:30"
+    },
+    {
+      "id": "rakshabandhan2025",
+      "eventName": "Raksha Bandhan Celebration",
+      "eventStartDate": "2025-08-19T10:00:00+05:30",
+      "eventEndDate": "2025-08-19T14:00:00+05:30"
+    },
+    {
+      "id": "janmashtami2025",
+      "eventName": "Janmashtami Festivities",
+      "eventStartDate": "2025-08-26T18:00:00+05:30",
+      "eventEndDate": "2025-08-27T01:00:00+05:30"
+    },
+    {
+      "id": "ganeshchaturthi2025",
+      "eventName": "Ganesh Chaturthi",
+      "eventStartDate": "2025-09-07T11:00:00+05:30",
+      "eventEndDate": "2025-09-07T15:00:00+05:30"
+    },
+    {
+      "id": "navratri2025",
+      "eventName": "Navratri Garba Night",
+      "eventStartDate": "2025-10-02T19:00:00+05:30",
+      "eventEndDate": "2025-10-03T00:00:00+05:30"
+    },
+    {
+      "id": "diwali2025",
+      "eventName": "Diwali - Festival of Lights",
+      "eventStartDate": "2025-10-21T17:00:00+05:30",
+      "eventEndDate": "2025-10-21T21:00:00+05:30"
+    },
+    {
+      "id": "freshers2025",
+      "eventName": "Fresher's Party 2025",
+      "eventStartDate": "2025-11-15T18:00:00+05:30",
+      "eventEndDate": "2025-11-15T23:00:00+05:30"
+    },
+    {
+      "id": "republicday2026",
+      "eventName": "Republic Day of India",
+      "eventStartDate": "2026-01-26T09:00:00+05:30",
+      "eventEndDate": "2026-01-26T12:00:00+05:30"
+    },
+    {
+      "id": "saraswatipuja2026",
+      "eventName": "Saraswati Puja",
+      "eventStartDate": "2026-02-01T09:00:00+05:30",
+      "eventEndDate": "2026-02-01T14:00:00+05:30"
+    },
+    {
+      "id": "techfest2026",
+      "eventName": "Tech Fest 2026",
+      "eventStartDate": "2026-02-20T09:00:00+05:30",
+      "eventEndDate": "2026-02-22T18:00:00+05:30"
+    },
+    {
+      "id": "holi2026",
+      "eventName": "Holi Celebration 2026",
+      "eventStartDate": "2026-03-14T10:00:00+05:30",
+      "eventEndDate": "2026-03-14T17:00:00+05:30"
+    },
+    {
+      "id": "culturalfest2026",
+      "eventName": "Annual Cultural Fest",
+      "eventStartDate": "2026-04-10T10:00:00+05:30",
+      "eventEndDate": "2026-04-12T22:00:00+05:30"
+    }
+  ]
+}

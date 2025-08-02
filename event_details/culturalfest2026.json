@@ -1,0 +1,97 @@
+{
+  "id": "culturalfest2026",
+  "eventName": "Annual Cultural Fest",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2026-04-10T10:00:00+05:30",
+  "eventEndDate": "2026-04-12T22:00:00+05:30",
+  "schedulePdfUrl": "https://example.com/path/to/culturalfest2026_schedule.pdf",
+  "hero": {
+    "title": "Utsav 2026: Annual Cultural Fest",
+    "dateString": "April 10-12, 2026",
+    "location": "College Campus"
+  },
+  "schedule": [
+    {
+      "day": "Day 1",
+      "date": "Apr 10",
+      "events": [
+        {
+          "time": "10:00",
+          "title": "Inauguration",
+          "details": "Main Stage"
+        },
+        {
+          "time": "12:00",
+          "title": "Street Play Competition",
+          "details": "Amphitheater"
+        }
+      ]
+    },
+    {
+      "day": "Day 2",
+      "date": "Apr 11",
+      "events": [
+        {
+          "time": "11:00",
+          "title": "Dance & Music Competitions",
+          "details": "Auditorium"
+        },
+        {
+          "time": "18:00",
+          "title": "Fashion Show",
+          "details": "Main Stage"
+        }
+      ]
+    },
+    {
+      "day": "Day 3",
+      "date": "Apr 12",
+      "events": [
+        {
+          "time": "19:00",
+          "title": "Celebrity Night & Closing Ceremony",
+          "details": "Main Grounds"
+        }
+      ]
+    }
+  ],
+  "speakers": [
+    {
+      "name": "Famous Local Band",
+      "role": "Star Performer",
+      "img": "https://placehold.co/400x400/ccc/000?text=Band",
+      "bio": "..."
+    }
+  ],
+  "tickets": [
+    {
+      "name": "3-Day Pass",
+      "price": "₹500",
+      "features": [
+        "Access to all events",
+        "Entry to Celebrity Night"
+      ],
+      "isFeatured": true
+    }
+  ],
+  "gallery": [],
+  "faq": [],
+  "news": [
+    {
+      "title": "Utsav 2026 is here!",
+      "excerpt": "The biggest cultural extravaganza of the year is back. Get your passes now!",
+      "date": "2026-03-20",
+      "category": "Announcement"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Student Council",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/ddd/000?text=SC"
+      }
+    ],
+    "volunteers": []
+  }
+}

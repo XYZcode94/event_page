@@ -1,0 +1,58 @@
+{
+  "id": "republicday2026",
+  "eventName": "Republic Day of India",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2026-01-26T09:00:00+05:30",
+  "eventEndDate": "2026-01-26T12:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Republic Day Parade",
+    "dateString": "January 26, 2026",
+    "location": "Parade Ground"
+  },
+  "schedule": [
+    {
+      "day": "Main Day",
+      "date": "Jan 26",
+      "events": [
+        {
+          "time": "09:00",
+          "title": "Flag Hoisting by the Director",
+          "details": "Followed by National Anthem"
+        },
+        {
+          "time": "09:30",
+          "title": "March Past & Parade",
+          "details": "NCC and NSS Units"
+        },
+        {
+          "time": "10:30",
+          "title": "Patriotic Cultural Program",
+          "details": "Student Performances"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [],
+  "faq": [],
+  "news": [
+    {
+      "title": "77th Republic Day Celebrations",
+      "excerpt": "All are cordially invited to attend the Republic Day parade and celebrations.",
+      "date": "2026-01-20",
+      "category": "Event"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "College Administration",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/777/FFF?text=CA"
+      }
+    ],
+    "volunteers": []
+  }
+}

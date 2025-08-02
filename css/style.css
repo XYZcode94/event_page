@@ -263,12 +263,22 @@ body {
     overflow: hidden;
 }
 
+
 .hero-bg {
     position: absolute;
     inset: 0;
-    background: url("https://placehold.co/1920x1080/0F0F0F/111111?text=+") center/cover no-repeat;
+    /* Generic background properties */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* Default animation */
     animation: ken-burns 20s infinite alternate ease-in-out;
     z-index: -2;
+}
+
+/* THE FIX: Disable the ken-burns animation when a GIF is active */
+.hero-bg.has-gif {
+    animation: none;
 }
 
 .hero::before {

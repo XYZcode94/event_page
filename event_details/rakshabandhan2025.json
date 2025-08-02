@@ -1,0 +1,30 @@
+{
+  "id": "rakshabandhan2025",
+  "eventName": "Raksha Bandhan Celebration",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Y5bXN2ZGt3aHVscG5tN3N5ZGRzNnZtM3cyb2I4d2g4eGdnbmZpZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVh5ww9R2nZ3t6/giphy.gif",
+  "eventStartDate": "2025-08-09T10:00:00+05:30",
+  "eventEndDate": "2025-08-09T14:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Raksha Bandhan",
+    "dateString": "August 19, 2025",
+    "location": "Student Common Room"
+  },
+  "schedule": [
+    {
+      "day": "Main Day", "date": "Aug 19",
+      "events": [
+        { "time": "10:00", "title": "Rakhi Making Workshop", "details": "All materials provided" },
+        { "time": "12:00", "title": "Celebration & Sweets", "details": "Celebrating the bond of siblings" }
+      ]
+    }
+  ],
+  "speakers": [], "tickets": [], "gallery": [], "faq": [],
+  "news": [
+    { "title": "Celebrate Raksha Bandhan on Campus", "excerpt": "Join our workshop and celebration.", "date": "2025-08-10", "category": "Event" }
+  ],
+  "team": {
+    "core": [{ "name": "Cultural Committee", "role": "Organizers", "img": "https://placehold.co/100x100/222/FFF?text=CC" }],
+    "volunteers": []
+  }
+}

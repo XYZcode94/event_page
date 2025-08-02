@@ -1,0 +1,53 @@
+{
+  "id": "ganeshchaturthi2025",
+  "eventName": "Ganesh Chaturthi",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2025-09-07T11:00:00+05:30",
+  "eventEndDate": "2025-09-07T15:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Ganesh Chaturthi Sthapna",
+    "dateString": "September 7, 2025",
+    "location": "Hostel Common Area"
+  },
+  "schedule": [
+    {
+      "day": "Main Day",
+      "date": "Sep 07",
+      "events": [
+        {
+          "time": "11:00",
+          "title": "Murti Sthapna & Puja",
+          "details": "Inauguration by the Dean"
+        },
+        {
+          "time": "12:30",
+          "title": "Aarti & Bhajans",
+          "details": "Followed by Prasad distribution"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [],
+  "faq": [],
+  "news": [
+    {
+      "title": "Ganesh Chaturthi on Campus",
+      "excerpt": "All are invited for the Murti Sthapna and Aarti.",
+      "date": "2025-09-01",
+      "category": "Event"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Hostel Committee",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/333/FFF?text=HC"
+      }
+    ],
+    "volunteers": []
+  }
+}

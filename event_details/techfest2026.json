@@ -1,0 +1,91 @@
+{
+  "id": "techfest2026",
+  "eventName": "Tech Fest 2026",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0xezQ14y0X8L2y2Y/giphy.gif",
+  "eventStartDate": "2026-02-20T09:00:00+05:30",
+  "eventEndDate": "2026-02-22T18:00:00+05:30",
+  "schedulePdfUrl": "https://example.com/path/to/techfest2026_schedule.pdf",
+  "hero": {
+    "title": "Tech Fest 2026",
+    "dateString": "February 20-22, 2026",
+    "location": "College Campus"
+  },
+  "schedule": [
+    {
+      "day": "Day 1",
+      "date": "Feb 20",
+      "events": [
+        {
+          "time": "09:00",
+          "title": "Inauguration & Keynote",
+          "details": "Main Auditorium"
+        },
+        {
+          "time": "11:00",
+          "title": "Robotics Competition Begins",
+          "details": "Robotics Lab"
+        }
+      ]
+    },
+    {
+      "day": "Day 2",
+      "date": "Feb 21",
+      "events": [
+        {
+          "time": "10:00",
+          "title": "Hackathon Kick-off",
+          "details": "Computer Center"
+        },
+        {
+          "time": "14:00",
+          "title": "Guest Lecture on AI",
+          "details": "Main Auditorium"
+        }
+      ]
+    }
+  ],
+  "speakers": [
+    {
+      "name": "Dr. Alisha Verma",
+      "role": "ISRO Scientist",
+      "img": "https://placehold.co/400x400/999/FFF?text=A.V",
+      "bio": "..."
+    }
+  ],
+  "tickets": [
+    {
+      "name": "Student Pass",
+      "price": "₹200",
+      "features": [
+        "Access to all events"
+      ],
+      "isFeatured": true
+    }
+  ],
+  "gallery": [],
+  "faq": [
+    {
+      "category": "events",
+      "question": "Can I participate in multiple events?",
+      "answer": "Yes, you can register for as many events as you like, provided the timings do not clash."
+    }
+  ],
+  "news": [
+    {
+      "title": "Tech Fest 2026 is Here!",
+      "excerpt": "The annual technical festival is back with more exciting events and competitions.",
+      "date": "2026-02-01",
+      "category": "Announcement"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Tech Club",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/aaa/FFF?text=TC"
+      }
+    ],
+    "volunteers": []
+  }
+}

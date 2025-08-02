@@ -1,0 +1,69 @@
+{
+  "id": "holi2026",
+  "eventName": "Holi Celebration 2026",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3g2c3VwY2h1c3I1Z2o0d2h6c3k3a2VwZzBqYjZ2eGRwYjR0c2p2eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKOqO5cI2vQ5M4w/giphy.gif",
+  "eventStartDate": "2026-03-14T10:00:00+05:30",
+  "eventEndDate": "2026-03-14T17:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Holi - Festival of Colors 2026",
+    "dateString": "March 14, 2026",
+    "location": "College Main Grounds"
+  },
+  "schedule": [
+    {
+      "day": "Main Day",
+      "date": "Mar 14",
+      "events": [
+        {
+          "time": "10:00",
+          "title": "Welcome & Color Distribution",
+          "details": "Entry Point"
+        },
+        {
+          "time": "11:00",
+          "title": "DJ Music & Rain Dance",
+          "details": "Main Stage"
+        },
+        {
+          "time": "13:00",
+          "title": "Special Lunch: Thandai & Gujiya",
+          "details": "Food Court"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [
+    {
+      "src": "https://placehold.co/600x400/c0392b/FFF?text=Holi+Fun",
+      "alt": "Holi Fun"
+    }
+  ],
+  "faq": [
+    {
+      "category": "events",
+      "question": "Are colors provided?",
+      "answer": "Yes, we provide organic and safe-to-use colors for all participants."
+    }
+  ],
+  "news": [
+    {
+      "title": "Join us for Holi!",
+      "excerpt": "Get ready for a splash of color and fun at our annual Holi celebration.",
+      "date": "2026-03-01",
+      "category": "Announcement"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Cultural Committee",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/bbb/FFF?text=CC"
+      }
+    ],
+    "volunteers": []
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "id": "freshers2025",
+  "eventName": "Fresher's Party 2025",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2025-11-15T18:00:00+05:30",
+  "eventEndDate": "2025-11-15T23:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Fresher's Party: A New Beginning",
+    "dateString": "November 15, 2025",
+    "location": "College Auditorium"
+  },
+  "schedule": [
+    {
+      "day": "Main Night",
+      "date": "Nov 15",
+      "events": [
+        {
+          "time": "18:00",
+          "title": "Welcome & Icebreaker Games",
+          "details": "Hosted by Senior Students"
+        },
+        {
+          "time": "19:00",
+          "title": "Talent Show & Performances",
+          "details": "Music, Dance, and Drama"
+        },
+        {
+          "time": "21:00",
+          "title": "Mr. & Ms. Fresher Crowning",
+          "details": "Main Stage"
+        },
+        {
+          "time": "21:30",
+          "title": "Dinner & DJ Night",
+          "details": "Auditorium Hall"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [
+    {
+      "name": "Fresher Pass",
+      "price": "Free",
+      "features": [
+        "Entry to all events",
+        "Dinner Included"
+      ],
+      "isFeatured": true
+    }
+  ],
+  "gallery": [],
+  "faq": [
+    {
+      "category": "events",
+      "question": "Is this event only for first-year students?",
+      "answer": "Yes, this event is exclusively to welcome our new batch of first-year students."
+    }
+  ],
+  "news": [
+    {
+      "title": "Welcome Freshers! Party Announced!",
+      "excerpt": "Get ready for a night of fun, food, and friendship as we welcome our new students.",
+      "date": "2025-11-01",
+      "category": "Announcement"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Senior Student Body",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/666/FFF?text=SSB"
+      }
+    ],
+    "volunteers": []
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "navratri2025",
+  "eventName": "Navratri Garba Night",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2025-10-02T19:00:00+05:30",
+  "eventEndDate": "2025-10-03T00:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Navratri Garba Night",
+    "dateString": "October 2, 2025",
+    "location": "College Auditorium"
+  },
+  "schedule": [
+    {
+      "day": "Main Night",
+      "date": "Oct 02",
+      "events": [
+        {
+          "time": "19:00",
+          "title": "Welcome & Aarti",
+          "details": "Lamp lighting by Director"
+        },
+        {
+          "time": "19:30",
+          "title": "Garba & Dandiya Raas",
+          "details": "Live music and DJ"
+        },
+        {
+          "time": "22:00",
+          "title": "Prize Distribution",
+          "details": "Best Dressed & Best Dancer awards"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [
+    {
+      "src": "https://placehold.co/600x400/e67e22/FFF?text=Garba",
+      "alt": "Garba Night"
+    }
+  ],
+  "faq": [
+    {
+      "category": "events",
+      "question": "Is there a dress code?",
+      "answer": "Traditional attire is encouraged to win prizes, but not mandatory."
+    }
+  ],
+  "news": [
+    {
+      "title": "Get Ready for Garba Night!",
+      "excerpt": "Join us for a night of dance, music, and celebration.",
+      "date": "2025-09-20",
+      "category": "Event"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Student Council",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/444/FFF?text=SC"
+      }
+    ],
+    "volunteers": []
+  }
+}

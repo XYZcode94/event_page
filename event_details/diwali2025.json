@@ -1,0 +1,64 @@
+{
+  "id": "diwali2025",
+  "eventName": "Diwali - Festival of Lights",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+  "eventStartDate": "2025-10-21T17:00:00+05:30",
+  "eventEndDate": "2025-10-21T21:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Diwali - Festival of Lights",
+    "dateString": "October 21, 2025",
+    "location": "Entire Campus"
+  },
+  "schedule": [
+    {
+      "day": "Main Evening",
+      "date": "Oct 21",
+      "events": [
+        {
+          "time": "17:00",
+          "title": "Rangoli & Diya Decoration Competition",
+          "details": "Admin Block"
+        },
+        {
+          "time": "18:30",
+          "title": "Lakshmi Puja",
+          "details": "Hostel Common Rooms"
+        },
+        {
+          "time": "19:30",
+          "title": "Campus Illumination & Safe Fireworks",
+          "details": "Main Grounds"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [],
+  "faq": [
+    {
+      "category": "events",
+      "question": "Are outside fireworks allowed?",
+      "answer": "No, for safety reasons, only fireworks provided by the college at the designated area are permitted."
+    }
+  ],
+  "news": [
+    {
+      "title": "Celebrate a Bright Diwali on Campus",
+      "excerpt": "Join competitions, puja, and a safe fireworks display.",
+      "date": "2025-10-10",
+      "category": "Announcement"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Admin & Student Council",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/555/FFF?text=A"
+      }
+    ],
+    "volunteers": []
+  }
+}

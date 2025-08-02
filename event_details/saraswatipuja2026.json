@@ -1,0 +1,58 @@
+{
+  "id": "saraswatipuja2026",
+  "eventName": "Saraswati Puja",
+  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9B5nB9s2gX6i88/giphy.gif",
+  "eventStartDate": "2026-02-01T09:00:00+05:30",
+  "eventEndDate": "2026-02-01T14:00:00+05:30",
+  "schedulePdfUrl": null,
+  "hero": {
+    "title": "Saraswati Puja 2026",
+    "dateString": "February 1, 2026",
+    "location": "College Quadrangle"
+  },
+  "schedule": [
+    {
+      "day": "Main Day",
+      "date": "Feb 01",
+      "events": [
+        {
+          "time": "09:00",
+          "title": "Sthapna and Puja",
+          "details": "All students and faculty are invited"
+        },
+        {
+          "time": "11:00",
+          "title": "Pushpanjali",
+          "details": "Offering of flowers to the Goddess"
+        },
+        {
+          "time": "12:30",
+          "title": "Prasad & Bhog Distribution",
+          "details": "Community lunch for all"
+        }
+      ]
+    }
+  ],
+  "speakers": [],
+  "tickets": [],
+  "gallery": [],
+  "faq": [],
+  "news": [
+    {
+      "title": "Saraswati Puja Celebrations on Campus",
+      "excerpt": "Join us for Pushpanjali and community Bhog.",
+      "date": "2026-01-25",
+      "category": "Event"
+    }
+  ],
+  "team": {
+    "core": [
+      {
+        "name": "Puja Committee",
+        "role": "Organizers",
+        "img": "https://placehold.co/100x100/888/FFF?text=PC"
+      }
+    ],
+    "volunteers": []
+  }
+}
