@@ -1,91 +1,125 @@
 {
   "id": "techfest2026",
   "eventName": "Tech Fest 2026",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0xezQ14y0X8L2y2Y/giphy.gif",
-  "eventStartDate": "2026-02-20T09:00:00+05:30",
-  "eventEndDate": "2026-02-22T18:00:00+05:30",
-  "schedulePdfUrl": "https://example.com/path/to/techfest2026_schedule.pdf",
+  "meta": {
+    "title": "Tech Fest 2026 | College Events",
+    "description": "The annual technical festival is back with exciting events like robotics, hackathons, and guest lectures from February 20-22, 2026."
+  },
   "hero": {
     "title": "Tech Fest 2026",
     "dateString": "February 20-22, 2026",
-    "location": "College Campus"
+    "location": "College Campus",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT0xezQ14y0X8L2y2Y/giphy.gif",
+    "cta": [
+      { "text": "Register Now", "url": "#tickets", "class": "btn-accent" },
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-secondary" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Day 1",
-      "date": "Feb 20",
-      "events": [
-        {
-          "time": "09:00",
-          "title": "Inauguration & Keynote",
-          "details": "Main Auditorium"
-        },
-        {
-          "time": "11:00",
-          "title": "Robotics Competition Begins",
-          "details": "Robotics Lab"
-        }
+  "about": {
+    "title": "About The Tech Fest",
+    "tagline": "Innovate, Code, Conquer",
+    "description": [
+      "Welcome to the biggest technical extravaganza of the year! Tech Fest 2026 is a three-day celebration of technology, innovation, and engineering prowess. It's a platform for students to showcase their skills, learn from experts, and compete with the best.",
+      "Featuring a diverse range of events from intense hackathons and robotics competitions to insightful guest lectures by industry pioneers, Tech Fest has something for every tech enthusiast. Join us to build, learn, and be inspired."
+    ],
+    "history": {
+      "title": "A Legacy of Innovation",
+      "stats": [
+        { "label": "editions held", "value": "12+" },
+        { "label": "participants last year", "value": "5000+" },
+        { "label": "total prize money", "value": "Over ₹5 Lakhs" }
+      ]
+    }
+  },
+  "highlights": {
+    "title": "Last Year's Glimpses",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look back at the innovation and excitement of Tech Fest 2025."
+  },
+  "schedule": {
+    "pdfUrl": "https://example.com/path/to/techfest2026_schedule.pdf",
+    "days": [
+      {
+        "day": "Day 1", "date": "Feb 20",
+        "events": [
+          { "time": "09:00", "title": "Inauguration & Keynote", "details": "Main Auditorium" },
+          { "time": "11:00", "title": "Robotics Competition (Round 1)", "details": "Robotics Lab" },
+          { "time": "14:00", "title": "Workshop on Machine Learning", "details": "Computer Center" }
+        ]
+      },
+      {
+        "day": "Day 2", "date": "Feb 21",
+        "events": [
+          { "time": "10:00", "title": "24-Hour Hackathon Kick-off", "details": "Computer Center" },
+          { "time": "14:00", "title": "Guest Lecture on Space Tech", "details": "Main Auditorium" }
+        ]
+      },
+      {
+        "day": "Day 3", "date": "Feb 22",
+        "events": [
+          { "time": "11:00", "title": "Hackathon Finale & Judging", "details": "Computer Center" },
+          { "time": "16:00", "title": "Prize Distribution & Closing Ceremony", "details": "Main Auditorium" }
+        ]
+      }
+    ]
+  },
+  "eventCategories": {
+    "title": "Flagship Events",
+    "categories": [
+      { "icon": "fa-solid fa-laptop-code", "title": "Hackathon", "description": "Solve real-world problems in 24 hours." },
+      { "icon": "fa-solid fa-robot", "title": "RoboWars", "description": "Build and battle robots in the arena." },
+      { "icon": "fa-solid fa-microchip", "title": "Circuit Design", "description": "Test your electronics engineering skills." },
+      { "icon": "fa-solid fa-gamepad", "title": "Gaming Tournament", "description": "Compete in popular e-sports titles." }
+    ]
+  },
+  "speakers": {
+    "title": "Guest Speakers",
+    "guests": [
+      { "name": "Dr. Alisha Verma", "role": "ISRO Scientist", "img": "https://placehold.co/400x400/999/FFF?text=AV", "bio": "A leading scientist in satellite communication." }
+    ]
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Tech Fest 2026 is Here!", "excerpt": "The annual technical festival is back with more exciting events and competitions.", "date": "2026-02-01", "category": "Announcement" }
+    ]
+  },
+  "tickets": {
+      "title": "Registration",
+      "packages": [
+        { "name": "Student Pass", "price": "₹200", "features": ["Access to all lectures & events", "Participation in one workshop"], "isFeatured": true }
+      ]
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Tech Club Core",
+      "members": [
+        { "name": "Vikram Rao", "role": "Fest Coordinator", "img": "https://placehold.co/100x100/aaa/FFF?text=VR" }
       ]
     },
-    {
-      "day": "Day 2",
-      "date": "Feb 21",
-      "events": [
-        {
-          "time": "10:00",
-          "title": "Hackathon Kick-off",
-          "details": "Computer Center"
-        },
-        {
-          "time": "14:00",
-          "title": "Guest Lecture on AI",
-          "details": "Main Auditorium"
-        }
-      ]
-    }
-  ],
-  "speakers": [
-    {
-      "name": "Dr. Alisha Verma",
-      "role": "ISRO Scientist",
-      "img": "https://placehold.co/400x400/999/FFF?text=A.V",
-      "bio": "..."
-    }
-  ],
-  "tickets": [
-    {
-      "name": "Student Pass",
-      "price": "₹200",
-      "features": [
-        "Access to all events"
-      ],
-      "isFeatured": true
-    }
-  ],
-  "gallery": [],
-  "faq": [
-    {
-      "category": "events",
-      "question": "Can I participate in multiple events?",
-      "answer": "Yes, you can register for as many events as you like, provided the timings do not clash."
-    }
-  ],
-  "news": [
-    {
-      "title": "Tech Fest 2026 is Here!",
-      "excerpt": "The annual technical festival is back with more exciting events and competitions.",
-      "date": "2026-02-01",
-      "category": "Announcement"
-    }
-  ],
-  "team": {
-    "core": [
-      {
-        "name": "Tech Club",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/aaa/FFF?text=TC"
-      }
-    ],
-    "volunteers": []
+    "volunteers": {
+      "title": "Student Coordinators",
+      "members": []
+    },
+    "joinText": "Want to be a part of the core team? Contact the Tech Club."
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/2980b9/FFF?text=Robotics", "alt": "Robotics Competition" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Can I participate in multiple events?", "answer": "Yes, you can register for as many events as you like, provided the timings do not clash." },
+      { "category": "events", "question": "Is accommodation provided for outstation participants?", "answer": "Limited accommodation is available in the college hostels on a first-come, first-served basis. Please check the registration portal for details." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "Various locations across the College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

@@ -1,69 +1,106 @@
 {
   "id": "navratri2025",
   "eventName": "Navratri Garba Night",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
-  "eventStartDate": "2025-10-02T19:00:00+05:30",
-  "eventEndDate": "2025-10-03T00:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Navratri Garba Night 2025 | College Events",
+    "description": "Join us for a night of dance, music, and celebration for Navratri on October 2, 2025."
+  },
   "hero": {
     "title": "Navratri Garba Night",
     "dateString": "October 2, 2025",
-    "location": "College Auditorium"
+    "location": "College Auditorium",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Night",
-      "date": "Oct 02",
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Welcome & Aarti",
-          "details": "Lamp lighting by Director"
-        },
-        {
-          "time": "19:30",
-          "title": "Garba & Dandiya Raas",
-          "details": "Live music and DJ"
-        },
-        {
-          "time": "22:00",
-          "title": "Prize Distribution",
-          "details": "Best Dressed & Best Dancer awards"
-        }
+  "about": {
+    "title": "About The Event",
+    "tagline": "A Night of Energetic Dance",
+    "description": [
+      "Get ready for the most awaited dance night of the year! Our Navratri Garba Night is a celebration of culture, music, and togetherness. Dress in your most vibrant traditional attire and get ready to dance the night away to the beats of Garba and Dandiya.",
+      "The evening will feature a live band, professional singers, and a DJ to keep the energy high. We will also have awards for the best-dressed couple and the best dancer, so bring your best moves!"
+    ],
+    "history": {
+      "title": "A Campus Favorite",
+      "stats": [
+        { "label": "years celebrating", "value": "8+" },
+        { "label": "dancers participate", "value": "Over 2000" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [],
-  "gallery": [
-    {
-      "src": "https://placehold.co/600x400/e67e22/FFF?text=Garba",
-      "alt": "Garba Night"
-    }
-  ],
-  "faq": [
-    {
-      "category": "events",
-      "question": "Is there a dress code?",
-      "answer": "Traditional attire is encouraged to win prizes, but not mandatory."
-    }
-  ],
-  "news": [
-    {
-      "title": "Get Ready for Garba Night!",
-      "excerpt": "Join us for a night of dance, music, and celebration.",
-      "date": "2025-09-20",
-      "category": "Event"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Garba",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "See the energy and colors of last year's spectacular event."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "Student Council",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/444/FFF?text=SC"
+        "day": "Main Night", "date": "Oct 02",
+        "events": [
+          { "time": "19:00", "title": "Welcome & Aarti", "details": "Lamp lighting by the Director" },
+          { "time": "19:30", "title": "Garba & Dandiya Raas", "details": "Live music and DJ sets" },
+          { "time": "22:00", "title": "Prize Distribution", "details": "Best Dressed & Best Dancer awards" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "Evening's Highlights",
+    "categories": [
+      { "icon": "fa-solid fa-drum", "title": "Live Music", "description": "Dance to the beats of a professional Garba band." },
+      { "icon": "fa-solid-fa-award", "title": "Competitions", "description": "Win prizes for your costume and dance skills." },
+      { "icon": "fa-solid fa-utensils", "title": "Food Stalls", "description": "Enjoy delicious festive snacks and drinks." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Get Ready for Garba Night!", "excerpt": "Join us for a night of dance, music, and celebration.", "date": "2025-09-20", "category": "Event" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": [
+        { "name": "Student Entry", "price": "₹100", "features": ["Entry to the event", "One complimentary drink"], "isFeatured": true }
+      ]
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Student Council",
+      "members": [
+        { "name": "Aisha Khan", "role": "Event Head", "img": "https://placehold.co/100x100/444/FFF?text=AK" }
+      ]
+    },
+    "volunteers": {
+      "title": "",
+      "members": []
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/e67e22/FFF?text=Garba", "alt": "Garba Night" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Is there a dress code?", "answer": "Traditional attire is encouraged to win prizes, but it is not mandatory for entry." },
+      { "category": "events", "question": "Will Dandiya sticks be provided?", "answer": "A limited number of Dandiya sticks will be available for use at the venue, but you are welcome to bring your own." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "College Auditorium,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

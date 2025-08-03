@@ -1,97 +1,122 @@
 {
   "id": "culturalfest2026",
   "eventName": "Annual Cultural Fest",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
-  "eventStartDate": "2026-04-10T10:00:00+05:30",
-  "eventEndDate": "2026-04-12T22:00:00+05:30",
-  "schedulePdfUrl": "https://example.com/path/to/culturalfest2026_schedule.pdf",
+  "meta": {
+    "title": "Utsav 2026: Annual Cultural Fest | College Events",
+    "description": "The biggest cultural extravaganza of the year is back with dance, music, fashion, and a celebrity night from April 10-12, 2026."
+  },
   "hero": {
     "title": "Utsav 2026: Annual Cultural Fest",
     "dateString": "April 10-12, 2026",
-    "location": "College Campus"
+    "location": "College Campus",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+    "cta": [
+      { "text": "Get Passes", "url": "#tickets", "class": "btn-accent" },
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-secondary" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Day 1",
-      "date": "Apr 10",
-      "events": [
-        {
-          "time": "10:00",
-          "title": "Inauguration",
-          "details": "Main Stage"
-        },
-        {
-          "time": "12:00",
-          "title": "Street Play Competition",
-          "details": "Amphitheater"
-        }
-      ]
-    },
-    {
-      "day": "Day 2",
-      "date": "Apr 11",
-      "events": [
-        {
-          "time": "11:00",
-          "title": "Dance & Music Competitions",
-          "details": "Auditorium"
-        },
-        {
-          "time": "18:00",
-          "title": "Fashion Show",
-          "details": "Main Stage"
-        }
-      ]
-    },
-    {
-      "day": "Day 3",
-      "date": "Apr 12",
-      "events": [
-        {
-          "time": "19:00",
-          "title": "Celebrity Night & Closing Ceremony",
-          "details": "Main Grounds"
-        }
-      ]
-    }
-  ],
-  "speakers": [
-    {
-      "name": "Famous Local Band",
-      "role": "Star Performer",
-      "img": "https://placehold.co/400x400/ccc/000?text=Band",
-      "bio": "..."
-    }
-  ],
-  "tickets": [
-    {
-      "name": "3-Day Pass",
-      "price": "₹500",
-      "features": [
-        "Access to all events",
-        "Entry to Celebrity Night"
-      ],
-      "isFeatured": true
-    }
-  ],
-  "gallery": [],
-  "faq": [],
-  "news": [
-    {
-      "title": "Utsav 2026 is here!",
-      "excerpt": "The biggest cultural extravaganza of the year is back. Get your passes now!",
-      "date": "2026-03-20",
-      "category": "Announcement"
-    }
-  ],
-  "team": {
-    "core": [
-      {
-        "name": "Student Council",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/ddd/000?text=SC"
-      }
+  "about": {
+    "title": "About Utsav 2026",
+    "tagline": "A Celebration of Art and Culture",
+    "description": [
+      "Utsav, the annual cultural festival of our college, is back bigger and better than ever! It's a three-day extravaganza that brings together talent from across the nation for a vibrant celebration of music, dance, drama, and art.",
+      "From electrifying dance-offs and soulful musical performances to a glamorous fashion show and thought-provoking street plays, Utsav is a platform for students to express their creativity. The festival culminates in a star-studded Celebrity Night, making it an unmissable event."
     ],
-    "volunteers": []
+    "history": {
+      "title": "A Legacy of Celebration",
+      "stats": [
+        { "label": "years of Utsav", "value": "20+" },
+        { "label": "participating colleges", "value": "50+" },
+        { "label": "footfall", "value": "Over 10,000" }
+      ]
+    }
+  },
+  "highlights": {
+    "title": "Last Year's Celebrity Night",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look back at the electrifying performance from Utsav 2025."
+  },
+  "schedule": {
+    "pdfUrl": "https://example.com/path/to/culturalfest2026_schedule.pdf",
+    "days": [
+      {
+        "day": "Day 1", "date": "Apr 10",
+        "events": [
+          { "time": "10:00", "title": "Inauguration Ceremony", "details": "Main Stage" },
+          { "time": "12:00", "title": "Street Play Competition (Nukkad Natak)", "details": "Amphitheater" }
+        ]
+      },
+      {
+        "day": "Day 2", "date": "Apr 11",
+        "events": [
+          { "time": "11:00", "title": "Dance & Music Competitions", "details": "Auditorium" },
+          { "time": "18:00", "title": "Fashion Show - 'Vogue'", "details": "Main Stage" }
+        ]
+      },
+      {
+        "day": "Day 3", "date": "Apr 12",
+        "events": [
+          { "time": "19:00", "title": "Celebrity Night & Closing Ceremony", "details": "Main Grounds" }
+        ]
+      }
+    ]
+  },
+  "eventCategories": {
+    "title": "Flagship Events",
+    "categories": [
+      { "icon": "fa-solid fa-music", "title": "Battle of Bands", "description": "Rock and metal band competition." },
+      { "icon": "fa-solid fa-masks-theater", "title": "Stage Play", "description": "Theatrical performances." },
+      { "icon": "fa-solid fa-person-walking", "title": "Fashion Show", "description": "Where style meets the ramp." },
+      { "icon": "fa-solid fa-star", "title": "Celebrity Night", "description": "A grand finale with a star performer." }
+    ]
+  },
+  "speakers": {
+    "title": "Star Performer",
+    "guests": [
+      { "name": "Famous Local Band", "role": "Headliner", "img": "https://placehold.co/400x400/ccc/000?text=Band", "bio": "A popular band known for their energetic live performances." }
+    ]
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Utsav 2026 is here!", "excerpt": "The biggest cultural extravaganza of the year is back. Get your passes now!", "date": "2026-03-20", "category": "Announcement" }
+    ]
+  },
+  "tickets": {
+      "title": "Get Your Passes",
+      "packages": [
+        { "name": "3-Day Combo Pass", "price": "₹500", "features": ["Access to all events", "Entry to Celebrity Night"], "isFeatured": true }
+      ]
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Student Council",
+      "members": [
+        { "name": "Ananya Sharma", "role": "Fest President", "img": "https://placehold.co/100x100/ddd/000?text=AS" }
+      ]
+    },
+    "volunteers": {
+      "title": "Student Coordinators",
+      "members": []
+    },
+    "joinText": "Become a part of the Utsav family. Volunteer registration is now open."
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/8e44ad/FFF?text=Stage+Lights", "alt": "Stage Lights" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Are passes available for individual days?", "answer": "Yes, single-day passes will be available at the venue, but the 3-day combo pass offers the best value." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "Various locations across the College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

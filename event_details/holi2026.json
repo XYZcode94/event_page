@@ -1,69 +1,103 @@
 {
   "id": "holi2026",
   "eventName": "Holi Celebration 2026",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3g2c3VwY2h1c3I1Z2o0d2h6c3k3a2VwZzBqYjZ2eGRwYjR0c2p2eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKOqO5cI2vQ5M4w/giphy.gif",
-  "eventStartDate": "2026-03-14T10:00:00+05:30",
-  "eventEndDate": "2026-03-14T17:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Holi 2026 | College Events",
+    "description": "Celebrate the festival of colors with music, dance, and fun on March 14, 2026."
+  },
   "hero": {
     "title": "Holi - Festival of Colors 2026",
     "dateString": "March 14, 2026",
-    "location": "College Main Grounds"
+    "location": "College Main Grounds",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3g2c3VwY2h1c3I1Z2o0d2h6c3k3a2VwZzBqYjZ2eGRwYjR0c2p2eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKOqO5cI2vQ5M4w/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Day",
-      "date": "Mar 14",
-      "events": [
-        {
-          "time": "10:00",
-          "title": "Welcome & Color Distribution",
-          "details": "Entry Point"
-        },
-        {
-          "time": "11:00",
-          "title": "DJ Music & Rain Dance",
-          "details": "Main Stage"
-        },
-        {
-          "time": "13:00",
-          "title": "Special Lunch: Thandai & Gujiya",
-          "details": "Food Court"
-        }
+  "about": {
+    "title": "About The Festival",
+    "tagline": "A Splash of Joy and Togetherness",
+    "description": [
+      "Get ready for the most vibrant day on the college calendar! Our Holi celebration is a day to forget worries, end conflicts, and come together in a riot of color and happiness.",
+      "We will provide organic, skin-safe colors for everyone. The main grounds will be transformed with a rain dance setup and a live DJ playing the latest hits to keep you dancing all day long. A special festive lunch will also be served."
+    ],
+    "history": {
+      "title": "Our Most Colorful Day",
+      "stats": [
+        { "label": "years celebrating", "value": "15+" },
+        { "label": "colors used (in kgs)", "value": "100+" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [],
-  "gallery": [
-    {
-      "src": "https://placehold.co/600x400/c0392b/FFF?text=Holi+Fun",
-      "alt": "Holi Fun"
-    }
-  ],
-  "faq": [
-    {
-      "category": "events",
-      "question": "Are colors provided?",
-      "answer": "Yes, we provide organic and safe-to-use colors for all participants."
-    }
-  ],
-  "news": [
-    {
-      "title": "Join us for Holi!",
-      "excerpt": "Get ready for a splash of color and fun at our annual Holi celebration.",
-      "date": "2026-03-01",
-      "category": "Announcement"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Celebration",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look back at the fun and festivities of Holi 2025."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "Cultural Committee",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/bbb/FFF?text=CC"
+        "day": "Main Day", "date": "Mar 14",
+        "events": [
+          { "time": "10:00", "title": "Welcome & Color Distribution", "details": "Entry Point" },
+          { "time": "11:00", "title": "DJ Music & Rain Dance", "details": "Main Stage" },
+          { "time": "13:00", "title": "Special Lunch: Thandai & Gujiya", "details": "Food Court" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "Day's Attractions",
+    "categories": [
+      { "icon": "fa-solid fa-droplet", "title": "Color Splash", "description": "Play with safe, organic colors." },
+      { "icon": "fa-solid fa-music", "title": "Live DJ", "description": "Dance to non-stop music." },
+      { "icon": "fa-solid fa-cloud-showers-heavy", "title": "Rain Dance", "description": "Cool off and have fun in the rain." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Join us for Holi!", "excerpt": "Get ready for a splash of color and fun at our annual Holi celebration.", "date": "2026-03-01", "category": "Announcement" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Cultural Committee",
+      "members": [
+        { "name": "Priya Sharma", "role": "Cultural Secretary", "img": "https://placehold.co/100x100/bbb/FFF?text=PS" }
+      ]
+    },
+    "volunteers": {
+      "title": "",
+      "members": []
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/c0392b/FFF?text=Holi+Fun", "alt": "Holi Fun" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Are colors provided?", "answer": "Yes, we provide organic and safe-to-use colors for all participants. Outside colors are not permitted." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "College Main Grounds,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

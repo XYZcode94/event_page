@@ -7,8 +7,8 @@
  * =================================================================
  */
 
-import { getCurrentEvent } from './events.js';
-import { renderPage, setupEventListeners, setFooterYear, initCountdown, setupScrollAnimations } from './handel.js';
+import { getCurrentEvent } from './modules/events.js';
+import { renderPage, setupEventListeners, setFooterYear, initCountdown, setupScrollAnimations } from './modules/ui.js';
 
 /**
  * Displays a helpful error message directly on the webpage.

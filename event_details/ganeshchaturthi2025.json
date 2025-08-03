@@ -1,53 +1,102 @@
 {
   "id": "ganeshchaturthi2025",
   "eventName": "Ganesh Chaturthi",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
-  "eventStartDate": "2025-09-07T11:00:00+05:30",
-  "eventEndDate": "2025-09-07T15:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Ganesh Chaturthi 2025 | College Events",
+    "description": "Welcome Lord Ganesha with a grand Sthapna and puja on September 7, 2025."
+  },
   "hero": {
     "title": "Ganesh Chaturthi Sthapna",
     "dateString": "September 7, 2025",
-    "location": "Hostel Common Area"
+    "location": "Hostel Common Area",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Day",
-      "date": "Sep 07",
-      "events": [
-        {
-          "time": "11:00",
-          "title": "Murti Sthapna & Puja",
-          "details": "Inauguration by the Dean"
-        },
-        {
-          "time": "12:30",
-          "title": "Aarti & Bhajans",
-          "details": "Followed by Prasad distribution"
-        }
+  "about": {
+    "title": "About The Festival",
+    "tagline": "Welcoming the Lord of Beginnings",
+    "description": [
+      "Join the hostel residents and the entire college community as we welcome Lord Ganesha. The festival of Ganesh Chaturthi marks a time of new beginnings, wisdom, and prosperity.",
+      "Our celebration will begin with the 'Sthapna' (installation) of the beautifully crafted idol of Lord Ganesha, followed by a traditional puja and aarti. It's a day of devotion and seeking blessings for the academic year ahead."
+    ],
+    "history": {
+      "title": "A Hostel Tradition",
+      "stats": [
+        { "label": "years celebrating", "value": "20+" },
+        { "label": "students attend", "value": "All residents" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [],
-  "gallery": [],
-  "faq": [],
-  "news": [
-    {
-      "title": "Ganesh Chaturthi on Campus",
-      "excerpt": "All are invited for the Murti Sthapna and Aarti.",
-      "date": "2025-09-01",
-      "category": "Event"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Sthapna",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look at the devotional atmosphere of last year's puja."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "Hostel Committee",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/333/FFF?text=HC"
+        "day": "Main Day", "date": "Sep 07",
+        "events": [
+          { "time": "11:00", "title": "Murti Sthapna & Puja", "details": "Inauguration by the Dean of Student Affairs" },
+          { "time": "12:30", "title": "Aarti & Bhajans", "details": "Followed by Prasad (Modak) distribution" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "Day's Activities",
+    "categories": [
+      { "icon": "fa-solid fa-gopuram", "title": "Sthapna Puja", "description": "Participate in the sacred installation ceremony." },
+      { "icon": "fa-solid fa-om", "title": "Aarti & Bhajans", "description": "Join in the devotional songs and prayers." },
+      { "icon": "fa-solid fa-cookie-bite", "title": "Prasad Distribution", "description": "Enjoy the traditional Modak offering." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Ganesh Chaturthi on Campus", "excerpt": "All are invited for the Murti Sthapna and Aarti.", "date": "2025-09-01", "category": "Event" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Hostel Committee",
+      "members": [
+        { "name": "Rajesh Gupta", "role": "Hostel Warden", "img": "https://placehold.co/100x100/333/FFF?text=RG" }
+      ]
+    },
+    "volunteers": {
+      "title": "",
+      "members": []
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/f39c12/FFF?text=Ganesha", "alt": "Ganesha Idol" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Is there a dress code?", "answer": "Traditional or smart casual attire is recommended for the puja." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "Main Common Area, Boys' Hostel 1,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

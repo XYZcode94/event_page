@@ -1,79 +1,108 @@
 {
   "id": "freshers2025",
   "eventName": "Fresher's Party 2025",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
-  "eventStartDate": "2025-11-15T18:00:00+05:30",
-  "eventEndDate": "2025-11-15T23:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Fresher's Party 2025 | College Events",
+    "description": "A night of fun, food, and friendship to welcome our new students on November 15, 2025."
+  },
   "hero": {
     "title": "Fresher's Party: A New Beginning",
     "dateString": "November 15, 2025",
-    "location": "College Auditorium"
+    "location": "College Auditorium",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Night",
-      "date": "Nov 15",
-      "events": [
-        {
-          "time": "18:00",
-          "title": "Welcome & Icebreaker Games",
-          "details": "Hosted by Senior Students"
-        },
-        {
-          "time": "19:00",
-          "title": "Talent Show & Performances",
-          "details": "Music, Dance, and Drama"
-        },
-        {
-          "time": "21:00",
-          "title": "Mr. & Ms. Fresher Crowning",
-          "details": "Main Stage"
-        },
-        {
-          "time": "21:30",
-          "title": "Dinner & DJ Night",
-          "details": "Auditorium Hall"
-        }
+  "about": {
+    "title": "About The Party",
+    "tagline": "Welcome to the Family!",
+    "description": [
+      "Get ready for an unforgettable night dedicated to our newest members! The annual Fresher's Party is a long-standing tradition where senior students officially welcome the first-year batch into the college family.",
+      "The evening is packed with exciting ice-breaker games, a talent show where freshers can showcase their skills, and the crowning of Mr. & Ms. Fresher 2025. The night concludes with a delicious dinner followed by a DJ night where everyone can hit the dance floor."
+    ],
+    "history": {
+      "title": "A Cherished Tradition",
+      "stats": [
+        { "label": "years running", "value": "30+" },
+        { "label": "new students welcomed", "value": "Thousands" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [
-    {
-      "name": "Fresher Pass",
-      "price": "Free",
-      "features": [
-        "Entry to all events",
-        "Dinner Included"
-      ],
-      "isFeatured": true
-    }
-  ],
-  "gallery": [],
-  "faq": [
-    {
-      "category": "events",
-      "question": "Is this event only for first-year students?",
-      "answer": "Yes, this event is exclusively to welcome our new batch of first-year students."
-    }
-  ],
-  "news": [
-    {
-      "title": "Welcome Freshers! Party Announced!",
-      "excerpt": "Get ready for a night of fun, food, and friendship as we welcome our new students.",
-      "date": "2025-11-01",
-      "category": "Announcement"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Party",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look back at the fun and excitement of the 2024 Fresher's Party."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "Senior Student Body",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/666/FFF?text=SSB"
+        "day": "Main Night", "date": "Nov 15",
+        "events": [
+          { "time": "18:00", "title": "Welcome & Icebreaker Games", "details": "Hosted by Senior Students" },
+          { "time": "19:00", "title": "Talent Show & Performances", "details": "Music, Dance, and Drama" },
+          { "time": "21:00", "title": "Mr. & Ms. Fresher Crowning", "details": "Main Stage" },
+          { "time": "21:30", "title": "Dinner & DJ Night", "details": "Auditorium Hall" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "What to Expect",
+    "categories": [
+      { "icon": "fa-solid fa-gamepad", "title": "Fun & Games", "description": "Engaging activities to break the ice." },
+      { "icon": "fa-solid fa-microphone-stage", "title": "Talent Show", "description": "Discover the hidden talents of the new batch." },
+      { "icon": "fa-solid fa-crown", "title": "Mr. & Ms. Fresher", "description": "The most anticipated title of the night." },
+      { "icon": "fa-solid fa-compact-disc", "title": "DJ Night", "description": "Dance the night away with your new friends." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Welcome Freshers! Party Announced!", "excerpt": "Get ready for a night of fun, food, and friendship as we welcome our new students.", "date": "2025-11-01", "category": "Announcement" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": [
+        { "name": "Fresher Pass", "price": "Free", "features": ["Entry to all events", "Dinner Included"], "isFeatured": true }
+      ]
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Senior Student Body",
+      "members": [
+        { "name": "Riya Singh", "role": "Event Head", "img": "https://placehold.co/100x100/666/FFF?text=RS" }
+      ]
+    },
+    "volunteers": {
+      "title": "",
+      "members": []
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/9b59b6/FFF?text=Party", "alt": "Party decorations" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Is this event only for first-year students?", "answer": "Yes, this event is exclusively to welcome our new batch of first-year students. Entry is restricted to them." },
+      { "category": "events", "question": "Is there a dress code?", "answer": "The dress code is smart casuals. Dress to impress!" }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "College Auditorium,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

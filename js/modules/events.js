@@ -7,8 +7,8 @@
  * =================================================================
  */
 
-const MASTER_LIST_URL = 'data/events.json';
-const DETAILS_BASE_URL = 'event_details/';
+const MASTER_LIST_URL = '../../data/events.json';
+const DETAILS_BASE_URL = '../../event_details/';
 
 async function fetchEventList() {
     try {

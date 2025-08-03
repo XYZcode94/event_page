@@ -1,58 +1,103 @@
 {
   "id": "saraswatipuja2026",
   "eventName": "Saraswati Puja",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9B5nB9s2gX6i88/giphy.gif",
-  "eventStartDate": "2026-02-01T09:00:00+05:30",
-  "eventEndDate": "2026-02-01T14:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Saraswati Puja 2026 | College Events",
+    "description": "Seek the blessings of the goddess of knowledge, music, and art on February 1, 2026."
+  },
   "hero": {
     "title": "Saraswati Puja 2026",
     "dateString": "February 1, 2026",
-    "location": "College Quadrangle"
+    "location": "College Quadrangle",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l1J9B5nB9s2gX6i88/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Day",
-      "date": "Feb 01",
-      "events": [
-        {
-          "time": "09:00",
-          "title": "Sthapna and Puja",
-          "details": "All students and faculty are invited"
-        },
-        {
-          "time": "11:00",
-          "title": "Pushpanjali",
-          "details": "Offering of flowers to the Goddess"
-        },
-        {
-          "time": "12:30",
-          "title": "Prasad & Bhog Distribution",
-          "details": "Community lunch for all"
-        }
+  "about": {
+    "title": "About The Puja",
+    "tagline": "An Ode to Knowledge and Art",
+    "description": [
+      "We invite all students and faculty to the auspicious occasion of Saraswati Puja. This day is dedicated to the goddess of wisdom, learning, and the arts, marking a special day for our academic community.",
+      "The celebration begins in the morning with the sthapna of the idol, followed by a collective Pushpanjali where everyone can offer flowers. The event concludes with a community lunch (Bhog) for all attendees, fostering a sense of togetherness and shared blessings."
+    ],
+    "history": {
+      "title": "A Sacred Tradition",
+      "stats": [
+        { "label": "years celebrating", "value": "40+" },
+        { "label": "attendees for Bhog", "value": "Thousands" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [],
-  "gallery": [],
-  "faq": [],
-  "news": [
-    {
-      "title": "Saraswati Puja Celebrations on Campus",
-      "excerpt": "Join us for Pushpanjali and community Bhog.",
-      "date": "2026-01-25",
-      "category": "Event"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Puja",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A glimpse into the serene and devotional atmosphere of last year's celebration."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "Puja Committee",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/888/FFF?text=PC"
+        "day": "Main Day", "date": "Feb 01",
+        "events": [
+          { "time": "09:00", "title": "Sthapna and Puja", "details": "All students and faculty are invited" },
+          { "time": "11:00", "title": "Pushpanjali", "details": "Offering of flowers to the Goddess" },
+          { "time": "12:30", "title": "Prasad & Bhog Distribution", "details": "Community lunch for all" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "Day's Rituals",
+    "categories": [
+      { "icon": "fa-solid-fa-book-open", "title": "Seeking Blessings", "description": "A day dedicated to knowledge and learning." },
+      { "icon": "fa-solid fa-hands-praying", "title": "Pushpanjali", "description": "Join the collective flower offering." },
+      { "icon": "fa-solid fa-utensils", "title": "Community Lunch", "description": "Share in the sacred Bhog prasad." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Saraswati Puja Celebrations on Campus", "excerpt": "Join us for Pushpanjali and community Bhog.", "date": "2026-01-25", "category": "Event" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Puja Committee",
+      "members": [
+        { "name": "Prof. S. Banerjee", "role": "Faculty Head", "img": "https://placehold.co/100x100/888/FFF?text=SB" }
+      ]
+    },
+    "volunteers": {
+      "title": "",
+      "members": []
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/ecf0f1/000?text=Saraswati+Idol", "alt": "Saraswati Idol" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "What should I wear?", "answer": "Traditional attire, especially yellow or white, is customary and encouraged for this auspicious day." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "College Main Quadrangle,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

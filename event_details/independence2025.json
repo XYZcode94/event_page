@@ -1,75 +1,113 @@
 {
   "id": "independence2025",
   "eventName": "Independence Day 2025",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
-  "eventStartDate": "2025-08-15T09:00:00+05:30",
-  "eventEndDate": "2025-08-15T13:00:00+05:30",
-  "schedulePdfUrl": "https://example.com/path/to/independence_day_schedule.pdf",
+  "meta": {
+    "title": "Independence Day 2025 | College Events",
+    "description": "Join us to celebrate the spirit of freedom with a grand parade and cultural events on August 15, 2025."
+  },
   "hero": {
     "title": "Independence Day Celebration",
     "dateString": "August 15, 2025",
-    "location": "Parade Ground"
+    "location": "Parade Ground",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGk3a2NqY2ZxaW52c2Z0aWJ1eXhsZ3NocmZkaG1uM3BqaGZpM2NqZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+    "cta": [
+        { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" },
+        { "text": "Learn More", "url": "#about", "class": "btn-secondary" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Day",
-      "date": "Aug 15",
-      "events": [
-        {
-          "time": "09:00",
-          "title": "Flag Hoisting Ceremony",
-          "details": "Chief Guest: District Magistrate"
-        },
-        {
-          "time": "09:30",
-          "title": "National Anthem & Parade",
-          "details": "NCC Cadets"
-        },
-        {
-          "time": "10:30",
-          "title": "Cultural Programs & Speeches",
-          "details": "Main Stage"
-        },
-        {
-          "time": "12:00",
-          "title": "Sweets Distribution",
-          "details": "All attendees"
-        }
+  "eventStartDate": "2025-08-15T09:00:00+05:30",
+  "eventEndDate": "2025-08-15T13:00:00+05:30",
+  "about": {
+    "title": "About The Celebration",
+    "tagline": "A Tribute to Freedom",
+    "description": [
+      "Join the entire college community as we come together to celebrate the 78th Independence Day of India. This day is a tribute to our freedom fighters and the rich history of our nation.",
+      "The event will feature a grand parade by the NCC and NSS units, followed by inspiring speeches and a series of patriotic cultural performances by our talented students. It is a day to reflect on our journey and renew our commitment to the nation's progress."
+    ],
+    "history": {
+      "title": "Our Tradition",
+      "stats": [
+        { "label": "years celebrating", "value": "50+" },
+        { "label": "student participants annually", "value": "1000+" },
+        { "label": "honored chief guests", "value": "Distinguished" }
       ]
     }
-  ],
-  "speakers": [
-    {
-      "name": "Hon. District Magistrate",
-      "role": "Chief Guest",
-      "img": "https://placehold.co/400x400/222/FFF?text=C.G",
-      "bio": "..."
-    }
-  ],
-  "news": [
-    {
-      "title": "Independence Day Program Announced",
-      "excerpt": "Join us to celebrate the spirit of freedom with a grand parade and cultural events.",
-      "date": "2025-08-01",
-      "category": "Announcement"
-    }
-  ],
-  "tickets": [],
-  "team": {
-    "core": [],
-    "volunteers": []
   },
-  "gallery": [
-    {
-      "src": "https://placehold.co/600x400/27ae60/FFF?text=Tiranga",
-      "alt": "Indian Flag"
-    }
-  ],
-  "faq": [
-    {
-      "category": "events",
-      "question": "Is the event open to all?",
-      "answer": "Yes, all students, faculty, and local citizens are welcome to attend."
-    }
-  ]
+  "highlights": {
+    "title": "Last Year's Parade",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look back at the proud moments from the 2024 parade."
+  },
+  "schedule": {
+    "pdfUrl": "https://example.com/path/to/independence_day_schedule.pdf",
+    "days": [
+      {
+        "day": "Main Day", "date": "Aug 15",
+        "events": [
+          { "time": "09:00", "title": "Flag Hoisting Ceremony", "details": "Chief Guest: District Magistrate" },
+          { "time": "09:30", "title": "National Anthem & Parade", "details": "NCC & NSS Cadets" },
+          { "time": "10:30", "title": "Cultural Programs & Speeches", "details": "Main Stage" },
+          { "time": "12:00", "title": "Sweets Distribution", "details": "All attendees" }
+        ]
+      }
+    ]
+  },
+  "eventCategories": {
+    "title": "Day's Activities",
+    "categories": [
+      { "icon": "fa-solid fa-flag", "title": "Patriotic Parade", "description": "Witness the disciplined march of our student units." },
+      { "icon": "fa-solid fa-music", "title": "Cultural Shows", "description": "Enjoy songs and dances celebrating our heritage." },
+      { "icon": "fa-solid fa-comments", "title": "Inspiring Speeches", "description": "Listen to our esteemed guests and student leaders." },
+      { "icon": "fa-solid fa-users", "title": "Community Gathering", "description": "A day for all students and faculty to unite." }
+    ]
+  },
+  "speakers": {
+    "title": "Chief Guest",
+    "guests": [
+      { "name": "Hon. District Magistrate", "role": "Chief Guest", "img": "https://placehold.co/400x400/222/FFF?text=C.G", "bio": "An esteemed public servant dedicated to the community." }
+    ]
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Independence Day Program Announced", "excerpt": "Join us to celebrate the spirit of freedom with a grand parade and cultural events.", "date": "2025-08-01", "category": "Announcement" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Faculty In-Charge",
+      "members": [
+        { "name": "Dr. Sharma", "role": "Dean of Student Affairs", "img": "https://placehold.co/100x100/222/FFF?text=DS" }
+      ]
+    },
+    "volunteers": {
+      "title": "Student Coordinators",
+      "members": [
+         { "name": "Anjali Singh", "role": "NCC Head", "img": "https://placehold.co/100x100/666/FFF?text=AS" }
+      ]
+    },
+    "joinText": "Be a part of the celebration! Contact the Student Affairs office to volunteer."
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/27ae60/FFF?text=Tiranga", "alt": "Indian Flag" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Is the event open to all?", "answer": "Yes, all students, faculty, and local citizens are welcome to attend." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "College Parade Ground,<br>123 University Ave, Tech City",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
+  }
 }

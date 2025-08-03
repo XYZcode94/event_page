@@ -3,557 +3,235 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>DevCon 2025 - The Ultimate Developer Conference</title>
+    <title>College Events</title> <!-- Title will be set by JS -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description"
-        content="Join thousands of developers for the biggest tech conference of the year. August 24-27, 2025." />
+    <meta name="description" content="" /> <!-- Description will be set by JS -->
     <meta name="theme-color" content="#FF2D2D" />
-
-    <!-- Open Graph / Social -->
-    <meta property="og:title" content="DevCon 2025" />
-    <meta property="og:description"
-        content="Join us from August 24-27 on College Campus for the ultimate developer experience." />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
     <meta property="og:image" content="images/hero-bg.jpg" />
     <meta property="og:type" content="website" />
-
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome CDN -->
     <script src="https://kit.fontawesome.com/c285d7f716.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body class="theme-dark">
-    <div class="page-wrapper">
+<body>
+    <a class="skip-link sr-only" href="#main">Skip to content</a>
+    <header class="site-header" data-sticky>
+        <div class="container header-inner">
+            <a href="#home" class="logo">
+                <img src="https://placehold.co/150x50/FFFFFF/FF2D2D?text=DevCon" alt="Event logo" />
+            </a>
+            <nav class="site-nav" aria-label="Primary">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
+                    <span class="sr-only">Menu</span>
+                    <span class="hamburger"></span>
+                </button>
+                <ul id="primary-menu" class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="nav-button-wrapper"><a href="#tickets" class="btn btn-accent"
+                            id="btn-tickets">Tickets</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <a class="skip-link sr-only" href="#main">Skip to content</a>
-
-        <header class="site-header" data-sticky>
-            <div class="container header-inner">
-                <a href="#home" class="logo">
-                    <img src="https://placehold.co/150x50/FFFFFF/FF2D2D?text=Events Page" alt="logo" />
-                </a>
-                <nav class="site-nav" aria-label="Primary">
-                    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
-                        <span class="sr-only">Menu</span>
-                        <span class="hamburger"></span>
-                    </button>
-                    <ul id="primary-menu" class="nav-menu">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#schedule">Schedule</a></li>
-                        <li><a href="#speakers">Speakers</a></li>
-                        <li><a href="#news">News</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li class="nav-button-wrapper"><a href="#tickets" class="btn btn-accent"
-                                id="btn-tickets">Tickets</a></li>
-                    </ul>
-                </nav>
+    <main id="main">
+        <section id="home" class="hero" aria-label="Hero">
+            <div class="hero-bg" role="img"></div>
+            <div class="container hero-content">
+                <h1 class="hero-title"></h1>
+                <p class="hero-meta">
+                    <span class="hero-date"></span>
+                    <span class="hero-location"></span>
+                </p>
+                <div class="hero-cta"></div>
+                <div id="countdown" class="countdown"></div>
             </div>
-        </header>
+        </section>
 
-        <main id="main">
-
-            <!-- 1. Hero Section -->
-            <section id="home" class="hero" aria-label="Hero">
-                <div class="hero-bg" role="img" aria-label="Abstract background of code and lights"></div>
-                <div class="container hero-content">
-                    <h1 class="hero-title">Biggest Developer Conference 2025</h1>
-                    <p class="hero-meta">
-                        <span class="hero-date"><i class="fa-solid fa-calendar-days"></i> August 24 to 27, 2025</span>
-                        <span class="hero-location"><i class="fa-solid fa-location-dot"></i> College Campus</span>
-                    </p>
-                    <div class="hero-cta">
-                        <a href="#tickets" class="btn btn-accent">Get Tickets</a>
-                        <a href="#about" class="btn btn-secondary">Learn More</a>
-                    </div>
-                    <div id="countdown" class="countdown">
-                        <div class="countdown-segment"><span class="countdown-value">385</span><span
-                                class="countdown-label">Days</span></div>
-                        <div class="countdown-segment"><span class="countdown-value">10</span><span
-                                class="countdown-label">Hours</span></div>
-                        <div class="countdown-segment"><span class="countdown-value">55</span><span
-                                class="countdown-label">Minutes</span></div>
-                        <div class="countdown-segment"><span class="countdown-value">30</span><span
-                                class="countdown-label">Seconds</span></div>
-                    </div>
+        <section id="about" class="section about">
+            <div class="container">
+                <header class="section-header">
+                    <h2 data-populate="about-title"></h2>
+                    <p class="section-tagline" data-populate="about-tagline"></p>
+                </header>
+                <div class="about-grid">
+                    <div class="about-desc section-content" data-populate="about-description"></div>
+                    <aside class="about-history">
+                        <h3 data-populate="about-history-title"></h3>
+                        <ul class="about-stats" data-populate="about-stats"></ul>
+                    </aside>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- 2. About Section -->
-            <section id="about" class="section about">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>About the Event</h2>
-                        <p class="section-tagline">Where Innovation Meets Collaboration</p>
-                    </header>
-                    <div class="about-grid">
-                        <div class="about-desc section-content"> <!-- Added .section-content class here -->
-                            <p>DevCon 2025 is a premier technology and innovation festival that brings together
-                                developers, tech enthusiasts, and industry leaders under one roof. It’s a dynamic
-                                platform to showcase cutting-edge technologies, attend insightful sessions, and
-                                participate in exciting challenges.</p>
-                            <p>The event is designed to inspire creativity, foster networking, and provide hands-on
-                                learning opportunities in the rapidly evolving world of technology. Whether you’re a
-                                student, professional, or startup enthusiast, this conference offers the perfect
-                                environment to learn, share, and grow.</p>
-                        </div>
-                        <aside class="about-history">
-                            <h3>History & Impact</h3>
-                            <ul class="about-stats">
-                                <li><strong>10+</strong> years running</li>
-                                <li><strong>50,000+</strong> attendees</li>
-                                <li><strong>200+</strong> colleges</li>
-                                <li><strong>20+</strong> participating states</li>
-                            </ul>
-                        </aside>
-                    </div>
-                </div>
-            </section>
+        <section id="video" class="section video">
+            <div class="container">
+                <header class="section-header">
+                    <h2 data-populate="highlights-title"></h2>
+                </header>
+                <div class="video-embed-wrapper" data-populate="highlights-video"></div>
+                <p class="video-caption" data-populate="highlights-caption"></p>
+            </div>
+        </section>
 
-            <!-- 3. Video / Highlights -->
-            <section id="video" class="section video">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Event Highlights</h2>
-                    </header>
-                    <div class="video-embed-wrapper">
-                        <iframe class="video-embed" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                            title="Event Promo Video"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <p class="video-caption">Top moments from last year’s event.</p>
-                </div>
-            </section>
+        <section id="schedule" class="section schedule">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Event Schedule</h2>
+                </header>
+                <div class="schedule-tabs" role="tablist"></div>
+                <p class="schedule-download"></p>
+            </div>
+        </section>
 
-            <!-- 4. Schedule -->
-            <section id="schedule" class="section schedule">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Event Schedule</h2>
-                    </header>
-                    <div class="schedule-tabs" role="tablist" aria-label="Event Days">
-                        <button role="tab" aria-selected="true" aria-controls="day1-panel" id="day1-tab">Day 1 (Aug
-                            24)</button>
-                        <button role="tab" aria-selected="false" aria-controls="day2-panel" id="day2-tab">Day 2 (Aug
-                            25)</button>
-                        <button role="tab" aria-selected="false" aria-controls="day3-panel" id="day3-tab">Day 3 (Aug
-                            26)</button>
-                    </div>
-                    <div id="day1-panel" role="tabpanel" aria-labelledby="day1-tab" class="schedule-day is-active">
-                        <ul class="schedule-list">
-                            <li><time datetime="09:00">09:00</time>
-                                <div>
-                                    <h3>Opening Ceremony & Welcome Address</h3>
-                                    <p>Main Auditorium</p>
-                                </div>
-                            </li>
-                            <li><time datetime="10:00">10:00</time>
-                                <div>
-                                    <h3>Keynote: The Future of AI</h3>
-                                    <p>Dr. Evelyn Reed</p>
-                                </div>
-                            </li>
-                            <li><time datetime="11:30">11:30</time>
-                                <div>
-                                    <h3>Workshop: Mastering Modern CSS</h3>
-                                    <p>Room 101</p>
-                                </div>
-                            </li>
-                            <li><time datetime="13:00">13:00</time>
-                                <div>
-                                    <h3>Lunch Break</h3>
-                                    <p>Campus Grounds</p>
-                                </div>
-                            </li>
-                            <li><time datetime="14:30">14:30</time>
-                                <div>
-                                    <h3>Panel: Scaling to a Billion Users</h3>
-                                    <p>Main Auditorium</p>
-                                </div>
-                            </li>
-                            <li><time datetime="16:00">16:00</time>
-                                <div>
-                                    <h3>Networking & Coffee</h3>
-                                    <p>Exhibition Hall</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="day2-panel" role="tabpanel" aria-labelledby="day2-tab" hidden class="schedule-day">
-                        <ul class="schedule-list">
-                            <li><time datetime="09:00">09:00</time>
-                                <div>
-                                    <h3>Keynote: Quantum Computing Explained</h3>
-                                    <p>Dr. Kenji Tanaka</p>
-                                </div>
-                            </li>
-                            <li><time datetime="10:30">10:30</time>
-                                <div>
-                                    <h3>Talk: The Rise of WebAssembly</h3>
-                                    <p>Room 204</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="day3-panel" role="tabpanel" aria-labelledby="day3-tab" hidden class="schedule-day">
-                        <ul class="schedule-list">
-                            <li><time datetime="10:00">10:00</time>
-                                <div>
-                                    <h3>Hackathon Finals & Judging</h3>
-                                    <p>Exhibition Hall</p>
-                                </div>
-                            </li>
-                            <li><time datetime="15:00">15:00</time>
-                                <div>
-                                    <h3>Closing Ceremony & Awards</h3>
-                                    <p>Main Auditorium</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <p class="schedule-download">
-                        <a href="docs/schedule.pdf" download class="btn btn-outline">Download Full Agenda (PDF)</a>
-                    </p>
-                </div>
-            </section>
+        <section id="events" class="section events">
+            <div class="container">
+                <header class="section-header">
+                    <h2 data-populate="categories-title"></h2>
+                </header>
+                <ul class="event-category-grid" data-populate="event-categories"></ul>
+            </div>
+        </section>
 
-            <!-- 5. Event Categories -->
-            <section id="events" class="section events">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>What's Happening</h2>
-                    </header>
-                    <ul class="event-category-grid">
-                        <li class="event-category-card"><span class="event-icon"><i class="fa-solid fa-code"></i></span>
-                            <h3>Tech Talks</h3>
-                            <p>Deep dives into new technologies.</p>
-                        </li>
-                        <li class="event-category-card"><span class="event-icon"><i
-                                    class="fa-solid fa-laptop-code"></i></span>
-                            <h3>Workshops</h3>
-                            <p>Hands-on coding sessions.</p>
-                        </li>
-                        <li class="event-category-card"><span class="event-icon"><i
-                                    class="fa-solid fa-trophy"></i></span>
-                            <h3>Hackathons</h3>
-                            <p>24-hour coding challenges.</p>
-                        </li>
-                        <li class="event-category-card"><span class="event-icon"><i
-                                    class="fa-solid fa-comments"></i></span>
-                            <h3>Networking</h3>
-                            <p>Meet industry leaders.</p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+        <section id="speakers" class="section speakers">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Speakers & Guests</h2>
+                </header>
+                <ul class="speaker-grid" data-populate="speakers"></ul>
+            </div>
+        </section>
 
-            <!-- 6. Speakers & Guests -->
-            <section id="speakers" class="section speakers">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Speakers & Guests</h2>
-                    </header>
-                    <ul class="speaker-grid" data-populate="speakers">
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/222/FFF?text=E.R"
-                                alt="Dr. Evelyn Reed">
-                            <h3>Dr. Evelyn Reed</h3>
-                            <p>Chief AI Scientist, Innovate Inc.</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/333/FFF?text=J.D"
-                                alt="Javier Diaz">
-                            <h3>Javier Diaz</h3>
-                            <p>Creator of the 'Flux' Framework</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/444/FFF?text=A.C"
-                                alt="Aisha Chen">
-                            <h3>Aisha Chen</h3>
-                            <p>Lead Engineer, QuantumLeap</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/555/FFF?text=S.L"
-                                alt="Samira Laine">
-                            <h3>Samira Laine</h3>
-                            <p>Cybersecurity Expert & Author</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/666/FFF?text=M.P"
-                                alt="Marcus Poe">
-                            <h3>Marcus Poe</h3>
-                            <p>Head of DevOps, ScaleFast</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/777/FFF?text=C.N"
-                                alt="Chloe Nguyen">
-                            <h3>Chloe Nguyen</h3>
-                            <p>Principal UX Designer, Google</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/888/FFF?text=R.S"
-                                alt="Rohan Singh">
-                            <h3>Rohan Singh</h3>
-                            <p>Web3 & Blockchain Pioneer</p>
-                        </li>
-                        <li class="speaker-card"><img src="https://placehold.co/400x400/999/FFF?text=L.K"
-                                alt="Lena Kim">
-                            <h3>Lena Kim</h3>
-                            <p>VP of Engineering, Netflix</p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
+        <section id="news" class="section news">
+            <div class="container">
+                <header class="section-header">
+                    <h2>News & Announcements</h2>
+                </header>
+                <div class="news-cards" data-populate="news"></div>
+            </div>
+        </section>
 
-            <!-- 7. News & Announcements -->
-            <section id="news" class="section news">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>News & Announcements</h2>
+        <section id="tickets" class="section tickets">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Get Your Tickets</h2>
+                </header>
+                <div class="ticket-grid" data-populate="tickets"></div>
+            </div>
+        </section>
+
+        <section id="team" class="section team">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Meet the Team</h2>
+                </header>
+                <h3 data-populate="team-core-title"></h3>
+                <ul class="team-grid" data-populate="team-core"></ul>
+                <h3 data-populate="team-volunteers-title"></h3>
+                <ul class="team-grid" data-populate="team-volunteers"></ul>
+                <p class="team-join"></p>
+            </div>
+        </section>
+
+        <section id="gallery" class="section gallery">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Photo Gallery</h2>
+                </header>
+                <ul class="gallery-grid" data-populate="gallery"></ul>
+            </div>
+        </section>
+
+        <section id="faq" class="section faq">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                </header>
+                <div class="faq-groups" data-populate="faq"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container contact-grid">
+                <div class="contact-form-wrapper">
+                    <header class="section-header" style="text-align: left;">
+                        <h2>Contact Us</h2>
                     </header>
-                    <form class="news-filter" role="search">
-                        <label for="news-search" class="sr-only">Search news</label>
-                        <input id="news-search" name="q" type="search" placeholder="Search news..." />
-                        <select id="news-category" name="category">
-                            <option value="">All Categories</option>
-                            <option value="announcement">Announcements</option>
-                            <option value="press">Press Release</option>
-                            <option value="update">Updates</option>
-                        </select>
+                    <form id="contact-form" class="contact-form" novalidate>
+                        <div class="form-field"><label for="contact-name">Name</label><input id="contact-name"
+                                name="name" type="text" required /></div>
+                        <div class="form-field"><label for="contact-email">Email</label><input id="contact-email"
+                                name="email" type="email" required /></div>
+                        <div class="form-field"><label for="contact-message">Message</label><textarea
+                                id="contact-message" name="message" rows="4" required></textarea></div>
+                        <button type="submit" class="btn btn-accent">Send Message</button>
                     </form>
-                    <div class="news-cards" data-populate="news">
-                        <article class="news-card">
-                            <h3>DevCon 2025 Tickets Now on Sale!</h3>
-                            <p>Get your early bird tickets now and save 20%. Don't miss out on the biggest tech event of
-                                the year.</p>
-                            <footer><time datetime="2025-07-15">July 15, 2025</time><span
-                                    class="news-category-badge">Announcement</span></footer>
-                        </article>
-                        <article class="news-card">
-                            <h3>First Wave of Speakers Announced</h3>
-                            <p>We are thrilled to announce our first lineup of keynote speakers, including industry
-                                pioneer Dr. Evelyn Reed.</p>
-                            <footer><time datetime="2025-07-10">July 10, 2025</time><span
-                                    class="news-category-badge">Press Release</span></footer>
-                        </article>
-                        <article class="news-card">
-                            <h3>Hackathon Theme Revealed: AI for Good</h3>
-                            <p>This year's hackathon will challenge developers to create solutions for global issues
-                                using artificial intelligence.</p>
-                            <footer><time datetime="2025-06-28">June 28, 2025</time><span
-                                    class="news-category-badge">Update</span></footer>
-                        </article>
+                </div>
+                <div class="contact-info-wrapper">
+                    <h3 data-populate="location-title"></h3>
+                    <p data-populate="location-address"></p>
+                    <div class="contact-map-wrapper" data-populate="location-map"></div>
+                    <div class="contact-social">
+                        <h3>Follow Us</h3>
+                        <ul class="social-list">
+                            <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                            <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                        </ul>
                     </div>
-                </div>
-            </section>
-
-            <!-- 8. Tickets -->
-            <section id="tickets" class="section tickets">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Get Your Tickets</h2>
-                    </header>
-                    <div class="ticket-grid" data-populate="tickets">
-                        <div class="ticket-card">
-                            <h3>Student Pass</h3>
-                            <p class="ticket-price">$49</p>
-                            <ul>
-                                <li>Access to all talks</li>
-                                <li>Workshop entry (lottery)</li>
-                                <li>Digital swag bag</li>
-                            </ul><a href="#" class="btn btn-secondary">Buy Now</a>
-                        </div>
-                        <div class="ticket-card featured">
-                            <div class="ticket-badge">Most Popular</div>
-                            <h3>All Access Pass</h3>
-                            <p class="ticket-price">$199</p>
-                            <ul>
-                                <li>Full conference access</li>
-                                <li>Guaranteed workshop entry</li>
-                                <li>Speaker Meet & Greet</li>
-                                <li>Physical swag bag</li>
-                            </ul><a href="#" class="btn btn-accent">Buy Now</a>
-                        </div>
-                        <div class="ticket-card">
-                            <h3>Corporate Pass</h3>
-                            <p class="ticket-price">$499</p>
-                            <ul>
-                                <li>All Access benefits</li>
-                                <li>VIP lounge access</li>
-                                <li>Exclusive networking dinner</li>
-                                <li>Company logo feature</li>
-                            </ul><a href="#" class="btn btn-secondary">Buy Now</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 9. Team & Volunteers -->
-            <section id="team" class="section team">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Meet the Team</h2>
-                    </header>
-                    <h3>Core Committee</h3>
-                    <ul class="team-grid" data-populate="team-core">
-                        <li class="team-card"><img src="https://placehold.co/100x100/222/FFF?text=A" alt="Team Member">
-                            <h3>Alex Ray</h3>
-                            <p>Lead Organizer</p>
-                        </li>
-                        <li class="team-card"><img src="https://placehold.co/100x100/333/FFF?text=B" alt="Team Member">
-                            <h3>Ben Carter</h3>
-                            <p>Sponsorship Head</p>
-                        </li>
-                        <li class="team-card"><img src="https://placehold.co/100x100/444/FFF?text=C" alt="Team Member">
-                            <h3>Carla Evans</h3>
-                            <p>Marketing Director</p>
-                        </li>
-                        <li class="team-card"><img src="https://placehold.co/100x100/555/FFF?text=D" alt="Team Member">
-                            <h3>David Lee</h3>
-                            <p>Logistics Manager</p>
-                        </li>
-                    </ul>
-                    <h3>Management & Volunteers</h3>
-                    <ul class="team-grid" data-populate="team-volunteers">
-                        <li class="team-card"><img src="https://placehold.co/100x100/666/FFF?text=E" alt="Team Member">
-                            <h3>Eva Green</h3>
-                            <p>Volunteer Coordinator</p>
-                        </li>
-                        <li class="team-card"><img src="https://placehold.co/100x100/777/FFF?text=F" alt="Team Member">
-                            <h3>Frank White</h3>
-                            <p>Tech Support</p>
-                        </li>
-                    </ul>
-                    <p class="team-join">
-                        Interested in helping? <a href="#contact">Join our team of volunteers</a>.
-                    </p>
-                </div>
-            </section>
-
-            <!-- 10. Gallery -->
-            <section id="gallery" class="section gallery">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Photo Gallery</h2>
-                    </header>
-                    <ul class="gallery-grid" data-populate="gallery">
-                        <li><img src="https://placehold.co/600x400/111/FFF?text=Stage" alt="Stage view"></li>
-                        <li><img src="https://placehold.co/400x600/222/FFF?text=Crowd" alt="Audience"></li>
-                        <li><img src="https://placehold.co/600x450/333/FFF?text=Workshop" alt="Workshop session"></li>
-                        <li><img src="https://placehold.co/600x400/444/FFF?text=Networking" alt="Networking"></li>
-                        <li><img src="https://placehold.co/400x500/555/FFF?text=Speaker" alt="Speaker on stage"></li>
-                        <li><img src="https://placehold.co/600x400/666/FFF?text=Hackathon" alt="Hackathon teams"></li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- 11. FAQ -->
-            <section id="faq" class="section faq">
-                <div class="container">
-                    <header class="section-header">
-                        <h2>Frequently Asked Questions</h2>
-                    </header>
-                    <div class="faq-groups">
-                        <div class="accordion" data-accordion="tickets">
-                            <details>
-                                <summary>Are student discounts available?</summary>
-                                <p>Yes, we offer a Student Pass at a significantly reduced price. You must present a
-                                    valid student ID at check-in.</p>
-                            </details>
-                            <details>
-                                <summary>What is the refund policy?</summary>
-                                <p>Tickets are non-refundable but can be transferred to another person up to 7 days
-                                    before the event starts.</p>
-                            </details>
-                        </div>
-                        <div class="accordion" data-accordion="events">
-                            <details>
-                                <summary>Do I need to register for workshops separately?</summary>
-                                <p>If you have an All Access or Corporate Pass, workshop entry is guaranteed. Student
-                                    Pass holders can enter via a lottery system one week before the event.</p>
-                            </details>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 12. Contact -->
-            <section id="contact" class="section contact">
-                <div class="container contact-grid">
-                    <div class="contact-form-wrapper">
-                        <header class="section-header" style="text-align: left;">
-                            <h2>Contact Us</h2>
-                        </header>
-                        <form id="contact-form" class="contact-form" novalidate>
-                            <div class="form-field"><label for="contact-name">Name</label><input id="contact-name"
-                                    name="name" type="text" required /></div>
-                            <div class="form-field"><label for="contact-email">Email</label><input id="contact-email"
-                                    name="email" type="email" required /></div>
-                            <div class="form-field"><label for="contact-message">Message</label><textarea
-                                    id="contact-message" name="message" rows="4" required></textarea></div>
-                            <button type="submit" class="btn btn-accent">Send Message</button>
-                        </form>
-                    </div>
-                    <div class="contact-info-wrapper">
-                        <h3>Event Location</h3>
-                        <p>College Campus Auditorium,<br>123 University Ave, Tech City</p>
-                        <div class="contact-map-wrapper">
-                            <iframe class="contact-map"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
-                                loading="lazy"></iframe>
-                        </div>
-                        <div class="contact-social">
-                            <h3>Follow Us</h3>
-                            <ul class="social-list">
-                                <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="site-footer">
-            <div class="container footer-grid">
-                <div class="footer-col footer-branding">
-                    <a href="#home" class="logo">
-                        <img src="https://placehold.co/150x50/FFFFFF/FF2D2D?text=Events Page" alt="logo" />
-                    </a>
-                    <p>&copy; <span id="footer-year">2025</span> DevCon Global. All rights reserved.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#tickets">Tickets</a></li>
-                        <li><a href="#schedule">Schedule</a></li>
-                        <li><a href="#speakers">Speakers</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Code of Conduct</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <ul class="social-list">
-                        <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
-                        <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
-                        <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                        <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
-                    </ul>
                 </div>
             </div>
-        </footer>
+        </section>
+    </main>
 
-    </div>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col footer-branding">
+                <a href="#home" class="logo">
+                    <img src="https://placehold.co/150x50/FFFFFF/FF2D2D?text=DevCon" alt="Event logo" />
+                </a>
+                <p>&copy; <span id="footer-year">2025</span> DevCon Global. All rights reserved.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#tickets">Tickets</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#speakers">Speakers</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Code of Conduct</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <ul class="social-list">
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
     <script type="module" src="js/main.js" defer></script>
 </body>
 

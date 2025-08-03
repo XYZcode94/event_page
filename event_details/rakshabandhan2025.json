@@ -1,30 +1,107 @@
 {
   "id": "rakshabandhan2025",
   "eventName": "Raksha Bandhan Celebration",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Y5bXN2ZGt3aHVscG5tN3N5ZGRzNnZtM3cyb2I4d2g4eGdnbmZpZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVh5ww9R2nZ3t6/giphy.gif",
+  "meta": {
+    "title": "Raksha Bandhan 2025 | College Events",
+    "description": "Celebrate the bond of siblings with a Rakhi making workshop and festivities on August 9, 2025."
+  },
+  "hero": {
+    "title": "Raksha Bandhan",
+    "dateString": "August 9, 2025",
+    "location": "Student Common Room",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2Y5bXN2ZGt3aHVscG5tN3N5ZGRzNnZtM3cyb2I4d2g4eGdnbmZpZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVh5ww9R2nZ3t6/giphy.gif",
+    "cta": [
+        { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
+  },
   "eventStartDate": "2025-08-09T10:00:00+05:30",
   "eventEndDate": "2025-08-09T14:00:00+05:30",
   "schedulePdfUrl": null,
-  "hero": {
-    "title": "Raksha Bandhan",
-    "dateString": "August 19, 2025",
-    "location": "Student Common Room"
-  },
-  "schedule": [
-    {
-      "day": "Main Day", "date": "Aug 19",
-      "events": [
-        { "time": "10:00", "title": "Rakhi Making Workshop", "details": "All materials provided" },
-        { "time": "12:00", "title": "Celebration & Sweets", "details": "Celebrating the bond of siblings" }
+  "about": {
+    "title": "About The Celebration",
+    "tagline": "Celebrating the Bond of Protection",
+    "description": [
+      "Join us as we celebrate Raksha Bandhan, a festival honoring the special bond between siblings. In our college, we extend this tradition to celebrate the bonds of friendship and community that feel like family.",
+      "The event will feature a creative Rakhi-making workshop where you can design your own Rakhis, followed by a celebration with traditional sweets. It's a wonderful opportunity to honor the friends who protect and support you throughout your college journey."
+    ],
+    "history": {
+      "title": "Our Campus Tradition",
+      "stats": [
+        { "label": "years celebrating", "value": "5+" },
+        { "label": "students participate", "value": "Hundreds" },
+        { "label": "Rakhis made", "value": "Countless" }
       ]
     }
-  ],
-  "speakers": [], "tickets": [], "gallery": [], "faq": [],
-  "news": [
-    { "title": "Celebrate Raksha Bandhan on Campus", "excerpt": "Join our workshop and celebration.", "date": "2025-08-10", "category": "Event" }
-  ],
+  },
+  "highlights": {
+    "title": "Last Year's Workshop",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A glimpse into the creativity and joy of last year's celebration."
+  },
+  "schedule": {
+    "days": [
+      {
+        "day": "Main Day", "date": "Aug 09",
+        "events": [
+          { "time": "10:00", "title": "Rakhi Making Workshop", "details": "All materials will be provided" },
+          { "time": "12:00", "title": "Celebration & Sweets Distribution", "details": "Student Common Room" }
+        ]
+      }
+    ]
+  },
+  "eventCategories": {
+    "title": "Day's Activities",
+    "categories": [
+      { "icon": "fa-solid fa-scissors", "title": "Craft Workshop", "description": "Design and create beautiful Rakhis." },
+      { "icon": "fa-solid fa-users", "title": "Community Bonding", "description": "Celebrate with friends who are like family." },
+      { "icon": "fa-solid fa-cookie-bite", "title": "Sweets & Treats", "description": "Enjoy traditional Indian sweets." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Celebrate Raksha Bandhan on Campus", "excerpt": "Join our workshop and celebration of siblinghood and friendship.", "date": "2025-08-01", "category": "Event" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
   "team": {
-    "core": [{ "name": "Cultural Committee", "role": "Organizers", "img": "https://placehold.co/100x100/222/FFF?text=CC" }],
-    "volunteers": []
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Cultural Committee",
+      "members": [
+        { "name": "Priya Sharma", "role": "Cultural Secretary", "img": "https://placehold.co/100x100/222/FFF?text=PS" }
+      ]
+    },
+    "volunteers": {
+      "title": "Student Coordinators",
+      "members": [
+         { "name": "Rohan Kumar", "role": "Event Volunteer", "img": "https://placehold.co/100x100/666/FFF?text=RK" }
+      ]
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/e74c3c/FFF?text=Rakhi", "alt": "Colorful Rakhis" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Do I need to bring any materials for the workshop?", "answer": "No, all craft materials for making Rakhis will be provided free of cost." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "Student Common Room, Main Building,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

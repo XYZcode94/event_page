@@ -1,58 +1,106 @@
 {
   "id": "janmashtami2025",
   "eventName": "Janmashtami Festivities",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNTC6U7EmChE6li/giphy.gif",
-  "eventStartDate": "2025-08-26T18:00:00+05:30",
-  "eventEndDate": "2025-08-27T01:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Janmashtami 2025 | College Events",
+    "description": "Celebrate the birth of Lord Krishna with bhajans, a Dahi Handi competition, and midnight aarti on August 26, 2025."
+  },
   "hero": {
     "title": "Krishna Janmashtami",
     "dateString": "August 26, 2025",
-    "location": "Campus Temple & Grounds"
+    "location": "Campus Temple & Grounds",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNTC6U7EmChE6li/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Evening",
-      "date": "Aug 26",
-      "events": [
-        {
-          "time": "18:00",
-          "title": "Bhajan Sandhya",
-          "details": "Devotional songs by the music club"
-        },
-        {
-          "time": "20:00",
-          "title": "Dahi Handi Competition",
-          "details": "Inter-department competition"
-        },
-        {
-          "time": "00:00",
-          "title": "Midnight Aarti & Prasad",
-          "details": "Main Temple"
-        }
+  "about": {
+    "title": "About The Festival",
+    "tagline": "Celebrating the Divine Birth",
+    "description": [
+      "Experience the divine atmosphere of Janmashtami on campus. We will celebrate the birth of Lord Krishna with an evening filled with devotion, excitement, and community spirit.",
+      "The highlight of the evening will be the inter-department Dahi Handi competition, a thrilling display of teamwork and strategy. This will be followed by a serene Bhajan Sandhya and a grand midnight aarti at the campus temple."
+    ],
+    "history": {
+      "title": "An Annual Tradition",
+      "stats": [
+        { "label": "years celebrating", "value": "15+" },
+        { "label": "Dahi Handi teams", "value": "10+" },
+        { "label": "devotees attend", "value": "Thousands" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [],
-  "gallery": [],
-  "faq": [],
-  "news": [
-    {
-      "title": "Janmashtami Celebrations Announced",
-      "excerpt": "Witness the Dahi Handi competition and join the midnight aarti.",
-      "date": "2025-08-15",
-      "category": "Announcement"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Dahi Handi",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "Relive the excitement of last year's thrilling competition."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "Cultural Committee",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/222/FFF?text=CC"
+        "day": "Main Evening", "date": "Aug 26",
+        "events": [
+          { "time": "18:00", "title": "Bhajan Sandhya", "details": "Devotional songs by the music club" },
+          { "time": "20:00", "title": "Dahi Handi Competition", "details": "Inter-department competition" },
+          { "time": "00:00", "title": "Midnight Aarti & Prasad", "details": "Main Temple" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "Evening's Festivities",
+    "categories": [
+      { "icon": "fa-solid fa-om", "title": "Devotional Music", "description": "Immerse yourself in soulful bhajans." },
+      { "icon": "fa-solid fa-people-group", "title": "Dahi Handi", "description": "Witness the thrilling human pyramid competition." },
+      { "icon": "fa-solid fa-moon", "title": "Midnight Aarti", "description": "Participate in the sacred midnight prayer." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "Janmashtami Celebrations Announced", "excerpt": "Witness the Dahi Handi competition and join the midnight aarti.", "date": "2025-08-15", "category": "Announcement" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "Cultural Committee",
+      "members": [
+        { "name": "Priya Sharma", "role": "Cultural Secretary", "img": "https://placehold.co/100x100/222/FFF?text=PS" }
+      ]
+    },
+    "volunteers": {
+      "title": "Student Coordinators",
+      "members": [
+         { "name": "Amit Patel", "role": "Event Volunteer", "img": "https://placehold.co/100x100/666/FFF?text=AP" }
+      ]
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/3498db/FFF?text=Dahi+Handi", "alt": "Dahi Handi Competition" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "Can anyone participate in the Dahi Handi?", "answer": "Participation is open to teams pre-registered through their respective departments." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "Campus Temple & Main Grounds,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }

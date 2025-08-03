@@ -1,58 +1,103 @@
 {
   "id": "republicday2026",
   "eventName": "Republic Day of India",
-  "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
-  "eventStartDate": "2026-01-26T09:00:00+05:30",
-  "eventEndDate": "2026-01-26T12:00:00+05:30",
-  "schedulePdfUrl": null,
+  "meta": {
+    "title": "Republic Day 2026 | College Events",
+    "description": "Join the Republic Day celebrations with a grand parade and cultural program on January 26, 2026."
+  },
   "hero": {
     "title": "Republic Day Parade",
     "dateString": "January 26, 2026",
-    "location": "Parade Ground"
+    "location": "Parade Ground",
+    "heroGif": "https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDB2Z2N2b3A1dGg3YjV1d242aXJqZ2N0aHh4c3p2eGJ0Z2l0NnF4eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6wNPIj7Eszs2u47K/giphy.gif",
+    "cta": [
+      { "text": "View Schedule", "url": "#schedule", "class": "btn-accent" }
+    ]
   },
-  "schedule": [
-    {
-      "day": "Main Day",
-      "date": "Jan 26",
-      "events": [
-        {
-          "time": "09:00",
-          "title": "Flag Hoisting by the Director",
-          "details": "Followed by National Anthem"
-        },
-        {
-          "time": "09:30",
-          "title": "March Past & Parade",
-          "details": "NCC and NSS Units"
-        },
-        {
-          "time": "10:30",
-          "title": "Patriotic Cultural Program",
-          "details": "Student Performances"
-        }
+  "about": {
+    "title": "About The Celebration",
+    "tagline": "Honoring the Spirit of the Nation",
+    "description": [
+      "We invite all students, faculty, and staff to join us in celebrating the 77th Republic Day of India. This is a day to honor our constitution and the democratic values that form the foundation of our great nation.",
+      "The day will commence with the hoisting of the national flag by our esteemed Director, followed by a disciplined and impressive march past by the NCC and NSS units. The celebration will continue with a series of patriotic songs, dances, and skits performed by students."
+    ],
+    "history": {
+      "title": "A Patriotic Tradition",
+      "stats": [
+        { "label": "years celebrating", "value": "Over 50" },
+        { "label": "units in parade", "value": "All" }
       ]
     }
-  ],
-  "speakers": [],
-  "tickets": [],
-  "gallery": [],
-  "faq": [],
-  "news": [
-    {
-      "title": "77th Republic Day Celebrations",
-      "excerpt": "All are cordially invited to attend the Republic Day parade and celebrations.",
-      "date": "2026-01-20",
-      "category": "Event"
-    }
-  ],
-  "team": {
-    "core": [
+  },
+  "highlights": {
+    "title": "Last Year's Parade",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "caption": "A look back at the proud moments from the 2025 parade."
+  },
+  "schedule": {
+    "pdfUrl": null,
+    "days": [
       {
-        "name": "College Administration",
-        "role": "Organizers",
-        "img": "https://placehold.co/100x100/777/FFF?text=CA"
+        "day": "Main Day", "date": "Jan 26",
+        "events": [
+          { "time": "09:00", "title": "Flag Hoisting by the Director", "details": "Followed by National Anthem" },
+          { "time": "09:30", "title": "March Past & Parade", "details": "NCC and NSS Units" },
+          { "time": "10:30", "title": "Patriotic Cultural Program", "details": "Student Performances" }
+        ]
       }
-    ],
-    "volunteers": []
+    ]
+  },
+  "eventCategories": {
+    "title": "Day's Highlights",
+    "categories": [
+      { "icon": "fa-solid fa-flag-checkered", "title": "Flag Hoisting", "description": "The main ceremony to honor the tricolor." },
+      { "icon": "fa-solid fa-shoe-prints", "title": "March Past", "description": "A disciplined parade by our student corps." },
+      { "icon": "fa-solid fa-masks-theater", "title": "Cultural Show", "description": "Patriotic performances by students." }
+    ]
+  },
+  "speakers": {
+    "title": "",
+    "guests": []
+  },
+  "news": {
+    "title": "Latest News",
+    "articles": [
+      { "title": "77th Republic Day Celebrations", "excerpt": "All are cordially invited to attend the Republic Day parade and celebrations.", "date": "2026-01-20", "category": "Event" }
+    ]
+  },
+  "tickets": {
+      "title": "Entry Information",
+      "packages": []
+  },
+  "team": {
+    "title": "Organizing Committee",
+    "core": {
+      "title": "College Administration",
+      "members": [
+        { "name": "The Director", "role": "Chief Patron", "img": "https://placehold.co/100x100/777/FFF?text=D" }
+      ]
+    },
+    "volunteers": {
+      "title": "",
+      "members": []
+    },
+    "joinText": ""
+  },
+  "gallery": {
+    "title": "Photo Gallery",
+    "images": [
+      { "src": "https://placehold.co/600x400/16a085/FFF?text=Parade", "alt": "Republic Day Parade" }
+    ]
+  },
+  "faq": {
+    "title": "Common Questions",
+    "questions": [
+      { "category": "events", "question": "What is the dress code for the event?", "answer": "Students are requested to attend in their college uniforms or formal white attire to honor the occasion." }
+    ]
+  },
+  "location": {
+      "title": "Event Location",
+      "address": "College Parade Ground,<br>College Campus",
+      "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086432973747!2d144.9537353159042!3d-37.81720997975195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619504559837!5m2!1sen!2sau"
   }
 }
