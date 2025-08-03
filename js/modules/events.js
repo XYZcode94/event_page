@@ -7,32 +7,13 @@
  * =================================================================
  */
 
-const MASTER_LIST_URL = '../../data/events.json';
-const DETAILS_BASE_URL = '../../event_details/';
+import { fetchEventList, fetchEventDetails } from './dataFetcher.js';
 
-async function fetchEventList() {
-    try {
-        const response = await fetch(MASTER_LIST_URL);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        return data.events;
-    } catch (error) {
-        console.error("Could not fetch master event list:", error);
-        return null;
-    }
-}
-
-async function fetchEventDetails(eventId) {
-    try {
-        const response = await fetch(`${DETAILS_BASE_URL}${eventId}.json`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error(`Could not fetch details for event "${eventId}":`, error);
-        return null;
-    }
-}
-
+/**
+ * Finds the ID of the most relevant event to display.
+ * @param {Array<Object>} events - An array of all event objects from the master list.
+ * @returns {string|null} The ID of the single event to be displayed.
+ */
 function findCurrentEventId(events) {
     if (!events || events.length === 0) return null;
 
@@ -44,15 +25,18 @@ function findCurrentEventId(events) {
         endDate: new Date(event.eventEndDate).getTime()
     }));
 
+    // 1. Find an active event
     const activeEvent = processedEvents.find(event => now >= event.startDate && now <= event.endDate);
     if (activeEvent) return activeEvent.id;
 
+    // 2. Find the next upcoming event
     const upcomingEvents = processedEvents
         .filter(event => event.startDate > now)
         .sort((a, b) => a.startDate - b.startDate);
     
     if (upcomingEvents.length > 0) return upcomingEvents[0].id;
 
+    // 3. Find the most recent past event
     const pastEvents = processedEvents
         .filter(event => event.endDate < now)
         .sort((a, b) => b.endDate - a.endDate);

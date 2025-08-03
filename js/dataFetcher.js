@@ -1,60 +1,75 @@
 /**
  * =================================================================
- * |   EVENT DATA MODULE (WITH DEFINITIVE CACHE FIX)               |
+ * |   EVENT DATA MODULE (DATABASE VERSION)                        |
  * =================================================================
- * |   This version uses HTTP headers to explicitly command the    |
- * |   browser to never use a cached version of the JSON files.    |
- * |   This guarantees the latest data is always loaded.           |
+ * |   This module now fetches all data directly from the live     |
+ * |   Firebase Firestore database instead of local JSON files.    |
  * =================================================================
  */
 
-const MASTER_LIST_URL = 'data/events.json';
-const DETAILS_BASE_URL = 'event_details/';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyCTKFePrg3LYJxKXLrdohyOJEkyK_rrApo",
+    authDomain: "college-events-website-8fd76.firebaseapp.com",
+    projectId: "college-events-website-8fd76",
+    storageBucket: "college-events-website-8fd76.firebasestorage.app",
+    messagingSenderId: "753892738323",
+    appId: "1:753892738323:web:452e2d492075d043c406e6",
+    measurementId: "G-NCTGYPBFRY"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 /**
- * Fetches the master list of events, bypassing the browser cache.
+ * Fetches the master list of events from the Firestore database.
  * @returns {Promise<Array|null>} A promise that resolves to the array of events, or null on error.
  */
 export async function fetchEventList() {
     try {
-        // THE FIX: Added headers to prevent caching.
-        const response = await fetch(MASTER_LIST_URL, {
-            cache: 'no-store', // For modern browsers
-            headers: {
-                'Cache-Control': 'no-cache', // For HTTP/1.1
-                'Pragma': 'no-cache',        // For HTTP/1.0 (legacy)
-                'Expires': '0'               // For proxies
-            }
-        });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        return data.events;
-    } catch (error) { // THE FIX: Added missing curly braces here
-        console.error("Could not fetch master event list:", error);
+        const eventsCollection = collection(db, "events");
+        const eventSnapshot = await getDocs(eventsCollection);
+        // We add the auto-generated ID to each event object
+        const eventList = eventSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        if (eventList.length === 0) {
+            console.warn("No events found in the database.");
+            return [];
+        }
+
+        return eventList;
+    } catch (error) {
+        console.error("Could not fetch master event list from Firestore:", error);
         return null;
     }
 }
 
 /**
- * Fetches the detailed data for a specific event, bypassing the browser cache.
+ * Fetches the detailed data for a specific event by its ID from Firestore.
  * @param {string} eventId - The ID of the event to fetch.
  * @returns {Promise<Object|null>} A promise that resolves to the detailed event object, or null on error.
  */
 export async function fetchEventDetails(eventId) {
     try {
-        // THE FIX: Added headers to prevent caching here as well.
-        const response = await fetch(`${DETAILS_BASE_URL}${eventId}.json`, {
-            cache: 'no-store',
-            headers: {
-                'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        return await response.json();
+        const eventRef = doc(db, "events", eventId);
+        const docSnap = await getDoc(eventRef);
+
+        if (docSnap.exists()) {
+            return { id: docSnap.id, ...docSnap.data() };
+        } else {
+            console.error(`No event found in the database with ID: ${eventId}`);
+            return null;
+        }
     } catch (error) {
-        console.error(`Could not fetch details for event "${eventId}":`, error);
+        console.error(`Could not fetch details for event "${eventId}" from Firestore:`, error);
         return null;
     }
 }

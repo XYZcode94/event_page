@@ -1,16 +1,16 @@
 {
   "events": [
     {
-      "id": "independence2025",
-      "eventName": "Independence Day 2025",
-      "eventStartDate": "2025-08-15T09:00:00+05:30",
-      "eventEndDate": "2025-08-15T13:00:00+05:30"
-    },
-    {
       "id": "rakshabandhan2025",
       "eventName": "Raksha Bandhan Celebration",
       "eventStartDate": "2025-08-09T10:00:00+05:30",
       "eventEndDate": "2025-08-09T14:00:00+05:30"
+    },
+    {
+      "id": "independence2025",
+      "eventName": "Independence Day 2025",
+      "eventStartDate": "2025-08-15T09:00:00+05:30",
+      "eventEndDate": "2025-08-15T13:00:00+05:30"
     },
     {
       "id": "janmashtami2025",

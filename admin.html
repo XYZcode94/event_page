@@ -39,7 +39,7 @@
                 </div>
 
                 <button id="login-btn-google" class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-                    <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.012,36.49,44,30.686,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+                    <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14._691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.012,36.49,44,30.686,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                     Sign in with Google
                 </button>
                  <p class="text-center text-gray-400 text-sm mt-6">
@@ -97,18 +97,16 @@
             <!-- Event Form -->
             <form id="event-form" class="bg-gray-800 p-6 rounded-xl shadow-2xl space-y-6">
                 
-                <!-- Core Details -->
                 <fieldset class="border-2 border-gray-700 p-4 rounded-lg">
                     <legend class="px-2 text-lg font-bold text-red-500">Core Details</legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label for="event-id" class="form-label">Event ID</label>
-                            <input type="text" id="event-id" class="form-input" placeholder="e.g., diwali2025" required>
-                            <p class="text-xs text-gray-500 mt-1">Unique ID. No spaces or special characters.</p>
-                        </div>
-                        <div>
                             <label for="event-name" class="form-label">Event Name</label>
                             <input type="text" id="event-name" class="form-input" placeholder="e.g., Diwali Celebration" required>
+                        </div>
+                        <div>
+                            <label for="hero-title" class="form-label">Hero Title</label>
+                            <input type="text" id="hero-title" class="form-input" placeholder="e.g., Festival of Lights">
                         </div>
                         <div>
                             <label for="event-start-date" class="form-label">Start Date & Time (IST)</label>
@@ -118,34 +116,21 @@
                             <label for="event-end-date" class="form-label">End Date & Time (IST)</label>
                             <input type="datetime-local" id="event-end-date" class="form-input" required>
                         </div>
-                    </div>
-                </fieldset>
-
-                <!-- Hero Section Details -->
-                <fieldset class="border-2 border-gray-700 p-4 rounded-lg">
-                    <legend class="px-2 text-lg font-bold text-red-500">Hero Section</legend>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="hero-title" class="form-label">Hero Title</label>
-                            <input type="text" id="hero-title" class="form-input" placeholder="e.g., Festival of Lights">
-                        </div>
-                        <div>
+                        <div class="md:col-span-2">
                             <label for="hero-gif" class="form-label">Hero Background GIF URL</label>
                             <input type="url" id="hero-gif" class="form-input" placeholder="https://i.giphy.com/...">
                         </div>
                     </div>
                 </fieldset>
 
-                <!-- Add other sections like About, Schedule, Speakers etc. here -->
-                <!-- For simplicity, we'll just add a save button for now -->
+                <!-- More sections can be added here -->
 
                 <div class="pt-4">
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Save Event</button>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Save New Event</button>
                 </div>
 
             </form>
         </div>
-
     </div>
 
     <script type="module" src="js/admin.js"></script>

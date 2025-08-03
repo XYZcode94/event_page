@@ -9,23 +9,17 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// --- IMPORTANT: PASTE YOUR FIREBASE CONFIGURATION HERE ---
+// --- IMPORTANT: PASTE YOUR FIREBASE CONFIGURATION OBJECT HERE ---
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCTKFePrg3LYJxKXLrdohyOJEkyK_rrApo",
+    authDomain: "college-events-website-8fd76.firebaseapp.com",
+    projectId: "college-events-website-8fd76",
+    storageBucket: "college-events-website-8fd76.firebasestorage.app",
+    messagingSenderId: "753892738323",
+    appId: "1:753892738323:web:452e2d492075d043c406e6",
 };
-
-// --- AUTHORIZATION ---
-const authorizedAdmins = [
-    "your.email@example.com",
-    "another.admin@example.com"
-];
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -41,11 +35,9 @@ const loadingView = document.getElementById('loading-view');
 const adminDashboard = document.getElementById('admin-dashboard');
 const accessDeniedView = document.getElementById('access-denied-view');
 const messageBox = document.getElementById('message-box');
-
 const loginForm = document.getElementById('login-form');
 const signupForm = document.getElementById('signup-form');
 const eventForm = document.getElementById('event-form');
-
 const loginBtnGoogle = document.getElementById('login-btn-google');
 const logoutBtn = document.getElementById('logout-btn');
 const showSignupBtn = document.getElementById('show-signup');
@@ -54,8 +46,6 @@ const userEmailDisplay = document.getElementById('user-email');
 
 /**
  * Displays a temporary message to the user.
- * @param {string} text - The message to display.
- * @param {boolean} isError - If true, styles the message as an error.
  */
 function showMessage(text, isError = false) {
     messageBox.textContent = text;
@@ -63,132 +53,99 @@ function showMessage(text, isError = false) {
     messageBox.classList.remove('hidden');
     setTimeout(() => {
         messageBox.classList.add('hidden');
-    }, 3000);
+    }, 4000);
 }
 
 /**
- * Converts a local datetime string to an ISO string with the +05:30 offset.
- * @param {string} localDateTime - The value from an <input type="datetime-local">.
- * @returns {string} The formatted ISO string for IST.
+ * Checks the database to see if a user is an authorized admin.
  */
-function toISTISOString(localDateTime) {
-    if (!localDateTime) return null;
-    // The input is already in local time, we just need to format it and add the offset.
-    // Note: This assumes the admin's computer is set to IST.
-    // A more robust solution would use a library like date-fns-tz if admins are in different timezones.
-    const date = new Date(localDateTime);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}+05:30`;
+async function isUserAdmin(user) {
+    if (!user) return false;
+    const userRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(userRef);
+    return docSnap.exists();
 }
-
 
 /**
- * Handles the submission of the event form.
- * Reads all data, structures it, and saves it to Firestore.
+ * Handles sign-up with email and password.
  */
-async function handleEventFormSubmit(e) {
-    e.preventDefault();
-    const eventId = document.getElementById('event-id').value;
-    if (!eventId) {
-        showMessage("Event ID is required.", true);
-        return;
-    }
-
-    // Show a saving indicator
-    const submitButton = e.target.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.textContent = 'Saving...';
-
-    try {
-        // Structure the data exactly like your JSON files
-        const eventData = {
-            id: eventId,
-            eventName: document.getElementById('event-name').value,
-            eventStartDate: toISTISOString(document.getElementById('event-start-date').value),
-            eventEndDate: toISTISOString(document.getElementById('event-end-date').value),
-            hero: {
-                title: document.getElementById('hero-title').value,
-                heroGif: document.getElementById('hero-gif').value,
-                // These are hardcoded for now but could be added to the form
-                dateString: new Date(document.getElementById('event-start-date').value).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-                location: "College Campus" 
-            },
-            // Add other sections here as you expand the form
-            // For now, we'll add empty placeholders
-            about: {},
-            highlights: {},
-            schedule: { days: [] },
-            eventCategories: { categories: [] },
-            speakers: { guests: [] },
-            news: { articles: [] },
-            tickets: { packages: [] },
-            team: { core: { members: [] }, volunteers: { members: [] } },
-            gallery: { images: [] },
-            faq: { questions: [] },
-            location: {}
-        };
-
-        // Create a reference to the document in Firestore
-        const eventRef = doc(db, "events", eventId);
-
-        // Save the data to Firestore
-        await setDoc(eventRef, eventData);
-
-        showMessage("Event saved successfully!");
-        e.target.reset(); // Clear the form
-
-    } catch (error) {
-        console.error("Error saving event:", error);
-        showMessage("Failed to save event. Check console for details.", true);
-    } finally {
-        // Re-enable the button
-        submitButton.disabled = false;
-        submitButton.textContent = 'Save Event';
-    }
-}
-
-
-// --- AUTHENTICATION FUNCTIONS (No changes needed) ---
-
-async function signInWithGoogle() {
-    try {
-        await signInWithPopup(auth, googleProvider);
-    } catch (error) {
-        console.error("Google Sign-In Error:", error);
-        showMessage("Google Sign-In failed. Please try again.", true);
-    }
-}
-
 async function handleSignUp(e) {
     e.preventDefault();
-    const email = document.getElementById('signup-email').value;
-    const password = document.getElementById('signup-password').value;
+    const emailInput = document.getElementById('signup-email');
+    const passwordInput = document.getElementById('signup-password');
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        showMessage("Account created successfully! Please wait for authorization.");
+        const userCredential = await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+        const user = userCredential.user;
+
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, {
+            email: user.email,
+            role: "admin",
+            createdAt: new Date()
+        });
+        
+        showMessage("Account created successfully! You are now logged in.");
     } catch (error) {
         console.error("Sign-Up Error:", error);
         showMessage(error.message, true);
+    } finally {
+        submitButton.disabled = false;
     }
 }
 
+/**
+ * Handles login with email and password.
+ */
 async function handleLogin(e) {
     e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+    const emailInput = document.getElementById('login-email');
+    const passwordInput = document.getElementById('login-password');
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+
     try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
     } catch (error) {
         console.error("Login Error:", error);
-        showMessage(error.message, true);
+        showMessage("Invalid email or password.", true);
+        passwordInput.value = ""; // Clear password but keep email
+    } finally {
+        submitButton.disabled = false;
     }
 }
 
+/**
+ * Handles Google Sign-In.
+ */
+async function signInWithGoogle() {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+
+        const userRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(userRef);
+
+        if (!docSnap.exists()) {
+            await setDoc(userRef, {
+                email: user.email,
+                displayName: user.displayName,
+                role: "admin",
+                createdAt: new Date()
+            });
+            showMessage("New admin account created via Google!");
+        }
+    } catch (error) {
+        console.error("Google Sign-In Error:", error);
+        showMessage("Google Sign-In failed. Please check authorized domains in Firebase.", true);
+    }
+}
+
+/**
+ * Handles the sign-out process.
+ */
 async function signOutUser() {
     try {
         await signOut(auth);
@@ -197,42 +154,117 @@ async function signOutUser() {
     }
 }
 
-function isUserAuthorized(user) {
-    return user && authorizedAdmins.includes(user.email.toLowerCase());
+/**
+ * Handles the submission of the event form.
+ */
+async function handleEventFormSubmit(e) {
+    e.preventDefault();
+    const submitButton = e.target.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Saving...';
+
+    try {
+        const eventData = {
+            eventName: document.getElementById('event-name').value,
+            eventStartDate: new Date(document.getElementById('event-start-date').value).toISOString(),
+            eventEndDate: new Date(document.getElementById('event-end-date').value).toISOString(),
+            hero: {
+                title: document.getElementById('hero-title').value,
+                heroGif: document.getElementById('hero-gif').value,
+                dateString: new Date(document.getElementById('event-start-date').value).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+                location: "College Campus"
+            },
+            about: {}, schedule: { days: [] }, eventCategories: { categories: [] },
+            speakers: { guests: [] }, news: { articles: [] }, tickets: { packages: [] },
+            team: { core: { members: [] }, volunteers: { members: [] } },
+            gallery: { images: [] }, faq: { questions: [] }, location: {}
+        };
+
+        const eventsCollection = collection(db, "events");
+        const docRef = await addDoc(eventsCollection, eventData);
+
+        showMessage(`Event saved successfully with ID: ${docRef.id}`);
+        e.target.reset();
+
+    } catch (error) {
+        console.error("Error saving event:", error);
+        showMessage("Failed to save event. Please check all fields.", true);
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Save New Event';
+    }
 }
 
-onAuthStateChanged(auth, (user) => {
+/**
+ * Central function to update the UI based on the current state.
+ * @param {string} state - The state to display ('login', 'loading', 'dashboard', 'denied').
+ * @param {object|null} user - The current user object, if available.
+ */
+function updateUI(state, user = null) {
     authContainer.classList.add('hidden');
     loadingView.classList.add('hidden');
     adminDashboard.classList.add('hidden');
     accessDeniedView.classList.add('hidden');
 
+    switch (state) {
+        case 'loading':
+            loadingView.classList.remove('hidden');
+            break;
+        case 'dashboard':
+            adminDashboard.classList.remove('hidden');
+            userEmailDisplay.textContent = `Signed in as ${user.email}`;
+            break;
+        case 'denied':
+            accessDeniedView.classList.remove('hidden');
+            showMessage("This account is not authorized.", true);
+            setTimeout(signOutUser, 4000); // Automatically sign out after 4 seconds
+            break;
+        case 'login':
+        default:
+            authContainer.classList.remove('hidden');
+            loginView.classList.remove('hidden');
+            signupView.classList.add('hidden');
+            break;
+    }
+}
+
+
+/**
+ * Listens for authentication state changes and updates the UI accordingly.
+ */
+onAuthStateChanged(auth, async (user) => {
     if (user) {
-        loadingView.classList.remove('hidden');
-        setTimeout(() => {
-            if (isUserAuthorized(user)) {
-                loadingView.classList.add('hidden');
-                adminDashboard.classList.remove('hidden');
-                userEmailDisplay.textContent = `Signed in as ${user.email}`;
-            } else {
-                loadingView.classList.add('hidden');
-                accessDeniedView.classList.remove('hidden');
-                setTimeout(signOutUser, 3000);
-            }
-        }, 500);
+        updateUI('loading');
+        const isAdmin = await isUserAdmin(user);
+        if (isAdmin) {
+            updateUI('dashboard', user);
+        } else {
+            updateUI('denied');
+        }
     } else {
-        authContainer.classList.remove('hidden');
-        loginView.classList.remove('hidden');
-        signupView.classList.add('hidden');
+        updateUI('login');
     }
 });
+
+/**
+ * THE FIX: This event listener runs every time the page becomes visible,
+ * including when the user navigates with the back/forward buttons.
+ */
+window.addEventListener('pageshow', (event) => {
+    // If the page is loaded from the back/forward cache and there's no user,
+    // it means they logged out on another page. Force the UI to the login state.
+    if (event.persisted && !auth.currentUser) {
+        updateUI('login');
+    }
+});
+
 
 // --- Event Listeners ---
 loginBtnGoogle.addEventListener('click', signInWithGoogle);
 logoutBtn.addEventListener('click', signOutUser);
 loginForm.addEventListener('submit', handleLogin);
 signupForm.addEventListener('submit', handleSignUp);
-eventForm.addEventListener('submit', handleEventFormSubmit); // Attach listener to the new form
+eventForm.addEventListener('submit', handleEventFormSubmit);
 
 showSignupBtn.addEventListener('click', () => {
     loginView.classList.add('hidden');
