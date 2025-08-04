@@ -6,16 +6,20 @@
     <title>Event Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- THE FIX: Added Font Awesome for the icons -->
+    <script src="https://kit.fontawesome.com/c285d7f716.js" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="bg-gray-900 text-gray-100 font-poppins">
+<body>
 
     <!-- Main container -->
-    <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div id="app" class="min-h-screen flex flex-col items-center p-4">
 
         <!-- Login / Signup Container -->
-        <div id="auth-container" class="w-full max-w-md">
-            <!-- Login View -->
+        <div id="auth-container" class="w-full max-w-md hidden">
+            <!-- Login View (JS will insert this) -->
             <div id="login-view" class="p-8 bg-gray-800 rounded-xl shadow-2xl">
                 <h1 class="text-3xl font-bold mb-2 text-white text-center">Admin Login</h1>
                 <p class="text-gray-400 mb-6 text-center">Sign in to manage events.</p>
@@ -23,13 +27,13 @@
                 <form id="login-form">
                     <div class="mb-4">
                         <label for="login-email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
-                        <input type="email" id="login-email" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <input type="email" id="login-email" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
                     <div class="mb-6">
                         <label for="login-password" class="block text-gray-300 text-sm font-bold mb-2">Password</label>
-                        <input type="password" id="login-password" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <input type="password" id="login-password" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Sign In</button>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Sign In</button>
                 </form>
 
                 <div class="my-6 flex items-center">
@@ -39,11 +43,11 @@
                 </div>
 
                 <button id="login-btn-google" class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
-                    <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14._691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.012,36.49,44,30.686,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
+                    <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.012,36.49,44,30.686,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>
                     Sign in with Google
                 </button>
                  <p class="text-center text-gray-400 text-sm mt-6">
-                    Need an account? <button id="show-signup" class="font-bold text-red-500 hover:text-red-400">Sign Up</button>
+                    Need an account? <button id="show-signup" class="font-bold text-blue-400 hover:text-blue-300">Sign Up</button>
                 </p>
             </div>
 
@@ -55,17 +59,17 @@
                 <form id="signup-form">
                     <div class="mb-4">
                         <label for="signup-email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
-                        <input type="email" id="signup-email" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <input type="email" id="signup-email" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
                     <div class="mb-6">
                         <label for="signup-password" class="block text-gray-300 text-sm font-bold mb-2">Password</label>
-                        <input type="password" id="signup-password" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <input type="password" id="signup-password" class="w-full bg-gray-700 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Sign Up</button>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Sign Up</button>
                 </form>
 
                  <p class="text-center text-gray-400 text-sm mt-6">
-                    Already have an account? <button id="show-login" class="font-bold text-red-500 hover:text-red-400">Sign In</button>
+                    Already have an account? <button id="show-login" class="font-bold text-blue-400 hover:text-blue-300">Sign In</button>
                 </p>
             </div>
         </div>
@@ -73,19 +77,16 @@
         <!-- Custom Message Box -->
         <div id="message-box" class="hidden fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg animate-fade-in-out"></div>
 
-        <!-- Loading View (Hidden by default) -->
+        <!-- Loading View -->
         <div id="loading-view" class="hidden text-center">
-            <p class="text-xl text-gray-400">Authenticating...</p>
+             <p class="text-xl text-gray-400">Authenticating...</p>
         </div>
 
-        <!-- Access Denied View (Hidden by default) -->
-        <div id="access-denied-view" class="hidden text-center p-8 bg-gray-800 rounded-xl shadow-2xl w-full max-w-md">
-            <h1 class="text-3xl font-bold mb-2 text-red-500">Access Denied</h1>
-            <p class="text-gray-400">Your account is not authorized to manage events. Please contact the site administrator.</p>
-        </div>
+        <!-- Access Denied View -->
+        <div id="access-denied-view" class="hidden text-center p-8 bg-gray-800 rounded-xl shadow-2xl w-full max-w-md"></div>
 
         <!-- Admin Dashboard View (Hidden by default) -->
-        <div id="admin-dashboard" class="hidden w-full max-w-4xl mx-auto p-4 sm:p-8">
+        <div id="admin-dashboard" class="hidden w-full max-w-5xl mx-auto p-4 sm:p-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <div>
                     <h1 class="text-3xl font-bold text-white">Event Dashboard</h1>
@@ -95,18 +96,23 @@
             </div>
             
             <!-- Event Form -->
-            <form id="event-form" class="bg-gray-800 p-6 rounded-xl shadow-2xl space-y-6">
+            <form id="event-form" class="space-y-6">
                 
-                <fieldset class="border-2 border-gray-700 p-4 rounded-lg">
-                    <legend class="px-2 text-lg font-bold text-red-500">Core Details</legend>
+                <!-- Core Details -->
+                <fieldset class="form-section">
+                    <legend class="form-legend">Core Details</legend>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label for="event-name" class="form-label">Event Name</label>
                             <input type="text" id="event-name" class="form-input" placeholder="e.g., Diwali Celebration" required>
                         </div>
                         <div>
-                            <label for="hero-title" class="form-label">Hero Title</label>
-                            <input type="text" id="hero-title" class="form-input" placeholder="e.g., Festival of Lights">
+                            <label for="meta-title" class="form-label">Meta Title (for SEO)</label>
+                            <input type="text" id="meta-title" class="form-input" placeholder="e.g., Diwali 2025 | College Events">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="meta-description" class="form-label">Meta Description (for SEO)</label>
+                            <textarea id="meta-description" class="form-textarea" rows="2" placeholder="A short description for search engines..."></textarea>
                         </div>
                         <div>
                             <label for="event-start-date" class="form-label">Start Date & Time (IST)</label>
@@ -116,22 +122,110 @@
                             <label for="event-end-date" class="form-label">End Date & Time (IST)</label>
                             <input type="datetime-local" id="event-end-date" class="form-input" required>
                         </div>
-                        <div class="md:col-span-2">
+                    </div>
+                </fieldset>
+
+                <!-- Hero Section -->
+                <fieldset class="form-section">
+                    <legend class="form-legend">Hero Section</legend>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="hero-title" class="form-label">Hero Title</label>
+                            <input type="text" id="hero-title" class="form-input" placeholder="e.g., Festival of Lights">
+                        </div>
+                        <div>
+                            <label for="hero-location" class="form-label">Location String</label>
+                            <input type="text" id="hero-location" class="form-input" placeholder="e.g., College Main Grounds">
+                        </div>
+                        <div>
                             <label for="hero-gif" class="form-label">Hero Background GIF URL</label>
                             <input type="url" id="hero-gif" class="form-input" placeholder="https://i.giphy.com/...">
                         </div>
                     </div>
                 </fieldset>
+                
+                <!-- About Section -->
+                <fieldset class="form-section">
+                    <legend class="form-legend">About Section</legend>
+                     <div class="space-y-4">
+                        <div>
+                            <label for="about-title" class="form-label">Section Title</label>
+                            <input type="text" id="about-title" class="form-input" value="About The Event">
+                        </div>
+                        <div>
+                            <label for="about-tagline" class="form-label">Tagline</label>
+                            <input type="text" id="about-tagline" class="form-input" placeholder="e.g., A Celebration of...">
+                        </div>
+                        <div>
+                            <label for="about-description" class="form-label">Description (use '|' to separate paragraphs)</label>
+                            <textarea id="about-description" class="form-textarea" rows="4" placeholder="First paragraph.|Second paragraph."></textarea>
+                        </div>
+                    </div>
+                </fieldset>
 
-                <!-- More sections can be added here -->
+                <!-- Schedule Section -->
+                <fieldset class="form-section">
+                    <legend class="form-legend">Schedule</legend>
+                    <div id="schedule-days-container" class="space-y-4">
+                        <!-- JS will add schedule day blocks here -->
+                    </div>
+                    <button type="button" id="add-day-btn" class="form-add-btn mt-4">Add Day</button>
+                </fieldset>
 
-                <div class="pt-4">
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Save New Event</button>
+                <!-- Speakers Section -->
+                <fieldset class="form-section">
+                    <legend class="form-legend">Speakers & Guests</legend>
+                    <div id="speakers-container" class="space-y-4">
+                        <!-- JS will add speaker blocks here -->
+                    </div>
+                    <button type="button" id="add-speaker-btn" class="form-add-btn mt-4">Add Speaker</button>
+                </fieldset>
+
+                <div class="pt-4 flex space-x-4">
+                    <button type="submit" class="w-full">Save Event</button>
+                    <button type="button" id="clear-form-btn" class="w-full">Clear Form</button>
                 </div>
-
             </form>
         </div>
     </div>
+
+    <!-- Template for a Schedule Day -->
+    <template id="schedule-day-template">
+        <div class="p-3 bg-gray-900 rounded-lg space-y-3 schedule-day-item">
+            <div class="flex justify-between items-center">
+                 <h4 class="text-md font-semibold text-gray-300">New Day</h4>
+                 <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <input type="text" class="form-input day-title" placeholder="Day Title (e.g., Day 1)">
+            <input type="text" class="form-input day-date" placeholder="Date (e.g., Aug 24)">
+            <div class="pl-4 border-l-2 border-gray-700 space-y-2 day-events-container">
+                <!-- JS will add schedule events here -->
+            </div>
+            <button type="button" class="form-add-btn-sm add-event-btn">Add Event to this Day</button>
+        </div>
+    </template>
+
+    <!-- Template for a Schedule Event -->
+    <template id="schedule-event-template">
+         <div class="flex items-center gap-2 schedule-event-item">
+            <input type="text" class="form-input-sm event-time" placeholder="Time (e.g., 09:00)">
+            <input type="text" class="form-input-sm event-title" placeholder="Event Title">
+            <input type="text" class="form-input-sm event-details" placeholder="Details (e.g., Speaker, Location)">
+            <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+        </div>
+    </template>
+
+    <!-- Template for a Speaker -->
+    <template id="speaker-template">
+        <div class="p-3 bg-gray-900 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-3 speaker-item">
+            <input type="text" class="form-input speaker-name" placeholder="Speaker Name">
+            <input type="text" class="form-input speaker-role" placeholder="Role / Title">
+            <input type="url" class="form-input speaker-img" placeholder="Image URL">
+            <div class="md:col-span-3 flex justify-end">
+                <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+    </template>
 
     <script type="module" src="js/admin.js"></script>
 </body>
