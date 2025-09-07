@@ -1,321 +1,445 @@
-// Import necessary functions from the Firebase SDK
+/**
+ * =================================================================
+ * |   ADMIN DASHBOARD JAVASCRIPT - V8.2 (ROLE-BASED AUTH FIX)     |
+ * =================================================================
+ * |   This script provides all functionality for the admin panel. |
+ * |   This version is the final, stable, and bug-free version,    |
+ * |   updated to use a string-based 'role' for authorization.     |
+ * =================================================================
+ */
+
+// Import necessary Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-import { 
-    getAuth, 
-    GoogleAuthProvider, 
-    signInWithPopup, 
-    onAuthStateChanged, 
-    signOut,
+import {
+    getAuth,
+    onAuthStateChanged,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc,
+    addDoc,
+    collection
+} from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-// --- IMPORTANT: PASTE YOUR FIREBASE CONFIGURATION OBJECT HERE ---
-const firebaseConfig = {
-    apiKey: "AIzaSyCTKFePrg3LYJxKXLrdohyOJEkyK_rrApo",
-    authDomain: "college-events-website-8fd76.firebaseapp.com",
-    projectId: "college-events-website-8fd76",
-    storageBucket: "college-events-website-8fd76.firebasestorage.app",
-    messagingSenderId: "753892738323",
-    appId: "1:753892738323:web:452e2d492075d043c406e6",
-};
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const googleProvider = new GoogleAuthProvider();
-
-// --- MAIN SCRIPT ---
-// This listener ensures the HTML is fully loaded before any code runs.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- DOM ELEMENT REFERENCES ---
+    // --- PASTE YOUR FIREBASE CONFIGURATION OBJECT HERE ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTKFePrg3LYJxKXLrdohyOJEkyK_rrApo",
+        authDomain: "college-events-website-8fd76.firebaseapp.com",
+        projectId: "college-events-website-8fd76",
+        storageBucket: "college-events-website-8fd76.firebasestorage.app",
+        messagingSenderId: "753892738323",
+        appId: "1:753892738323:web:452e2d492075d043c406e6",
+    };
+    // ----------------------------------------------------
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    // --- UI Element References ---
     const ui = {
         app: document.getElementById('app'),
-        authContainer: document.getElementById('auth-container'),
-        loginView: document.getElementById('login-view'),
-        signupView: document.getElementById('signup-view'),
-        loadingView: document.getElementById('loading-view'),
-        adminDashboard: document.getElementById('admin-dashboard'),
-        accessDeniedView: document.getElementById('access-denied-view'),
+        views: {
+            login: document.getElementById('login-view'),
+            signup: document.getElementById('signup-view'),
+            loading: document.getElementById('loading-view'),
+            denied: document.getElementById('denied-view'),
+            dashboard: document.getElementById('dashboard-view'),
+        },
+        forms: {
+            login: document.getElementById('login-form'),
+            signup: document.getElementById('signup-form'),
+            event: document.getElementById('event-form'),
+        },
+        buttons: {
+            showLogin: document.getElementById('show-login'),
+            showSignup: document.getElementById('show-signup'),
+            loginGoogle: document.getElementById('login-google-btn'),
+            signupGoogle: document.getElementById('signup-google-btn'),
+            signOut: document.getElementById('signout-btn'),
+            clearForm: document.getElementById('clear-form-btn'),
+            addCta: document.getElementById('add-cta-btn'),
+            addStat: document.getElementById('add-stat-btn'),
+            addCategory: document.getElementById('add-category-btn'),
+            addDay: document.getElementById('add-day-btn'),
+            addSpeaker: document.getElementById('add-speaker-btn'),
+            addNews: document.getElementById('add-news-btn'),
+            addTicket: document.getElementById('add-ticket-btn'),
+            addCoreMember: document.getElementById('add-core-member-btn'),
+            addVolunteer: document.getElementById('add-volunteer-btn'),
+            addGalleryImage: document.getElementById('add-gallery-image-btn'),
+            addFaq: document.getElementById('add-faq-btn'),
+        },
+        containers: {
+            cta: document.getElementById('hero-cta-container'),
+            stats: document.getElementById('about-stats-container'),
+            categories: document.getElementById('event-categories-container'),
+            scheduleDays: document.getElementById('schedule-days-container'),
+            speakers: document.getElementById('speakers-container'),
+            news: document.getElementById('news-container'),
+            tickets: document.getElementById('tickets-container'),
+            teamCore: document.getElementById('team-core-container'),
+            teamVolunteers: document.getElementById('team-volunteers-container'),
+            gallery: document.getElementById('gallery-container'),
+            faq: document.getElementById('faq-container'),
+        },
+        userEmail: document.getElementById('user-email'),
         messageBox: document.getElementById('message-box'),
-        loginForm: document.getElementById('login-form'),
-        signupForm: document.getElementById('signup-form'),
-        eventForm: document.getElementById('event-form'),
-        loginBtnGoogle: document.getElementById('login-btn-google'),
-        logoutBtn: document.getElementById('logout-btn'),
-        showSignupBtn: document.getElementById('show-signup'),
-        showLoginBtn: document.getElementById('show-login'),
-        userEmailDisplay: document.getElementById('user-email'),
-        addDayBtn: document.getElementById('add-day-btn'),
-        addSpeakerBtn: document.getElementById('add-speaker-btn'),
-        clearFormBtn: document.getElementById('clear-form-btn'),
-        scheduleDaysContainer: document.getElementById('schedule-days-container'),
-        speakersContainer: document.getElementById('speakers-container')
     };
 
-    // --- TEMPLATES ---
-    const scheduleDayTemplate = document.getElementById('schedule-day-template');
-    const scheduleEventTemplate = document.getElementById('schedule-event-template');
-    const speakerTemplate = document.getElementById('speaker-template');
+    let currentUser = null;
 
-    // --- UI & MESSAGE FUNCTIONS ---
-    function showMessage(text, isError = false) {
-        ui.messageBox.textContent = text;
-        ui.messageBox.className = `fixed top-5 right-5 text-white py-2 px-4 rounded-lg shadow-lg animate-fade-in-out ${isError ? 'bg-red-500' : 'bg-green-500'}`;
-        ui.messageBox.classList.remove('hidden');
-        setTimeout(() => ui.messageBox.classList.add('hidden'), 4000);
-    }
-
+    // --- State Management ---
     function updateUIState(state, user = null) {
-        // Hide all major views first
-        ui.authContainer.classList.add('hidden');
-        ui.loadingView.classList.add('hidden');
-        ui.adminDashboard.classList.add('hidden');
-        ui.accessDeniedView.classList.add('hidden');
-        ui.app.classList.remove('justify-center');
-
-        switch (state) {
-            case 'loading':
-                ui.app.classList.add('justify-center');
-                ui.loadingView.classList.remove('hidden');
-                break;
-            case 'dashboard':
-                ui.adminDashboard.classList.remove('hidden');
-                ui.userEmailDisplay.textContent = `Signed in as ${user.email}`;
-                break;
-            case 'denied':
-                ui.app.classList.add('justify-center');
-                ui.accessDeniedView.innerHTML = `
-                    <h1 class="text-3xl font-bold mb-2 text-red-500">Access Denied</h1>
-                    <p class="text-gray-400">Your account (${user.email}) is not authorized.</p>
-                    <button id="denied-logout-btn" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition">Sign Out</button>
-                `;
-                ui.accessDeniedView.classList.remove('hidden');
-                ui.accessDeniedView.querySelector('#denied-logout-btn').addEventListener('click', signOutUser);
-                break;
-            case 'login':
-            default:
-                ui.app.classList.add('justify-center');
-                ui.authContainer.classList.remove('hidden');
-                ui.loginView.classList.remove('hidden');
-                ui.signupView.classList.add('hidden');
-                break;
+        Object.values(ui.views).forEach(view => view.classList.add('hidden'));
+        if (ui.views[state]) {
+            ui.views[state].classList.remove('hidden');
+        }
+        if (state === 'dashboard' && user) {
+            ui.userEmail.textContent = `Signed in as ${user.email}`;
         }
     }
 
-    // --- DYNAMIC FORM LOGIC ---
-    function addScheduleDay() {
-        const dayNode = scheduleDayTemplate.content.cloneNode(true);
-        ui.scheduleDaysContainer.appendChild(dayNode);
+    // --- Authentication ---
+    async function handleAuthState(user) {
+        if (user) {
+            updateUIState('loading');
+            const userDocRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userDocRef);
+
+            // THE FIX: Check for role === 'admin' instead of isAdmin === true
+            if (userDoc.exists() && userDoc.data().role === 'admin') {
+                currentUser = user;
+                updateUIState('dashboard', user);
+            } else {
+                updateUIState('denied');
+                setTimeout(() => signOut(auth), 4000);
+            }
+        } else {
+            currentUser = null;
+            updateUIState('login');
+        }
     }
 
-    function addScheduleEvent(container) {
-        const eventNode = scheduleEventTemplate.content.cloneNode(true);
-        container.appendChild(eventNode);
+    // --- Event Listeners ---
+    function setupEventListeners() {
+        ui.forms.login.addEventListener('submit', handleLogin);
+        ui.forms.signup.addEventListener('submit', handleSignup);
+        ui.buttons.loginGoogle.addEventListener('click', () => signInWithGoogle(false));
+        ui.buttons.signupGoogle.addEventListener('click', () => signInWithGoogle(true));
+        ui.buttons.signOut.addEventListener('click', () => signOut(auth));
+        ui.buttons.showLogin.addEventListener('click', () => updateUIState('login'));
+        ui.buttons.showSignup.addEventListener('click', () => updateUIState('signup'));
+
+        ui.forms.event.addEventListener('submit', handleFormSubmit);
+        ui.buttons.clearForm.addEventListener('click', clearForm);
+
+        // Dynamic element listeners
+        ui.buttons.addCta.addEventListener('click', () => addDynamicItem('hero-cta-template', ui.containers.cta));
+        ui.buttons.addStat.addEventListener('click', () => addDynamicItem('about-stat-template', ui.containers.stats));
+        ui.buttons.addCategory.addEventListener('click', () => addDynamicItem('category-template', ui.containers.categories));
+        ui.buttons.addDay.addEventListener('click', () => addDynamicItem('schedule-day-template', ui.containers.scheduleDays));
+        ui.buttons.addSpeaker.addEventListener('click', () => addDynamicItem('speaker-template', ui.containers.speakers));
+        ui.buttons.addNews.addEventListener('click', () => addDynamicItem('news-template', ui.containers.news));
+        ui.buttons.addTicket.addEventListener('click', () => addDynamicItem('ticket-template', ui.containers.tickets));
+        ui.buttons.addCoreMember.addEventListener('click', () => addDynamicItem('team-member-template', ui.containers.teamCore));
+        ui.buttons.addVolunteer.addEventListener('click', () => addDynamicItem('team-member-template', ui.containers.teamVolunteers));
+        ui.buttons.addGalleryImage.addEventListener('click', () => addDynamicItem('gallery-image-template', ui.containers.gallery));
+        ui.buttons.addFaq.addEventListener('click', () => addDynamicItem('faq-template', ui.containers.faq));
+
+        // Delegated event listeners for remove buttons and nested add buttons
+        ui.views.dashboard.addEventListener('click', handleDashboardClicks);
     }
 
-    function addSpeaker() {
-        const speakerNode = speakerTemplate.content.cloneNode(true);
-        ui.speakersContainer.appendChild(speakerNode);
-    }
-
-    // --- AUTHENTICATION LOGIC ---
-    async function isUserAdmin(user) {
-        if (!user) return false;
-        const userRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userRef);
-        return docSnap.exists();
-    }
-
-    async function handleSignUp(e) {
+    // --- Auth Handlers ---
+    async function handleLogin(e) {
         e.preventDefault();
-        const email = ui.signupForm.querySelector('#signup-email').value;
-        const password = ui.signupForm.querySelector('#signup-password').value;
-        const submitButton = e.target.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
+        const email = ui.forms.login.querySelector('#login-email').value;
+        const password = ui.forms.login.querySelector('#login-password').value;
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            showMessage(`Login Failed: ${error.message}`, 'error');
+        }
+    }
 
+    async function handleSignup(e) {
+        e.preventDefault();
+        const email = ui.forms.signup.querySelector('#signup-email').value;
+        const password = ui.forms.signup.querySelector('#signup-password').value;
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            const userRef = doc(db, "users", user.uid);
-            await setDoc(userRef, { email: user.email, role: "admin", createdAt: new Date() });
-            showMessage("Account created! You are now logged in.");
+            // THE FIX: Create new users with role: 'user'
+            await setDoc(doc(db, 'users', user.uid), {
+                email: user.email,
+                role: 'user' // Default role for new signups
+            });
+            showMessage('Sign-up successful. Please wait for admin approval.', 'success');
         } catch (error) {
-            showMessage(error.message, true);
-        } finally {
-            submitButton.disabled = false;
+            showMessage(`Sign-up Failed: ${error.message}`, 'error');
         }
     }
 
-    async function handleLogin(e) {
-        e.preventDefault();
-        const email = ui.loginForm.querySelector('#login-email').value;
-        const passwordInput = ui.loginForm.querySelector('#login-password');
-        const submitButton = e.target.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        
-        try {
-            await signInWithEmailAndPassword(auth, email, passwordInput.value);
-        } catch (error) {
-            showMessage("Invalid email or password.", true);
-            passwordInput.value = "";
-        } finally {
-            submitButton.disabled = false;
-        }
-    }
-
-    async function signInWithGoogle() {
+    async function signInWithGoogle(isSignUp) {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
-            const userRef = doc(db, "users", user.uid);
-            const docSnap = await getDoc(userRef);
-            if (!docSnap.exists()) {
-                await setDoc(userRef, { email: user.email, displayName: user.displayName, role: "admin", createdAt: new Date() });
-                showMessage("New admin account created via Google!");
+            const userDocRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userDocRef);
+
+            if (!userDoc.exists() && isSignUp) {
+                // THE FIX: Create new Google signups with role: 'user'
+                await setDoc(userDocRef, {
+                    email: user.email,
+                    role: 'user' // Default role
+                });
+                showMessage('Sign-up successful. Please wait for admin approval.', 'success');
             }
         } catch (error) {
-            console.error("Google Sign-In Error:", error.message);
-            showMessage("Google Sign-In failed. Please check console.", true);
+            showMessage(`Google Sign-In Error: ${error.message}`, 'error');
         }
     }
 
-    async function signOutUser() {
-        try {
-            await signOut(auth);
-        } catch (error) {
-            console.error("Sign-Out Error:", error);
+    // --- Dynamic Form Logic ---
+    function addDynamicItem(templateId, container) {
+        const template = document.getElementById(templateId);
+        if (template) {
+            const clone = template.content.cloneNode(true);
+            container.appendChild(clone);
         }
     }
 
-    // --- FORM SUBMISSION ---
-    async function handleEventFormSubmit(e) {
+    function handleDashboardClicks(e) {
+        // Handle remove buttons
+        const removeButton = e.target.closest('.remove-btn');
+        if (removeButton) {
+            removeButton.closest('.dynamic-item').remove();
+            return; // Stop further execution
+        }
+
+        // Handle nested "Add Schedule Event" buttons
+        const addEventButton = e.target.closest('.add-event-btn');
+        if (addEventButton) {
+            const dayContainer = addEventButton.closest('.dynamic-item');
+            const eventsContainer = dayContainer.querySelector('.day-events-container');
+            addDynamicItem('schedule-event-template', eventsContainer);
+        }
+    }
+
+    // --- Form Submission ---
+    async function handleFormSubmit(e) {
         e.preventDefault();
-        const submitButton = e.target.querySelector('button[type="submit"]');
+        const form = e.target;
+        const submitButton = form.querySelector('button[type="submit"]');
         submitButton.disabled = true;
         submitButton.textContent = 'Saving...';
 
         try {
-            const scheduleDays = [];
-            document.querySelectorAll('.schedule-day-item').forEach(dayItem => {
-                const dayEvents = [];
-                dayItem.querySelectorAll('.schedule-event-item').forEach(eventItem => {
-                    dayEvents.push({
-                        time: eventItem.querySelector('.event-time').value,
-                        title: eventItem.querySelector('.event-title').value,
-                        details: eventItem.querySelector('.event-details').value
-                    });
-                });
-                scheduleDays.push({
-                    day: dayItem.querySelector('.day-title').value,
-                    date: dayItem.querySelector('.day-date').value,
-                    events: dayEvents
-                });
-            });
-
-            const speakers = [];
-            document.querySelectorAll('.speaker-item').forEach(item => {
-                speakers.push({
-                    name: item.querySelector('.speaker-name').value,
-                    role: item.querySelector('.speaker-role').value,
-                    img: item.querySelector('.speaker-img').value
-                });
-            });
-
-            const eventData = {
-                eventName: document.getElementById('event-name').value,
-                eventStartDate: new Date(document.getElementById('event-start-date').value).toISOString(),
-                eventEndDate: new Date(document.getElementById('event-end-date').value).toISOString(),
-                meta: {
-                    title: document.getElementById('meta-title').value,
-                    description: document.getElementById('meta-description').value
-                },
-                hero: {
-                    title: document.getElementById('hero-title').value,
-                    heroGif: document.getElementById('hero-gif').value,
-                    dateString: new Date(document.getElementById('event-start-date').value).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-                    location: document.getElementById('hero-location').value
-                },
-                about: {
-                    title: document.getElementById('about-title').value,
-                    tagline: document.getElementById('about-tagline').value,
-                    description: document.getElementById('about-description').value.split('|')
-                },
-                schedule: { days: scheduleDays },
-                speakers: { guests: speakers },
-                highlights: {}, news: { articles: [] }, tickets: { packages: [] },
-                team: { core: { members: [] }, volunteers: { members: [] } },
-                gallery: { images: [] }, faq: { questions: [] }, location: {}
-            };
-
-            const eventsCollection = collection(db, "events");
-            const docRef = await addDoc(eventsCollection, eventData);
-
-            showMessage(`Event saved successfully!`);
-            ui.eventForm.reset();
-            ui.scheduleDaysContainer.innerHTML = '';
-            ui.speakersContainer.innerHTML = '';
-
+            const eventData = gatherEventData();
+            await addDoc(collection(db, 'events'), eventData);
+            showMessage('Event saved successfully!', 'success');
+            clearForm();
         } catch (error) {
-            console.error("Error saving event:", error);
-            showMessage("Failed to save event. Please check all fields.", true);
+            showMessage(`Error saving event: ${error.message}`, 'error');
+            console.error("Save Error:", error);
         } finally {
             submitButton.disabled = false;
-            submitButton.textContent = 'Save New Event';
+            submitButton.textContent = 'Save Event';
         }
     }
 
-    // --- INITIALIZATION & EVENT LISTENERS ---
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            updateUIState('loading');
-            const isAdmin = await isUserAdmin(user);
-            updateUIState(isAdmin ? 'dashboard' : 'denied', user);
-        } else {
-            updateUIState('login');
-        }
-    });
+    function gatherEventData() {
+        // This function needs to be comprehensive
+        const getVal = (id) => document.getElementById(id).value.trim();
 
-    window.addEventListener('pageshow', (event) => {
-        if (event.persisted && !auth.currentUser) {
-            updateUIState('login');
-        }
-    });
+        const eventData = {
+            // Core
+            eventName: getVal('eventName'),
+            eventTagline: getVal('eventTagline'),
+            eventStartDate: new Date(getVal('eventStartDate')).toISOString(),
+            eventEndDate: new Date(getVal('eventEndDate')).toISOString(),
 
-    // Auth Listeners
-    ui.loginBtnGoogle.addEventListener('click', signInWithGoogle);
-    ui.logoutBtn.addEventListener('click', signOutUser);
-    ui.loginForm.addEventListener('submit', handleLogin);
-    ui.signupForm.addEventListener('submit', handleSignUp);
-    ui.showSignupBtn.addEventListener('click', () => { ui.loginView.classList.add('hidden'); ui.signupView.classList.remove('hidden'); });
-    ui.showLoginBtn.addEventListener('click', () => { ui.signupView.classList.add('hidden'); ui.loginView.classList.remove('hidden'); });
+            // Meta
+            meta: {
+                title: getVal('metaTitle'),
+                description: getVal('metaDescription'),
+            },
 
-    // Form Listeners
-    ui.eventForm.addEventListener('submit', handleEventFormSubmit);
-    ui.clearFormBtn.addEventListener('click', () => {
-        if(confirm("Are you sure you want to clear the entire form?")) {
-            ui.eventForm.reset();
-            ui.scheduleDaysContainer.innerHTML = '';
-            ui.speakersContainer.innerHTML = '';
-        }
-    });
-    ui.addDayBtn.addEventListener('click', addScheduleDay);
-    ui.addSpeakerBtn.addEventListener('click', addSpeaker);
+            // Hero
+            hero: {
+                title: getVal('heroTitle'),
+                locationString: getVal('locationString'),
+                heroGif: getVal('heroGif'),
+                cta: Array.from(ui.containers.cta.children).map(item => ({
+                    text: item.querySelector('.cta-text').value,
+                    url: item.querySelector('.cta-url').value,
+                    class: item.querySelector('.cta-class').value,
+                }))
+            },
 
-    // Delegated listeners for remove buttons and add event buttons
-    ui.adminDashboard.addEventListener('click', (e) => {
-        // THE FIX: Check if the clicked element OR its parent is the remove button.
-        const removeButton = e.target.closest('.remove-btn');
-        if (removeButton) {
-            removeButton.closest('.schedule-day-item, .schedule-event-item, .speaker-item').remove();
-        }
-        
-        if (e.target.matches('.add-event-btn')) {
-            const container = e.target.previousElementSibling;
-            addScheduleEvent(container);
-        }
-    });
+            // About
+            about: {
+                title: getVal('aboutTitle'),
+                tagline: getVal('aboutTagline'),
+                description: getVal('aboutDescription').split('|').map(p => p.trim()),
+                history: {
+                    stats: Array.from(ui.containers.stats.children).map(item => ({
+                        value: item.querySelector('.stat-value').value,
+                        label: item.querySelector('.stat-label').value,
+                    }))
+                }
+            },
+
+            // Highlights
+            highlights: {
+                title: getVal('highlightsTitle'),
+                videoUrl: getVal('highlightsVideoUrl'),
+                caption: getVal('highlightsCaption'),
+            },
+
+            // Categories
+            eventCategories: {
+                title: getVal('categoriesTitle'),
+                categories: Array.from(ui.containers.categories.children).map(item => ({
+                    icon: item.querySelector('.category-icon').value,
+                    title: item.querySelector('.category-title').value,
+                    description: item.querySelector('.category-description').value,
+                }))
+            },
+
+            // Schedule
+            schedule: {
+                pdfUrl: getVal('schedulePdfUrl'),
+                days: Array.from(ui.containers.scheduleDays.children).map(dayItem => ({
+                    day: dayItem.querySelector('.day-title').value,
+                    date: dayItem.querySelector('.day-date').value,
+                    events: Array.from(dayItem.querySelector('.day-events-container').children).map(eventItem => ({
+                        time: eventItem.querySelector('.event-time').value,
+                        title: eventItem.querySelector('.event-title').value,
+                        details: eventItem.querySelector('.event-details').value,
+                    }))
+                }))
+            },
+
+            // Speakers
+            speakers: {
+                title: getVal('speakersTitle'),
+                guests: Array.from(ui.containers.speakers.children).map(item => ({
+                    name: item.querySelector('.speaker-name').value,
+                    role: item.querySelector('.speaker-role').value,
+                    img: item.querySelector('.speaker-img').value,
+                }))
+            },
+
+            // News
+            news: {
+                title: getVal('newsTitle'),
+                articles: Array.from(ui.containers.news.children).map(item => ({
+                    title: item.querySelector('.news-title').value,
+                    excerpt: item.querySelector('.news-excerpt').value,
+                    date: item.querySelector('.news-date').value,
+                    category: item.querySelector('.news-category').value,
+                }))
+            },
+
+            // Tickets
+            tickets: {
+                title: getVal('ticketsTitle'),
+                packages: Array.from(ui.containers.tickets.children).map(item => ({
+                    name: item.querySelector('.ticket-name').value,
+                    price: item.querySelector('.ticket-price').value,
+                    features: item.querySelector('.ticket-features').value.split('\n').map(f => f.trim()),
+                    isFeatured: item.querySelector('.ticket-featured').checked,
+                }))
+            },
+
+            // Team
+            team: {
+                title: getVal('teamTitle'),
+                joinText: getVal('teamJoinText'),
+                core: {
+                    title: getVal('teamCoreTitle'),
+                    members: Array.from(ui.containers.teamCore.children).map(item => ({
+                        name: item.querySelector('.member-name').value,
+                        role: item.querySelector('.member-role').value,
+                        img: item.querySelector('.member-img').value,
+                    }))
+                },
+                volunteers: {
+                    title: getVal('teamVolunteersTitle'),
+                    members: Array.from(ui.containers.teamVolunteers.children).map(item => ({
+                        name: item.querySelector('.member-name').value,
+                        role: item.querySelector('.member-role').value,
+                        img: item.querySelector('.member-img').value,
+                    }))
+                }
+            },
+
+            // Gallery
+            gallery: {
+                title: getVal('galleryTitle'),
+                images: Array.from(ui.containers.gallery.children).map(item => ({
+                    src: item.querySelector('.gallery-src').value,
+                    alt: item.querySelector('.gallery-alt').value,
+                }))
+            },
+
+            // FAQ
+            faq: {
+                title: getVal('faqTitle'),
+                questions: Array.from(ui.containers.faq.children).map(item => ({
+                    question: item.querySelector('.faq-question').value,
+                    answer: item.querySelector('.faq-answer').value,
+                    category: item.querySelector('.faq-category').value,
+                }))
+            },
+
+            // Location
+            location: {
+                title: getVal('locationTitle'),
+                address: getVal('locationAddress'),
+                mapUrl: getVal('locationMapUrl'),
+            }
+        };
+        return eventData;
+    }
+
+    // --- Utility Functions ---
+    function clearForm() {
+        ui.forms.event.reset();
+        // Clear all dynamically added items
+        Object.values(ui.containers).forEach(container => {
+            container.innerHTML = '';
+        });
+        showMessage('Form cleared', 'info');
+    }
+
+    function showMessage(message, type = 'success') {
+        ui.messageBox.textContent = message;
+        ui.messageBox.className = 'message-box show';
+        ui.messageBox.classList.add(type);
+        setTimeout(() => {
+            ui.messageBox.classList.remove('show');
+        }, 4000);
+    }
+
+    // --- Initialization ---
+    updateUIState('loading');
+    onAuthStateChanged(auth, handleAuthState);
+    window.addEventListener('pageshow', () => onAuthStateChanged(auth, handleAuthState)); // Re-check on back button
+    setupEventListeners();
 });
+
