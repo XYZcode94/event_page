@@ -1,331 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Admin Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/c285d7f716.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/admin.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/c285d7f716.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/admin.css" />
 </head>
-<body class="theme-dark">
-    <div id="app" class="min-h-screen flex items-center justify-center p-4">
+<body>
+  <div id="app">
 
-        <!-- LOGIN VIEW -->
-        <div id="login-view" class="w-full max-w-md hidden auth-card">
-            <h1 class="text-3xl font-bold mb-2 text-center text-white">Admin Login</h1>
-            <p class="text-gray-400 mb-6 text-center">Sign in to manage events.</p>
-            <form id="login-form" class="space-y-4">
-                <input type="email" id="login-email" placeholder="Email" class="w-full form-input" required>
-                <input type="password" id="login-password" placeholder="Password" class="w-full form-input" required>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold text-white">Sign In</button>
-            </form>
-            <div class="my-6 flex items-center">
-                <hr class="w-full border-gray-600"><span class="px-2 text-gray-400 text-sm">OR</span><hr class="w-full border-gray-600">
-            </div>
-            <button id="login-google-btn" class="w-full bg-gray-700 hover:bg-gray-600 py-3 rounded-lg font-bold flex items-center justify-center text-white">
-                <i class="fa-brands fa-google mr-2"></i> Sign in with Google
-            </button>
-            <p class="text-center text-gray-400 text-sm mt-6">
-                Need an account? <button id="show-signup" class="text-blue-400 hover:text-blue-300">Sign Up</button>
-            </p>
-        </div>
+    <div id="login-view" class="auth-view">
+      <div class="auth-card">
+        <h1 class="auth-title">Admin Login</h1>
+        <p class="auth-subtitle">Sign in to manage events.</p>
+        <form id="login-form">
+          <div class="input-wrapper">
+            <input type="email" id="login-email" class="form-input" placeholder=" " required>
+            <label for="login-email" class="form-label">Email</label>
+          </div>
+          <div class="input-wrapper">
+            <input type="password" id="login-password" class="form-input" placeholder=" " required>
+            <label for="login-password" class="form-label">Password</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-full">Sign In</button>
+        </form>
+        <div class="auth-divider"><span>OR</span></div>
+        <button id="login-google-btn" class="btn btn-secondary w-full"><i class="fa-brands fa-google"></i> Sign in with Google</button>
+        <p class="auth-switcher">Need an account? <button id="show-signup">Sign Up</button></p>
+      </div>
+    </div>
 
-        <!-- SIGNUP VIEW -->
-        <div id="signup-view" class="w-full max-w-md hidden auth-card">
-             <h1 class="text-3xl font-bold mb-2 text-center text-white">Create Admin Account</h1>
-            <p class="text-gray-400 mb-6 text-center">Sign up for administrative access.</p>
-            <form id="signup-form" class="space-y-4">
-                <input type="email" id="signup-email" placeholder="Email" class="w-full form-input" required>
-                <input type="password" id="signup-password" placeholder="Password (min. 6 characters)" class="w-full form-input" required>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold text-white">Sign Up</button>
-            </form>
-             <div class="my-6 flex items-center">
-                <hr class="w-full border-gray-600"><span class="px-2 text-gray-400 text-sm">OR</span><hr class="w-full border-gray-600">
-            </div>
-            <button id="signup-google-btn" class="w-full bg-gray-700 hover:bg-gray-600 py-3 rounded-lg font-bold flex items-center justify-center text-white">
-                <i class="fa-brands fa-google mr-2"></i> Sign up with Google
-            </button>
-            <p class="text-center text-gray-400 text-sm mt-6">
-                Already have an account? <button id="show-login" class="text-blue-400 hover:text-blue-300">Sign In</button>
-            </p>
-        </div>
-
-        <!-- LOADING -->
-        <div id="loading-view" class="hidden text-center">
-            <p class="text-xl text-gray-400">Authenticating...</p>
-        </div>
-
-        <!-- ACCESS DENIED -->
-        <div id="denied-view" class="hidden auth-card max-w-md">
-            <h1 class="text-2xl font-bold text-red-500 mb-2">Access Denied</h1>
-            <p class="text-gray-400">Your account is not authorized. You’ll be logged out shortly.</p>
-        </div>
-
-        <!-- DASHBOARD -->
-        <div id="dashboard-view" class="hidden w-full max-w-4xl mx-auto my-8">
-            <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-                <div>
-                    <h1 class="text-4xl font-bold text-white">Event Dashboard</h1>
-                    <p id="user-email" class="text-gray-400"></p>
+    <div id="signup-view" class="auth-view hidden">
+        <div class="auth-card">
+            <h1 class="auth-title">Create Admin Account</h1>
+            <p class="auth-subtitle">Sign up for administrative access.</p>
+            <form id="signup-form">
+                <div class="input-wrapper">
+                    <input type="email" id="signup-email" class="form-input" placeholder=" " required>
+                    <label for="signup-email" class="form-label">Email</label>
                 </div>
-                <button id="signout-btn" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg mt-4 sm:mt-0 font-semibold text-white">Sign Out</button>
-            </header>
-
-            <form id="event-form" class="space-y-8">
-
-                <!-- Core Details -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Core Details</legend>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <input type="text" id="eventName" class="form-input" placeholder="Event Name (e.g., Diwali Celebration)" required>
-                        <input type="text" id="eventTagline" class="form-input" placeholder="Event Tagline (e.g., Festival of Lights)">
-                        <div>
-                            <label class="form-label">Start Date & Time (IST)</label>
-                            <input type="datetime-local" id="eventStartDate" class="form-input" required>
-                        </div>
-                        <div>
-                            <label class="form-label">End Date & Time (IST)</label>
-                            <input type="datetime-local" id="eventEndDate" class="form-input" required>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <!-- Meta & SEO -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Meta & SEO</legend>
-                    <input type="text" id="metaTitle" class="form-input" placeholder="Meta Title (for search engines)">
-                    <textarea id="metaDescription" class="form-textarea mt-4" rows="2" placeholder="Meta Description (for search engines)"></textarea>
-                </fieldset>
-
-                <!-- Hero Section -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Hero Section</legend>
-                    <input type="text" id="heroTitle" class="form-input" placeholder="Hero Title (e.g., Utsav - A Festival of Lights)">
-                    <input type="text" id="locationString" class="form-input mt-4" placeholder="Location String (e.g., College Auditorium)">
-                    <input type="url" id="heroGif" class="form-input mt-4" placeholder="Hero Background GIF URL">
-                    <div id="hero-cta-container" class="mt-4 space-y-2"></div>
-                    <button type="button" id="add-cta-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Hero Button</button>
-                </fieldset>
-
-                <!-- About Section -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">About Section</legend>
-                    <input type="text" id="aboutTitle" class="form-input" placeholder="About Section Title">
-                    <input type="text" id="aboutTagline" class="form-input mt-4" placeholder="About Section Tagline">
-                    <textarea id="aboutDescription" class="form-textarea mt-4" rows="4" placeholder="Description (Use '|' to separate paragraphs)"></textarea>
-                    <h4 class="font-semibold text-lg mt-4 text-gray-300">History & Impact</h4>
-                    <div id="about-stats-container" class="mt-2 space-y-2"></div>
-                    <button type="button" id="add-stat-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Stat</button>
-                </fieldset>
-                
-                <!-- Highlights Section -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Highlights Video</legend>
-                    <input type="text" id="highlightsTitle" class="form-input" placeholder="Highlights Section Title">
-                    <input type="url" id="highlightsVideoUrl" class="form-input mt-4" placeholder="YouTube Embed URL">
-                    <input type="text" id="highlightsCaption" class="form-input mt-4" placeholder="Video Caption">
-                </fieldset>
-
-                <!-- Event Categories -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Event Categories / What's Happening</legend>
-                    <input type="text" id="categoriesTitle" class="form-input" placeholder="Section Title (e.g., What to Expect)">
-                    <div id="event-categories-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-category-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Category</button>
-                </fieldset>
-
-                <!-- Schedule -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Schedule</legend>
-                    <input type="url" id="schedulePdfUrl" class="form-input" placeholder="Optional: Link to full schedule PDF">
-                    <div id="schedule-days-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-day-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Day</button>
-                </fieldset>
-
-                <!-- Speakers -->
-                <fieldset class="form-section">
-                     <legend class="form-legend">Speakers & Guests</legend>
-                     <input type="text" id="speakersTitle" class="form-input" placeholder="Section Title (e.g., Chief Guests)">
-                    <div id="speakers-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-speaker-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Speaker/Guest</button>
-                </fieldset>
-                
-                <!-- News -->
-                 <fieldset class="form-section">
-                    <legend class="form-legend">News & Announcements</legend>
-                    <input type="text" id="newsTitle" class="form-input" placeholder="Section Title (e.g., Latest Updates)">
-                    <div id="news-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-news-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add News Article</button>
-                </fieldset>
-
-                <!-- Tickets -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Tickets / Entry</legend>
-                    <input type="text" id="ticketsTitle" class="form-input" placeholder="Section Title (e.g., Get Your Tickets)">
-                    <div id="tickets-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-ticket-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Ticket Package</button>
-                </fieldset>
-
-                <!-- Team -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Organizing Team</legend>
-                    <input type="text" id="teamTitle" class="form-input" placeholder="Section Title (e.g., Meet the Organizers)">
-                    <input type="text" id="teamJoinText" class="form-input mt-4" placeholder="Join Team Text (e.g., Interested in helping? Join us.)">
-                    <h4 class="font-semibold text-lg mt-4 text-gray-300">Core Committee</h4>
-                     <input type="text" id="teamCoreTitle" class="form-input mt-2" placeholder="Core Team Subtitle (e.g., Senior Student Body)">
-                    <div id="team-core-container" class="mt-2 space-y-4"></div>
-                    <button type="button" id="add-core-member-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Core Member</button>
-                    <h4 class="font-semibold text-lg mt-6 text-gray-300">Volunteers</h4>
-                    <input type="text" id="teamVolunteersTitle" class="form-input mt-2" placeholder="Volunteers Subtitle">
-                    <div id="team-volunteers-container" class="mt-2 space-y-4"></div>
-                    <button type="button" id="add-volunteer-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Volunteer</button>
-                </fieldset>
-
-                <!-- Gallery -->
-                <fieldset class="form-section">
-                    <legend class="form-legend">Photo Gallery</legend>
-                    <input type="text" id="galleryTitle" class="form-input" placeholder="Section Title (e.g., Event Moments)">
-                    <div id="gallery-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-gallery-image-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add Gallery Image</button>
-                </fieldset>
-
-                <!-- FAQ -->
-                <fieldset class="form-section">
-                     <legend class="form-legend">FAQ</legend>
-                     <input type="text" id="faqTitle" class="form-input" placeholder="Section Title (e.g., Common Questions)">
-                    <div id="faq-container" class="mt-4 space-y-4"></div>
-                    <button type="button" id="add-faq-btn" class="form-add-btn mt-2"><i class="fa-solid fa-plus"></i> Add FAQ</button>
-                </fieldset>
-                
-                <!-- Location -->
-                 <fieldset class="form-section">
-                    <legend class="form-legend">Location</legend>
-                    <input type="text" id="locationTitle" class="form-input" placeholder="Section Title (e.g., Find Us Here)">
-                    <textarea id="locationAddress" class="form-textarea mt-4" rows="2" placeholder="Address (Use <br> for new lines)"></textarea>
-                    <input type="url" id="locationMapUrl" class="form-input mt-4" placeholder="Google Maps Embed URL">
-                </fieldset>
-
-                <!-- Actions -->
-                <div class="flex space-x-4 pt-8">
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold text-white">Save Event</button>
-                    <button type="button" id="clear-form-btn" class="w-full bg-gray-600 hover:bg-gray-700 py-3 rounded-lg font-semibold text-white">Clear Form</button>
+                <div class="input-wrapper">
+                    <input type="password" id="signup-password" class="form-input" placeholder=" " required>
+                    <label for="signup-password" class="form-label">Password</label>
                 </div>
+                <button type="submit" class="btn btn-primary w-full">Sign Up</button>
             </form>
+            <div class="auth-divider"><span>OR</span></div>
+            <button id="signup-google-btn" class="btn btn-secondary w-full"><i class="fa-brands fa-google"></i> Sign up with Google</button>
+            <p class="auth-switcher">Already have an account? <button id="show-login">Sign In</button></p>
         </div>
     </div>
 
-    <!-- Message Box -->
-    <div id="message-box" class="hidden message-box"></div>
+    <div id="loading-view" class="auth-view hidden">
+      <p class="loading-text">Authenticating...</p>
+    </div>
 
-    <!-- TEMPLATES -->
-    <template id="hero-cta-template">
-        <div class="p-2 bg-gray-800 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-2 dynamic-item">
-            <input type="text" class="form-input-sm cta-text" placeholder="Button Text">
-            <input type="text" class="form-input-sm cta-url" placeholder="URL (#about, etc)">
-            <select class="form-input-sm cta-class">
-                <option value="btn-accent">Primary (Red)</option>
-                <option value="btn-secondary">Secondary (Gray)</option>
-            </select>
-            <div class="md:col-span-3 flex justify-end"><button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button></div>
+    <div id="denied-view" class="auth-view hidden">
+        <div class="auth-card">
+            <h1 class="auth-title" style="color: var(--color-danger);">Access Denied</h1>
+            <p class="auth-subtitle">Your account is not authorized. You’ll be logged out shortly.</p>
         </div>
-    </template>
-    <template id="about-stat-template">
-        <div class="p-2 bg-gray-800 rounded-lg flex gap-2 dynamic-item">
-            <input type="text" class="form-input-sm stat-value" placeholder="Value (e.g., 10+)">
-            <input type="text" class="form-input-sm stat-label" placeholder="Label (e.g., years running)">
-            <button type="button" class="remove-btn ml-auto"><i class="fa-solid fa-trash"></i></button>
-        </div>
-    </template>
-    <template id="category-template">
-        <div class="p-3 bg-gray-800 rounded-lg dynamic-item space-y-2">
-            <div class="flex justify-end"><button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button></div>
-            <input type="text" class="form-input category-icon" placeholder="Font Awesome Icon (e.g., fa-solid fa-gamepad)">
-            <input type="text" class="form-input category-title" placeholder="Category Title">
-            <textarea class="form-textarea category-description" rows="2" placeholder="Description"></textarea>
-        </div>
-    </template>
-    <template id="schedule-day-template">
-        <div class="p-3 bg-gray-800 rounded-lg space-y-3 dynamic-item">
-            <div class="flex justify-between items-center">
-                <h4 class="text-md font-semibold text-gray-300">New Day</h4>
-                <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            <input type="text" class="form-input day-title" placeholder="Day Title (e.g., Main Night)">
-            <input type="text" class="form-input day-date" placeholder="Date (e.g., Nov 15)">
-            <div class="pl-4 border-l-2 border-gray-700 space-y-2 day-events-container"></div>
-            <button type="button" class="form-add-btn-sm add-event-btn">Add Schedule Event</button>
-        </div>
-    </template>
-    <template id="schedule-event-template">
-        <div class="flex items-center gap-2 dynamic-item">
-            <input type="text" class="form-input-sm event-time" placeholder="Time (e.g., 18:00)">
-            <input type="text" class="form-input-sm event-title flex-grow" placeholder="Title">
-            <input type="text" class="form-input-sm event-details flex-grow" placeholder="Details">
-            <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
-        </div>
-    </template>
-    <template id="speaker-template">
-        <div class="p-3 bg-gray-800 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-3 dynamic-item">
-            <input type="text" class="form-input speaker-name" placeholder="Speaker Name">
-            <input type="text" class="form-input speaker-role" placeholder="Role / Title">
-            <input type="url" class="form-input speaker-img" placeholder="Image URL">
-            <div class="md:col-span-3 flex justify-end"><button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button></div>
-        </div>
-    </template>
-     <template id="news-template">
-        <div class="p-3 bg-gray-800 rounded-lg dynamic-item space-y-2">
-            <div class="flex justify-end"><button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button></div>
-            <input type="text" class="form-input news-title" placeholder="Article Title">
-            <textarea class="form-textarea news-excerpt" rows="2" placeholder="Excerpt / Summary"></textarea>
-            <div class="flex gap-2">
-                 <input type="date" class="form-input-sm news-date">
-                 <input type="text" class="form-input-sm news-category" placeholder="Category">
-            </div>
-        </div>
-    </template>
-    <template id="ticket-template">
-        <div class="p-3 bg-gray-800 rounded-lg dynamic-item space-y-2">
-            <div class="flex justify-between items-center">
-                 <h4 class="text-md font-semibold text-gray-300">New Ticket</h4>
-                 <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            <input type="text" class="form-input ticket-name" placeholder="Package Name (e.g., Student Pass)">
-            <input type="text" class="form-input ticket-price" placeholder="Price (e.g., $49 or Free)">
-            <textarea class="form-textarea ticket-features" rows="3" placeholder="Features (One per line)"></textarea>
-            <label class="flex items-center gap-2 text-gray-300"><input type="checkbox" class="ticket-featured"> Featured?</label>
-        </div>
-    </template>
-    <template id="team-member-template">
-         <div class="p-3 bg-gray-800 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-3 dynamic-item">
-            <input type="text" class="form-input member-name" placeholder="Name">
-            <input type="text" class="form-input member-role" placeholder="Role">
-            <input type="url" class="form-input member-img" placeholder="Image URL">
-            <div class="md:col-span-3 flex justify-end"><button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button></div>
-        </div>
-    </template>
-    <template id="gallery-image-template">
-        <div class="p-2 bg-gray-800 rounded-lg flex gap-2 dynamic-item">
-            <input type="url" class="form-input-sm gallery-src" placeholder="Image URL">
-            <input type="text" class="form-input-sm gallery-alt" placeholder="Alt Text (description)">
-            <button type="button" class="remove-btn ml-auto"><i class="fa-solid fa-trash"></i></button>
-        </div>
-    </template>
-    <template id="faq-template">
-         <div class="p-3 bg-gray-800 rounded-lg dynamic-item space-y-2">
-            <div class="flex justify-end"><button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button></div>
-            <input type="text" class="form-input faq-question" placeholder="Question">
-            <textarea class="form-textarea faq-answer" rows="2" placeholder="Answer"></textarea>
-            <select class="form-input-sm faq-category">
-                <option value="events">Events Category</option>
-                <option value="tickets">Tickets Category</option>
-                 <option value="location">Location Category</option>
-            </select>
-        </div>
-    </template>
+    </div>
 
-    <script type="module" src="js/admin.js"></script>
+    <div id="dashboard-view" class="hidden">
+      <div class="dashboard-container">
+        <main class="main-content">
+          <header class="main-header">
+            <div>
+              <h1 class="header-title">Event Dashboard</h1>
+              <p id="user-email" class="header-subtitle"></p>
+            </div>
+            <button id="signout-btn" class="btn btn-danger">Sign Out</button>
+          </header>
+
+          <div class="dashboard-grid-layout">
+            
+            <div class="form-column">
+              <h2 id="form-title" class="form-main-title">Add New Event</h2>
+              <form id="event-form">
+                <input type="hidden" id="editing-event-id">
+                
+                <fieldset class="form-section">
+                  <legend class="form-legend">Core Details</legend>
+                  <div class="form-grid">
+                    <div class="input-wrapper">
+                      <input type="text" id="eventName" class="form-input" placeholder=" " required>
+                      <label for="eventName" class="form-label">Event Name</label>
+                    </div>
+                    <div class="input-wrapper">
+                      <input type="text" id="eventTagline" class="form-input" placeholder=" ">
+                      <label for="eventTagline" class="form-label">Event Tagline</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="datetime-local" id="eventStartDate" class="form-input" required>
+                        <label for="eventStartDate" class="form-label floating">Start Date & Time</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="datetime-local" id="eventEndDate" class="form-input" required>
+                        <label for="eventEndDate" class="form-label floating">End Date & Time</label>
+                    </div>
+                  </div>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                  <legend class="form-legend">Meta & SEO</legend>
+                  <div class="input-wrapper">
+                    <input type="text" id="metaTitle" class="form-input" placeholder=" ">
+                    <label for="metaTitle" class="form-label">Meta Title</label>
+                  </div>
+                  <div class="input-wrapper">
+                    <textarea id="metaDescription" class="form-input" rows="2" placeholder=" "></textarea>
+                    <label for="metaDescription" class="form-label">Meta Description</label>
+                  </div>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                  <legend class="form-legend">Hero Section</legend>
+                  <div class="input-wrapper">
+                    <input type="text" id="heroTitle" class="form-input" placeholder=" ">
+                    <label for="heroTitle" class="form-label">Hero Title</label>
+                  </div>
+                   <div class="input-wrapper">
+                    <input type="text" id="locationString" class="form-input" placeholder=" ">
+                    <label for="locationString" class="form-label">Location String (e.g., College Auditorium)</label>
+                  </div>
+                  <div class="input-wrapper">
+                    <input type="url" id="heroGif" class="form-input" placeholder=" ">
+                    <label for="heroGif" class="form-label">Hero Background GIF URL</label>
+                  </div>
+                  <div id="hero-cta-container"></div>
+                  <button type="button" id="add-cta-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Hero Button</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">About Section</legend>
+                    <div class="input-wrapper">
+                      <input type="text" id="aboutTitle" class="form-input" placeholder=" ">
+                      <label for="aboutTitle" class="form-label">About Section Title</label>
+                    </div>
+                    <div class="input-wrapper">
+                      <input type="text" id="aboutTagline" class="form-input" placeholder=" ">
+                      <label for="aboutTagline" class="form-label">About Section Tagline</label>
+                    </div>
+                    <div class="input-wrapper">
+                      <textarea id="aboutDescription" class="form-input" rows="4" placeholder=" "></textarea>
+                      <label for="aboutDescription" class="form-label">Description (Use '|' for paragraphs)</label>
+                    </div>
+                    <h4 class="sub-heading">History & Impact</h4>
+                    <div id="about-stats-container"></div>
+                    <button type="button" id="add-stat-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Stat</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Highlights Video</legend>
+                    <div class="input-wrapper">
+                      <input type="text" id="highlightsTitle" class="form-input" placeholder=" ">
+                      <label for="highlightsTitle" class="form-label">Highlights Section Title</label>
+                    </div>
+                    <div class="input-wrapper">
+                      <input type="url" id="highlightsVideoUrl" class="form-input" placeholder=" ">
+                      <label for="highlightsVideoUrl" class="form-label">YouTube Embed URL</label>
+                    </div>
+                    <div class="input-wrapper">
+                      <input type="text" id="highlightsCaption" class="form-input" placeholder=" ">
+                      <label for="highlightsCaption" class="form-label">Video Caption</label>
+                    </div>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Event Categories</legend>
+                    <div class="input-wrapper">
+                      <input type="text" id="categoriesTitle" class="form-input" placeholder=" ">
+                      <label for="categoriesTitle" class="form-label">Section Title (e.g., What to Expect)</label>
+                    </div>
+                    <div id="event-categories-container"></div>
+                    <button type="button" id="add-category-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Category</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Schedule</legend>
+                    <div class="input-wrapper">
+                      <input type="url" id="schedulePdfUrl" class="form-input" placeholder=" ">
+                      <label for="schedulePdfUrl" class="form-label">Optional: Full Schedule PDF URL</label>
+                    </div>
+                    <div id="schedule-days-container"></div>
+                    <button type="button" id="add-day-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Day</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Speakers & Guests</legend>
+                    <div class="input-wrapper">
+                      <input type="text" id="speakersTitle" class="form-input" placeholder=" ">
+                      <label for="speakersTitle" class="form-label">Section Title (e.g., Chief Guests)</label>
+                    </div>
+                    <div id="speakers-container"></div>
+                    <button type="button" id="add-speaker-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Speaker/Guest</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">News & Announcements</legend>
+                    <div class="input-wrapper">
+                      <input type="text" id="newsTitle" class="form-input" placeholder=" ">
+                      <label for="newsTitle" class="form-label">Section Title (e.g., Latest Updates)</label>
+                    </div>
+                    <div id="news-container"></div>
+                    <button type="button" id="add-news-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add News Article</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Tickets / Entry</legend>
+                     <div class="input-wrapper">
+                      <input type="text" id="ticketsTitle" class="form-input" placeholder=" ">
+                      <label for="ticketsTitle" class="form-label">Section Title (e.g., Get Your Tickets)</label>
+                    </div>
+                    <div id="tickets-container"></div>
+                    <button type="button" id="add-ticket-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Ticket Package</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Organizing Team</legend>
+                    <div class="input-wrapper">
+                        <input type="text" id="teamTitle" class="form-input" placeholder=" ">
+                        <label for="teamTitle" class="form-label">Section Title (e.g., Meet the Organizers)</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="teamJoinText" class="form-input" placeholder=" ">
+                        <label for="teamJoinText" class="form-label">Join Team Text</label>
+                    </div>
+                    <h4 class="sub-heading">Core Committee</h4>
+                    <div class="input-wrapper">
+                        <input type="text" id="teamCoreTitle" class="form-input" placeholder=" ">
+                        <label for="teamCoreTitle" class="form-label">Core Team Subtitle</label>
+                    </div>
+                    <div id="team-core-container"></div>
+                    <button type="button" id="add-core-member-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Core Member</button>
+                    <h4 class="sub-heading">Volunteers</h4>
+                    <div class="input-wrapper">
+                        <input type="text" id="teamVolunteersTitle" class="form-input" placeholder=" ">
+                        <label for="teamVolunteersTitle" class="form-label">Volunteers Subtitle</label>
+                    </div>
+                    <div id="team-volunteers-container"></div>
+                    <button type="button" id="add-volunteer-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Volunteer</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Photo Gallery</legend>
+                    <div class="input-wrapper">
+                        <input type="text" id="galleryTitle" class="form-input" placeholder=" ">
+                        <label for="galleryTitle" class="form-label">Section Title (e.g., Event Moments)</label>
+                    </div>
+                    <div id="gallery-container"></div>
+                    <button type="button" id="add-gallery-image-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Gallery Image</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">FAQ</legend>
+                    <div class="input-wrapper">
+                        <input type="text" id="faqTitle" class="form-input" placeholder=" ">
+                        <label for="faqTitle" class="form-label">Section Title (e.g., Common Questions)</label>
+                    </div>
+                    <div id="faq-container"></div>
+                    <button type="button" id="add-faq-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add FAQ</button>
+                </fieldset>
+    
+                <fieldset class="form-section">
+                    <legend class="form-legend">Location</legend>
+                    <div class="input-wrapper">
+                        <input type="text" id="locationTitle" class="form-input" placeholder=" ">
+                        <label for="locationTitle" class="form-label">Section Title (e.g., Find Us Here)</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <textarea id="locationAddress" class="form-input" rows="2" placeholder=" "></textarea>
+                        <label for="locationAddress" class="form-label">Address (Use &lt;br&gt; for new lines)</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="url" id="locationMapUrl" class="form-input" placeholder=" ">
+                        <label for="locationMapUrl" class="form-label">Google Maps Embed URL</label>
+                    </div>
+                </fieldset>
+
+                <div id="form-actions" class="form-actions-sticky">
+                  <button type="submit" id="submit-event-btn" class="btn btn-primary">
+                    <span>Save New Event</span>
+                    <div class="spinner"></div>
+                  </button>
+                  <button type="button" id="clear-form-btn" class="btn btn-secondary">Clear Form</button>
+                  <button type="button" id="cancel-edit-btn" class="btn btn-warning hidden">Cancel Edit</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="list-column">
+                <section id="current-events-section">
+                    <h2 class="list-main-title">Current Events</h2>
+                    <div id="current-events-list">
+                        </div>
+                </section>
+            </div>
+
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirmation-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true">
+        <h3 id="modal-title" class="modal-title">Confirm Deletion</h3>
+        <p id="modal-message" class="modal-body">Are you sure you want to permanently delete this event? This action cannot be undone.</p>
+        <div class="modal-actions">
+            <button id="modal-cancel-btn" class="btn btn-secondary">Cancel</button>
+            <button id="modal-confirm-btn" class="btn btn-danger">Yes, Delete</button>
+        </div>
+    </div>
+  </div>
+
+  <div id="message-box" class="message-box"></div>
+
+  <template id="hero-cta-template">
+    <div class="dynamic-item">
+      <input type="text" class="form-input-sm cta-text" placeholder="Button Text">
+      <input type="text" class="form-input-sm cta-url" placeholder="URL (#about, etc)">
+      <select class="form-input-sm cta-class">
+        <option value="btn-accent">Primary</option>
+        <option value="btn-secondary">Secondary</option>
+      </select>
+      <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="about-stat-template">
+    <div class="dynamic-item">
+      <input type="text" class="form-input-sm stat-value" placeholder="Value (e.g., 10+)">
+      <input type="text" class="form-input-sm stat-label" placeholder="Label (e.g., years running)">
+      <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="category-template">
+    <div class="dynamic-item-card">
+      <input type="text" class="form-input-sm category-icon" placeholder="Font Awesome Icon (e.g., fa-solid fa-gamepad)">
+      <input type="text" class="form-input-sm category-title" placeholder="Category Title">
+      <textarea class="form-input-sm category-description" rows="2" placeholder="Description"></textarea>
+      <button type="button" class="remove-btn card-remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="schedule-day-template">
+    <div class="dynamic-item-card is-nested">
+      <input type="text" class="form-input-sm day-title" placeholder="Day Title (e.g., Main Night)">
+      <input type="text" class="form-input-sm day-date" placeholder="Date (e.g., Nov 15)">
+      <div class="day-events-container"></div>
+      <button type="button" class="btn btn-secondary btn-sm add-event-btn"><i class="fa-solid fa-plus"></i> Add Schedule Event</button>
+      <button type="button" class="remove-btn card-remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="schedule-event-template">
+    <div class="dynamic-item">
+      <input type="text" class="form-input-sm event-time" placeholder="18:00">
+      <input type="text" class="form-input-sm event-title" placeholder="Event Title">
+      <input type="text" class="form-input-sm event-details" placeholder="Details (e.g., by John Doe)">
+      <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="speaker-template">
+    <div class="dynamic-item">
+      <input type="text" class="form-input-sm speaker-name" placeholder="Speaker Name">
+      <input type="text" class="form-input-sm speaker-role" placeholder="Role / Title">
+      <input type="url" class="form-input-sm speaker-img" placeholder="Image URL">
+      <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="news-template">
+    <div class="dynamic-item-card">
+      <input type="text" class="form-input-sm news-title" placeholder="Article Title">
+      <textarea class="form-input-sm news-excerpt" rows="2" placeholder="Excerpt / Summary"></textarea>
+      <div class="form-grid">
+        <input type="date" class="form-input-sm news-date">
+        <input type="text" class="form-input-sm news-category" placeholder="Category">
+      </div>
+      <button type="button" class="remove-btn card-remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="ticket-template">
+    <div class="dynamic-item-card">
+      <input type="text" class="form-input-sm ticket-name" placeholder="Package Name (e.g., Student Pass)">
+      <input type="text" class="form-input-sm ticket-price" placeholder="Price (e.g., $49 or Free)">
+      <textarea class="form-input-sm ticket-features" rows="3" placeholder="Features (One per line)"></textarea>
+      <label class="checkbox-label"><input type="checkbox" class="ticket-featured"> Featured?</label>
+      <button type="button" class="remove-btn card-remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="team-member-template">
+    <div class="dynamic-item">
+      <input type="text" class="form-input-sm member-name" placeholder="Name">
+      <input type="text" class="form-input-sm member-role" placeholder="Role">
+      <input type="url" class="form-input-sm member-img" placeholder="Image URL">
+      <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="gallery-image-template">
+    <div class="dynamic-item">
+      <input type="url" class="form-input-sm gallery-src" placeholder="Image URL">
+      <input type="text" class="form-input-sm gallery-alt" placeholder="Alt Text (description)">
+      <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <template id="faq-template">
+    <div class="dynamic-item-card">
+      <input type="text" class="form-input-sm faq-question" placeholder="Question">
+      <textarea class="form-input-sm faq-answer" rows="2" placeholder="Answer"></textarea>
+      <select class="form-input-sm faq-category">
+        <option value="general">General</option>
+        <option value="events">Events</option>
+        <option value="tickets">Tickets</option>
+        <option value="location">Location</option>
+      </select>
+      <button type="button" class="remove-btn card-remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+  <script type="module" src="js/admin.js"></script>
 </body>
 </html>
-
