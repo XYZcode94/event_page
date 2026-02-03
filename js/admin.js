@@ -303,7 +303,7 @@ const firebaseConfig = {
         const setVal = (id, val) => { if(document.getElementById(id)) document.getElementById(id).value = val || '' };
         setVal('eventName', data.eventName); setVal('eventTagline', data.eventTagline); setVal('eventStartDate', formatISOForInput(data.eventStartDate)); setVal('eventEndDate', formatISOForInput(data.eventEndDate));
         if(data.meta) { setVal('metaTitle', data.meta.title); setVal('metaDescription', data.meta.description); }
-        if(data.hero) { setVal('heroTitle', data.hero.title); setVal('locationString', data.hero.locationString); setVal('heroGif', data.hero.heroGif); }
+        if(data.hero) { setVal('heroTitle', data.hero.title); setVal('locationString', data.hero.locationString); setVal('heroVideoUrl', data.hero.heroVideoUrl); }
         if(data.about) { setVal('aboutTitle', data.about.title); setVal('aboutTagline', data.about.tagline); setVal('aboutDescription', data.about.description ? data.about.description.join(' | ') : ''); }
         if(data.highlights) { setVal('highlightsTitle', data.highlights.title); setVal('highlightsVideoUrl', data.highlights.videoUrl); setVal('highlightsCaption', data.highlights.caption); }
         if(data.eventCategories) { setVal('categoriesTitle', data.eventCategories.title); }
