@@ -47,36 +47,62 @@ function renderMeta(meta) {
     if (descriptionTag) descriptionTag.setAttribute('content', meta.description || '');
 }
 
+/**
+ * Renders the Hero section with dynamic video background and event data.
+ * @param {Object} hero - The hero data object from Firestore.
+ */
+
 function renderHero(hero) {
     const heroSection = document.getElementById('home');
     if (!heroSection || !hero) return;
 
+    // Element Selectors
     const titleEl = heroSection.querySelector('.hero-title');
     const dateEl = heroSection.querySelector('.hero-date');
     const locationEl = heroSection.querySelector('.hero-location');
     const ctaContainer = heroSection.querySelector('.hero-cta');
-    const bgEl = heroSection.querySelector('.hero-bg');
+    const videoEl = document.getElementById('hero-video');
+    const videoSource = videoEl ? videoEl.querySelector('source') : null;
 
-    if (titleEl) titleEl.textContent = hero.title || '';
-    if (dateEl) dateEl.innerHTML = hero.dateString ? `<i class="fa-solid fa-calendar-days"></i> ${hero.dateString}` : '';
-    if (locationEl) locationEl.innerHTML = hero.locationString ? `<i class="fa-solid fa-location-dot"></i> ${hero.locationString}` : '';
+    // 1. Render Text Content
+    if (titleEl) titleEl.textContent = hero.title || 'Welcome to the Event';
+    
+    // Using eventStartDate from your admin panel format
+    if (dateEl && hero.eventStartDate) {
+        const date = new Date(hero.eventStartDate).toLocaleDateString('en-US', { 
+            month: 'long', day: 'numeric', year: 'numeric' 
+        });
+        dateEl.innerHTML = `<i class="fa-solid fa-calendar-days"></i> ${date}`;
+    }
 
-    // Render CTA buttons
+    if (locationEl) {
+        locationEl.innerHTML = hero.locationString 
+            ? `<i class="fa-solid fa-location-dot"></i> ${hero.locationString}` 
+            : '';
+    }
+
+    // 2. Render CTA Buttons
     if (ctaContainer && hero.cta && hero.cta.length > 0) {
         ctaContainer.innerHTML = hero.cta.map(btn =>
             `<a href="${btn.url}" class="btn ${btn.class || 'btn-secondary'}">${btn.text}</a>`
         ).join('');
-    } else if (ctaContainer) {
-        ctaContainer.innerHTML = ''; // Clear if no CTAs
     }
 
-    // Render background GIF
-    if (bgEl && hero.heroGif) {
-        bgEl.style.backgroundImage = `url('${hero.heroGif}')`;
-        bgEl.classList.add('has-gif');
-    } else if (bgEl) {
-        bgEl.style.backgroundImage = ''; // Use default from CSS
-        bgEl.classList.remove('has-gif');
+    // 3. Render Background Video
+    if (videoEl && videoSource && hero.heroVideoUrl) {
+        // Only update if the source has actually changed to prevent flickering
+        if (videoSource.src !== hero.heroVideoUrl) {
+            videoSource.src = hero.heroVideoUrl;
+            videoEl.load(); // Vital for the browser to recognize the new source
+            
+            // Explicitly play to handle browser autoplay restrictions
+            videoEl.play().catch(error => {
+                console.warn("Autoplay was prevented. Ensure muted attribute is present.", error);
+            });
+        }
+        videoEl.style.display = 'block';
+    } else if (videoEl) {
+        videoEl.style.display = 'none';
     }
 }
 

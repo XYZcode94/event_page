@@ -335,7 +335,7 @@ const firebaseConfig = {
         return {
             eventName: getVal('eventName'), eventTagline: getVal('eventTagline'), eventStartDate: new Date(getVal('eventStartDate')).toISOString(), eventEndDate: new Date(getVal('eventEndDate')).toISOString(),
             meta: { title: getVal('metaTitle'), description: getVal('metaDescription') },
-            hero: { title: getVal('heroTitle'), locationString: getVal('locationString'), heroGif: getVal('heroGif'), cta: Array.from(ui.containers.cta.children).map(item => ({ text: item.querySelector('.cta-text').value, url: item.querySelector('.cta-url').value, class: item.querySelector('.cta-class').value })) },
+            hero: { title: getVal('heroTitle'), locationString: getVal('locationString'), heroVideoUrl: getVal('heroVideoUrl'), cta: Array.from(ui.containers.cta.children).map(item => ({ text: item.querySelector('.cta-text').value, url: item.querySelector('.cta-url').value, class: item.querySelector('.cta-class').value })) },
             about: { title: getVal('aboutTitle'), tagline: getVal('aboutTagline'), description: getVal('aboutDescription').split('|').map(p => p.trim()), history: { stats: Array.from(ui.containers.stats.children).map(item => ({ value: item.querySelector('.stat-value').value, label: item.querySelector('.stat-label').value })) } },
             highlights: { title: getVal('highlightsTitle'), videoUrl: getVal('highlightsVideoUrl'), caption: getVal('highlightsCaption') },
             eventCategories: { title: getVal('categoriesTitle'), categories: Array.from(ui.containers.categories.children).map(item => ({ icon: item.querySelector('.category-icon').value, title: item.querySelector('.category-title').value, description: item.querySelector('.category-description').value })) },

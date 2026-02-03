@@ -21,6 +21,43 @@
     --transition-speed: 0.3s;
 }
 
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-accent);
+    color: white;
+    padding: 8px;
+    z-index: 2000;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+
+/* Add this to your Hero Section styles */
+.hero-bg video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Disable the scale animation when using a video */
+.hero:has(video) .hero-bg {
+    animation: none;
+}
+
+
+
 /* === KEYFRAME ANIMATIONS === */
 @keyframes ken-burns {
     0% {
