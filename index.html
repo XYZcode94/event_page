@@ -4,10 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>College Events</title>
-    <!-- Title will be set by JS -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
-    <!-- Description will be set by JS -->
     <meta name="theme-color" content="#FF2D2D" />
     <meta property="og:title" content="" />
     <meta property="og:description" content="" />
@@ -50,7 +48,7 @@
     <main id="main">
         <section id="home" class="hero" aria-label="Hero">
             <div class="hero-bg">
-                <video id="hero-video" autoplay loop muted playsinline class="video-background">
+                <video id="hero-video" autoplay loop muted playsinline class="video-background" style="display: none;">
                     <source src="" type="video/mp4" />
                 </video>
                 <div class="hero-overlay"></div>
@@ -82,14 +80,12 @@
             </div>
         </section>
 
-        <section id="video" class="section video" hidden>
+        <section id="video" class="section video">
             <div class="container">
                 <header class="section-header">
-                    <h2 data-populate="highlights-title">Event Highlights</h2>
+                    <h2 data-populate="highlights-title"></h2>
                 </header>
-
-                <div class="video-embed-wrapper" data-populate="highlights-video"></div>
-
+                <div id="highlights-grid" class="highlights-grid"></div>
                 <p class="video-caption" data-populate="highlights-caption"></p>
             </div>
         </section>
@@ -100,7 +96,7 @@
                     <h2>Event Schedule</h2>
                 </header>
                 <div class="schedule-tabs" role="tablist"></div>
-                <p class="schedule-download"></p>
+                <p class="schedule-download" hidden></p>
             </div>
         </section>
 
@@ -179,16 +175,16 @@
                     </header>
                     <form id="contact-form" class="contact-form" novalidate>
                         <div class="form-field">
-                            <label for="contact-name">Name</label><input id="contact-name" name="name" type="text"
-                                required />
+                            <label for="contact-name">Name</label>
+                            <input id="contact-name" name="name" type="text" required />
                         </div>
                         <div class="form-field">
-                            <label for="contact-email">Email</label><input id="contact-email" name="email" type="email"
-                                required />
+                            <label for="contact-email">Email</label>
+                            <input id="contact-email" name="email" type="email" required />
                         </div>
                         <div class="form-field">
-                            <label for="contact-message">Message</label><textarea id="contact-message" name="message"
-                                rows="4" required></textarea>
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" name="message" rows="4" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-accent">Send Message</button>
                     </form>
@@ -197,21 +193,14 @@
                     <h3 data-populate="location-title"></h3>
                     <p data-populate="location-address"></p>
                     <div class="contact-map-wrapper" data-populate="location-map"></div>
+                    
                     <div class="contact-social">
                         <h3>Follow Us</h3>
                         <ul class="social-list">
-                            <li>
-                                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                            </li>
+                            <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                            <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                            <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                            <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -225,10 +214,7 @@
                 <a href="#home" class="logo">
                     <img src="https://placehold.co/150x50/transparent/FF2D2D?text=EVENTS+PAGE" alt="Event logo" />
                 </a>
-                <p>
-                    &copy; <span id="footer-year">2025</span> DevCon Global. All rights
-                    reserved.
-                </p>
+                <p>&copy; <span id="footer-year">2026</span> DevCon Global. All rights reserved.</p>
             </div>
             <div class="footer-col">
                 <h4>Quick Links</h4>
@@ -250,18 +236,10 @@
             <div class="footer-col">
                 <h4>Follow Us</h4>
                 <ul class="social-list">
-                    <li>
-                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                    </li>
+                    <li><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                    <li><a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -269,5 +247,4 @@
 
     <script type="module" src="js/main.js" defer></script>
 </body>
-
 </html>

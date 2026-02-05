@@ -517,6 +517,9 @@ body {
     color: var(--color-accent);
     transition: transform var(--transition-speed);
 }
+.event-category-card i{
+    font-size: 50px;
+}
 
 .event-category-card:hover .event-icon {
     transform: scale(1.2);
@@ -757,6 +760,9 @@ body {
 
 .team-join a:hover {
     text-decoration: underline;
+}
+.team-grid li{
+    border: 1px solid #212121;
 }
 
 /* === GALLERY (FIXED) === */
@@ -1145,4 +1151,81 @@ body {
     margin-top: 15px;
     color: #666;
     font-style: italic;
+}
+
+
+/* === VIDEO HIGHLIGHTS SECTION STYLES === */
+
+/* Container and Grid Setup */
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 120px; /* Base height for grid rows */
+    gap: 16px;
+}
+
+/* Base Video Card Styling */
+.video-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 160px; /* Fallback height */
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-alt);
+}
+
+/* Landscape Spans (8 of 12 columns) */
+.video-card.landscape {
+    grid-column: span 8;
+    grid-row: span 4;
+}
+
+/* Portrait Spans (4 of 12 columns) */
+.video-card.portrait {
+    grid-column: span 4;
+    grid-row: span 6;
+}
+
+/* Video Behavior within Cards */
+.video-card video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    z-index: 1;
+}
+
+/* Play Icon Overlay */
+.video-card::before {
+    content: "▶";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.5);
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.video-card:hover::before {
+    opacity: 0; /* Hide icon on hover */
+}
+
+/* Caption Styling */
+.video-caption {
+    margin-top: var(--space-md);
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+/* Animation Hook (Used for fade-in-up) */
+.animate-on-scroll {
+    opacity: 0;
+}
+
+.animate-on-scroll.is-visible {
+    animation: fade-in-up 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }

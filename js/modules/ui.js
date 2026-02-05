@@ -1,19 +1,25 @@
 /**
  * =================================================================
- * |   UI MODULE - V5.0 (FULL DYNAMIC RENDERING)                   |
+ * |   UI MODULE - V5.4 FIXED (VIDEO LOADING ISSUE RESOLVED)       |
  * =================================================================
- * |   This module handles all DOM manipulation, rendering,        |
- * |   animations, and user interactions for the public site.      |
- * |   It's designed to render every detail from the new,          |
- * |   comprehensive event JSON structure.                         |
+ * |   ✔ Fixed highlights section targeting                        |
+ * |   ✔ Fixed video rendering and playback                        |
+ * |   ✔ Added extensive debugging logs                            |
+ * |   ✔ Multiple fallback strategies                              |
  * =================================================================
  */
 
-// --- Main Page Rendering Orchestrator ---
+"use strict";
+
+/* ================================================================
+   MAIN PAGE RENDER ORCHESTRATOR
+================================================================ */
 export function renderPage(event) {
-    // This is the master function that calls all other rendering functions
-    // in the correct order.
     try {
+        if (!event) throw new Error("Event data missing");
+
+        console.log("🎬 Starting page render with event:", event);
+
         renderMeta(event.meta);
         renderHero(event.hero);
         renderAbout(event.about);
@@ -28,104 +34,113 @@ export function renderPage(event) {
         renderFaq(event.faq);
         renderLocation(event.location);
 
-        // A small delay to ensure all new DOM elements from the data
-        // are ready before we try to animate them.
-        setTimeout(setupScrollAnimations, 100);
-
-    } catch (error) {
-        console.error("A critical error occurred during page rendering:", error);
-        showFatalError("There was a problem building the page from the event data.");
+        setTimeout(setupScrollAnimations, 150);
+    } catch (err) {
+        console.error("❌ Render error:", err);
+        showFatalError("There was a problem rendering this event.");
     }
 }
 
-// --- Individual Section Renderers ---
-
+/* ================================================================
+   META
+================================================================ */
 function renderMeta(meta) {
     if (!meta) return;
-    document.title = meta.title || 'College Events';
-    const descriptionTag = document.querySelector('meta[name="description"]');
-    if (descriptionTag) descriptionTag.setAttribute('content', meta.description || '');
+    document.title = meta.title || "College Events";
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.setAttribute("content", meta.description || "");
 }
 
-/**
- * Renders the Hero section with dynamic video background and event data.
- * @param {Object} hero - The hero data object from Firestore.
- */
-
+/* ================================================================
+   HERO (WITH VIDEO BACKGROUND)
+================================================================ */
 function renderHero(hero) {
-    const heroSection = document.getElementById('home');
-    if (!heroSection || !hero) return;
+    const section = document.getElementById("home");
+    if (!section || !hero) return;
 
-    // Element Selectors
-    const titleEl = heroSection.querySelector('.hero-title');
-    const dateEl = heroSection.querySelector('.hero-date');
-    const locationEl = heroSection.querySelector('.hero-location');
-    const ctaContainer = heroSection.querySelector('.hero-cta');
-    const videoEl = document.getElementById('hero-video');
-    const videoSource = videoEl ? videoEl.querySelector('source') : null;
+    const title = section.querySelector(".hero-title");
+    const dateEl = section.querySelector(".hero-date");
+    const locationEl = section.querySelector(".hero-location");
+    const cta = section.querySelector(".hero-cta");
 
-    // 1. Render Text Content
-    if (titleEl) titleEl.textContent = hero.title || 'Welcome to the Event';
-    
-    // Using eventStartDate from your admin panel format
+    const video = document.getElementById("hero-video");
+    const source = video ? video.querySelector("source") : null;
+
+    if (title) title.textContent = hero.title || "";
+
     if (dateEl && hero.eventStartDate) {
-        const date = new Date(hero.eventStartDate).toLocaleDateString('en-US', { 
-            month: 'long', day: 'numeric', year: 'numeric' 
-        });
-        dateEl.innerHTML = `<i class="fa-solid fa-calendar-days"></i> ${date}`;
+        const d = new Date(hero.eventStartDate);
+        if (!isNaN(d)) {
+            dateEl.innerHTML = `<i class="fa-solid fa-calendar-days"></i> ${d.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            })}`;
+        }
     }
 
     if (locationEl) {
-        locationEl.innerHTML = hero.locationString 
-            ? `<i class="fa-solid fa-location-dot"></i> ${hero.locationString}` 
-            : '';
+        locationEl.innerHTML = hero.locationString
+            ? `<i class="fa-solid fa-location-dot"></i> ${hero.locationString}`
+            : "";
     }
 
-    // 2. Render CTA Buttons
-    if (ctaContainer && hero.cta && hero.cta.length > 0) {
-        ctaContainer.innerHTML = hero.cta.map(btn =>
-            `<a href="${btn.url}" class="btn ${btn.class || 'btn-secondary'}">${btn.text}</a>`
-        ).join('');
+    if (cta && Array.isArray(hero.cta)) {
+        cta.innerHTML = hero.cta.map(btn =>
+            `<a href="${btn.url || "#"}" class="btn ${btn.class || "btn-secondary"}">${btn.text}</a>`
+        ).join("");
     }
 
-    // 3. Render Background Video
-    if (videoEl && videoSource && hero.heroVideoUrl) {
-        // Only update if the source has actually changed to prevent flickering
-        if (videoSource.src !== hero.heroVideoUrl) {
-            videoSource.src = hero.heroVideoUrl;
-            videoEl.load(); // Vital for the browser to recognize the new source
-            
-            // Explicitly play to handle browser autoplay restrictions
-            videoEl.play().catch(error => {
-                console.warn("Autoplay was prevented. Ensure muted attribute is present.", error);
-            });
-        }
-        videoEl.style.display = 'block';
-    } else if (videoEl) {
-        videoEl.style.display = 'none';
+    if (video && source && hero.heroVideoUrl) {
+        source.src = hero.heroVideoUrl;
+
+        video.muted = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = "auto";
+
+        video.setAttribute("muted", "");
+        video.setAttribute("playsinline", "");
+
+        video.load();
+        video.style.display = "block";
+        video.style.visibility = "visible";
+
+        video.play().catch(() => {
+            console.warn("Hero video autoplay prevented by browser");
+        });
+    } else if (video) {
+        video.style.display = "none";
     }
 }
 
+/* ================================================================
+   ABOUT
+================================================================ */
 function renderAbout(about) {
-    const section = document.getElementById('about');
+    const section = document.getElementById("about");
     if (!section || !about) {
-        if(section) section.hidden = true;
+        if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    section.querySelector('[data-populate="about-title"]').textContent = about.title || '';
-    section.querySelector('[data-populate="about-tagline"]').textContent = about.tagline || '';
-    
-    const descContainer = section.querySelector('[data-populate="about-description"]');
-    if (descContainer && about.description) {
-        descContainer.innerHTML = about.description.map(p => `<p>${p}</p>`).join('');
+    const titleEl = section.querySelector('[data-populate="about-title"]');
+    const taglineEl = section.querySelector('[data-populate="about-tagline"]');
+    const descEl = section.querySelector('[data-populate="about-description"]');
+
+    if (titleEl) titleEl.textContent = about.title || "";
+    if (taglineEl) taglineEl.textContent = about.tagline || "";
+
+    if (descEl && Array.isArray(about.description)) {
+        descEl.innerHTML = about.description.map(p => `<p>${p}</p>`).join("");
     }
 
-    if (about.history) {
-        section.querySelector('[data-populate="about-history-title"]').textContent = about.history.title || '';
+    // Stats rendering (if exists)
+    if (about.history && about.history.stats) {
         const statsContainer = section.querySelector('[data-populate="about-stats"]');
-        if (statsContainer && about.history.stats) {
+        if (statsContainer) {
             statsContainer.innerHTML = about.history.stats.map(stat =>
                 `<li><strong>${stat.value}</strong> ${stat.label}</li>`
             ).join('');
@@ -133,158 +148,287 @@ function renderAbout(about) {
     }
 }
 
+/* ================================================================
+   HIGHLIGHTS (ARRAY OF VIDEOS - GRID LAYOUT) - FIXED
+================================================================ */
 function renderHighlights(highlights) {
-    const section = document.getElementById('video');
-     if (!section || !highlights || !highlights.videoUrl) {
-        if(section) section.hidden = true;
+    console.log("🎥 renderHighlights called with:", highlights);
+    
+    // Try multiple possible section IDs
+    let section = document.getElementById("highlights");
+    if (!section) {
+        console.warn("⚠️ #highlights not found, trying #video");
+        section = document.getElementById("video");
+    }
+    if (!section) {
+        console.warn("⚠️ #video not found, trying .highlights selector");
+        section = document.querySelector(".highlights");
+    }
+    
+    if (!section) {
+        console.error("❌ Could not find highlights section with any selector!");
         return;
     }
+    
+    console.log("✅ Found highlights section:", section);
+    
+    // Try multiple possible grid container IDs
+    let grid = section.querySelector("#highlights-grid");
+    if (!grid) {
+        console.warn("⚠️ #highlights-grid not found, trying .highlights-grid");
+        grid = section.querySelector(".highlights-grid");
+    }
+    if (!grid) {
+        console.warn("⚠️ .highlights-grid not found, trying [data-populate='highlights-video']");
+        grid = section.querySelector("[data-populate='highlights-video']");
+    }
+    
+    if (!grid) {
+        console.error("❌ Could not find grid container! Creating one...");
+        // Create the grid if it doesn't exist
+        grid = document.createElement("div");
+        grid.id = "highlights-grid";
+        grid.className = "highlights-grid";
+        section.appendChild(grid);
+        console.log("✅ Created new grid container");
+    }
+    
+    console.log("✅ Found grid container:", grid);
+    
+    // Validate highlights data
+    if (!highlights) {
+        console.error("❌ No highlights data provided");
+        section.hidden = true;
+        return;
+    }
+    
+    if (!Array.isArray(highlights.videoUrls)) {
+        console.error("❌ highlights.videoUrls is not an array:", highlights.videoUrls);
+        section.hidden = true;
+        return;
+    }
+    
+    if (highlights.videoUrls.length === 0) {
+        console.error("❌ highlights.videoUrls is empty");
+        section.hidden = true;
+        return;
+    }
+    
+    console.log(`✅ Found ${highlights.videoUrls.length} video URLs:`, highlights.videoUrls);
+    
     section.hidden = false;
 
-    section.querySelector('[data-populate="highlights-title"]').textContent = highlights.title || '';
-    section.querySelector('[data-populate="highlights-caption"]').textContent = highlights.caption || '';
-    
-    const videoContainer = section.querySelector('[data-populate="highlights-video"]');
-    if(videoContainer) {
-        videoContainer.innerHTML = `<iframe class="video-embed" src="${highlights.videoUrl}" title="Event Promo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    // Update section title if provided
+    const titleEl = section.querySelector('[data-populate="highlights-title"]');
+    if (titleEl && highlights.title) {
+        titleEl.textContent = highlights.title;
+        console.log("✅ Set highlights title:", highlights.title);
     }
+
+    // Render video grid
+    const videoHTML = highlights.videoUrls.map((url, i) => {
+        // Convert Dropbox share links to direct download links
+        let directUrl = url;
+        if (url.includes('dropbox.com')) {
+            directUrl = url
+                .replace("dl=0", "raw=1")
+                .replace("www.dropbox.com", "dl.dropboxusercontent.com");
+            console.log(`🔗 Converted Dropbox URL ${i}:`, directUrl);
+        }
+        
+        // Alternate between landscape and portrait for visual variety
+        const orientation = i % 2 === 0 ? "landscape" : "portrait";
+        
+        console.log(`📹 Creating video card ${i}: ${orientation}`);
+        
+        return `
+        <div class="video-card animate-on-scroll ${orientation}">
+            <video
+                src="${directUrl}"
+                muted
+                autoplay
+                loop
+                playsinline
+                preload="auto"
+            ></video>
+        </div>`;
+    }).join("");
+    
+    console.log("✅ Generated video HTML, inserting into grid...");
+    grid.innerHTML = videoHTML;
+    console.log("✅ Grid innerHTML updated");
+
+    // Ensure videos start playing after DOM insertion
+    setTimeout(() => {
+        const videos = grid.querySelectorAll("video");
+        console.log(`🎬 Found ${videos.length} video elements, attempting to play...`);
+        
+        videos.forEach((v, index) => {
+            console.log(`▶️ Playing video ${index}:`, v.src);
+            v.play().catch(err => {
+                console.error(`❌ Video ${index} autoplay failed:`, err);
+            });
+        });
+    }, 100);
+    
+    console.log("✅ Highlights section render complete!");
 }
 
+/* ================================================================
+   SCHEDULE
+================================================================ */
 function renderSchedule(schedule) {
-    const section = document.getElementById('schedule');
-    if (!section || !schedule || !schedule.days || schedule.days.length === 0) {
+    const section = document.getElementById("schedule");
+    if (!section || !schedule || !Array.isArray(schedule.days) || schedule.days.length === 0) {
         if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    const tabsContainer = section.querySelector('.schedule-tabs');
-    // Clear any existing panels from previous renders
-    section.querySelectorAll('.schedule-day').forEach(p => p.remove());
+    const tabs = section.querySelector(".schedule-tabs");
+    if (!tabs) return;
 
-    tabsContainer.innerHTML = schedule.days.map((day, index) => `
-        <button role="tab" aria-selected="${index === 0}" aria-controls="day${index + 1}-panel" id="day${index + 1}-tab">${day.day} (${day.date})</button>
-    `).join('');
+    section.querySelectorAll(".schedule-day").forEach(p => p.remove());
 
-    schedule.days.forEach((day, index) => {
-        const panel = document.createElement('div');
-        panel.id = `day${index + 1}-panel`;
-        panel.className = 'schedule-day';
-        if (index === 0) panel.classList.add('is-active');
-        panel.hidden = index !== 0;
-        panel.setAttribute('role', 'tabpanel');
-        
-        const eventList = day.events.map(event => `
-            <li>
-                <time datetime="${event.time}">${event.time}</time>
-                <div>
-                    <h3>${event.title}</h3>
-                    <p>${event.details}</p>
-                </div>
-            </li>
-        `).join('');
-        panel.innerHTML = `<ul class="schedule-list">${eventList}</ul>`;
-        tabsContainer.after(panel);
+    tabs.innerHTML = schedule.days.map((d, i) =>
+        `<button role="tab" aria-selected="${i === 0}" aria-controls="day${i + 1}-panel">${d.day} (${d.date})</button>`
+    ).join("");
+
+    schedule.days.forEach((day, i) => {
+        const panel = document.createElement("div");
+        panel.id = `day${i + 1}-panel`;
+        panel.className = "schedule-day";
+        panel.hidden = i !== 0;
+        panel.setAttribute("role", "tabpanel");
+
+        panel.innerHTML = `<ul class="schedule-list">
+            ${(day.events || []).map(e => `
+                <li>
+                    <time>${e.time}</time>
+                    <div><h3>${e.title}</h3><p>${e.details}</p></div>
+                </li>`).join("")}
+        </ul>`;
+        tabs.after(panel);
     });
-    
+
+    // Add PDF download if available
     const downloadContainer = section.querySelector('.schedule-download');
     if (downloadContainer && schedule.pdfUrl) {
-        downloadContainer.innerHTML = `<a href="${schedule.pdfUrl}" download class="btn btn-outline">Download Full Agenda (PDF)</a>`;
+        downloadContainer.innerHTML = `<a href="${schedule.pdfUrl}" download class="btn btn-outline">Download Full Schedule (PDF)</a>`;
         downloadContainer.hidden = false;
     } else if (downloadContainer) {
         downloadContainer.hidden = true;
     }
 }
 
-function renderEventCategories(categoriesData) {
-    const section = document.getElementById('events');
-    if (!section || !categoriesData || !categoriesData.categories || categoriesData.categories.length === 0) {
+/* ================================================================
+   EVENT CATEGORIES
+================================================================ */
+function renderEventCategories(data) {
+    const section = document.getElementById("events");
+    if (!section || !data || !Array.isArray(data.categories) || data.categories.length === 0) {
         if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    section.querySelector('[data-populate="categories-title"]').textContent = categoriesData.title || '';
-    const container = section.querySelector('[data-populate="event-categories"]');
-    container.innerHTML = categoriesData.categories.map(cat => `
-        <li class="event-category-card">
-            <span class="event-icon"><i class="${cat.icon}"></i></span>
-            <h3>${cat.title}</h3>
-            <p>${cat.description}</p>
-        </li>
-    `).join('');
-}
-
-
-function renderSpeakers(speakersData) {
-    const section = document.getElementById('speakers');
-    if (!section || !speakersData || !speakersData.guests || speakersData.guests.length === 0) {
-        if (section) section.hidden = true;
-        return;
-    }
-    section.hidden = false;
+    const titleEl = section.querySelector('[data-populate="categories-title"]');
+    const containerEl = section.querySelector('[data-populate="event-categories"]');
     
-    const sectionHeader = section.querySelector('.section-header h2');
-    if (sectionHeader && speakersData.title) {
-        sectionHeader.textContent = speakersData.title;
+    if (titleEl) titleEl.textContent = data.title || "";
+    if (containerEl) {
+        containerEl.innerHTML = data.categories.map(c => `
+            <li class="event-category-card">
+                <i class="${c.icon}"></i>
+                <h3>${c.title}</h3>
+                <p>${c.description}</p>
+            </li>`).join("");
     }
-    
-    const container = section.querySelector('[data-populate="speakers"]');
-    container.innerHTML = speakersData.guests.map(speaker => `
-        <li class="speaker-card">
-            <img src="${speaker.img}" alt="${speaker.name}">
-            <h3>${speaker.name}</h3>
-            <p>${speaker.role}</p>
-        </li>
-    `).join('');
 }
 
-function renderNews(newsData) {
-     const section = document.getElementById('news');
-    if (!section || !newsData || !newsData.articles || newsData.articles.length === 0) {
+/* ================================================================
+   SPEAKERS
+================================================================ */
+function renderSpeakers(data) {
+    const section = document.getElementById("speakers");
+    if (!section || !data || !Array.isArray(data.guests) || data.guests.length === 0) {
         if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    const container = section.querySelector('[data-populate="news"]');
-    container.innerHTML = newsData.articles.map(item => `
-        <article class="news-card">
-            <h3>${item.title}</h3>
-            <p>${item.excerpt}</p>
-            <footer>
-                <time datetime="${item.date}">${new Date(item.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
-                <span class="news-category-badge">${item.category}</span>
-            </footer>
-        </article>
-    `).join('');
+    const titleEl = section.querySelector('.section-header h2');
+    if (titleEl && data.title) {
+        titleEl.textContent = data.title;
+    }
+
+    const containerEl = section.querySelector('[data-populate="speakers"]');
+    if (containerEl) {
+        containerEl.innerHTML = data.guests.map(s => `
+            <li class="speaker-card">
+                <img src="${s.img}" alt="${s.name}">
+                <h3>${s.name}</h3>
+                <p>${s.role}</p>
+            </li>`).join("");
+    }
 }
 
-
-function renderTickets(ticketsData) {
-    const section = document.getElementById('tickets');
-    if (!section || !ticketsData || !ticketsData.packages || ticketsData.packages.length === 0) {
+/* ================================================================
+   NEWS
+================================================================ */
+function renderNews(data) {
+    const section = document.getElementById("news");
+    if (!section || !data || !Array.isArray(data.articles) || data.articles.length === 0) {
         if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    const container = section.querySelector('[data-populate="tickets"]');
-    container.innerHTML = ticketsData.packages.map(ticket => `
-        <div class="ticket-card ${ticket.isFeatured ? 'featured' : ''}">
-            ${ticket.isFeatured ? '<div class="ticket-badge">Most Popular</div>' : ''}
-            <h3>${ticket.name}</h3>
-            <p class="ticket-price">${ticket.price}</p>
-            <ul>${ticket.features.map(feature => `<li>${feature}</li>`).join('')}</ul>
-            <a href="#" class="btn ${ticket.isFeatured ? 'btn-accent' : 'btn-secondary'}">Buy Now</a>
-        </div>
-    `).join('');
+    const containerEl = section.querySelector('[data-populate="news"]');
+    if (containerEl) {
+        containerEl.innerHTML = data.articles.map(n => `
+            <article class="news-card">
+                <h3>${n.title}</h3>
+                <p>${n.excerpt}</p>
+                <footer>
+                    <time datetime="${n.date}">${new Date(n.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+                    <span class="news-category-badge">${n.category}</span>
+                </footer>
+            </article>`).join("");
+    }
 }
 
-function renderTeam(teamData) {
-    const section = document.getElementById('team');
-     if (!section || !teamData) {
-        if(section) section.hidden = true;
+/* ================================================================
+   TICKETS
+================================================================ */
+function renderTickets(data) {
+    const section = document.getElementById("tickets");
+    if (!section || !data || !Array.isArray(data.packages) || data.packages.length === 0) {
+        if (section) section.hidden = true;
+        return;
+    }
+    section.hidden = false;
+
+    const containerEl = section.querySelector('[data-populate="tickets"]');
+    if (containerEl) {
+        containerEl.innerHTML = data.packages.map(t => `
+            <div class="ticket-card ${t.isFeatured ? "featured" : ""}">
+                ${t.isFeatured ? '<div class="ticket-badge">Most Popular</div>' : ''}
+                <h3>${t.name}</h3>
+                <p class="ticket-price">${t.price}</p>
+                <ul>${(t.features || []).map(f => `<li>${f}</li>`).join("")}</ul>
+                <a href="#" class="btn ${t.isFeatured ? 'btn-accent' : 'btn-secondary'}">Buy Now</a>
+            </div>`).join("");
+    }
+}
+
+/* ================================================================
+   TEAM
+================================================================ */
+function renderTeam(data) {
+    const section = document.getElementById("team");
+    if (!section || !data) {
+        if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
@@ -299,97 +443,108 @@ function renderTeam(teamData) {
 
     const coreContainer = section.querySelector('[data-populate="team-core"]');
     const coreTitle = section.querySelector('[data-populate="team-core-title"]');
-    if (coreContainer && teamData.core && teamData.core.members && teamData.core.members.length > 0) {
-        coreTitle.textContent = teamData.core.title || 'Core Committee';
-        coreTitle.hidden = false;
-        coreContainer.innerHTML = renderMembers(teamData.core.members);
-        coreContainer.hidden = false;
-    } else {
-        if(coreTitle) coreTitle.hidden = true;
-        if(coreContainer) coreContainer.hidden = true;
+    if (coreContainer && data.core && data.core.members && data.core.members.length > 0) {
+        if (coreTitle) coreTitle.textContent = data.core.title || 'Core Committee';
+        coreContainer.innerHTML = renderMembers(data.core.members);
     }
 
     const volunteersContainer = section.querySelector('[data-populate="team-volunteers"]');
     const volunteersTitle = section.querySelector('[data-populate="team-volunteers-title"]');
-    if (volunteersContainer && teamData.volunteers && teamData.volunteers.members && teamData.volunteers.members.length > 0) {
-        volunteersTitle.textContent = teamData.volunteers.title || 'Volunteers';
-        volunteersTitle.hidden = false;
-        volunteersContainer.innerHTML = renderMembers(teamData.volunteers.members);
-        volunteersContainer.hidden = false;
-    } else {
-         if(volunteersTitle) volunteersTitle.hidden = true;
-         if(volunteersContainer) volunteersContainer.hidden = true;
+    if (volunteersContainer && data.volunteers && data.volunteers.members && data.volunteers.members.length > 0) {
+        if (volunteersTitle) volunteersTitle.textContent = data.volunteers.title || 'Volunteers';
+        volunteersContainer.innerHTML = renderMembers(data.volunteers.members);
     }
-    
+
     const joinContainer = section.querySelector('.team-join');
-    if(joinContainer && teamData.joinText) {
-        joinContainer.innerHTML = `${teamData.joinText} <a href="#contact">Join our team</a>.`;
-        joinContainer.hidden = false;
-    } else if (joinContainer) {
-        joinContainer.hidden = true;
+    if (joinContainer && data.joinText) {
+        joinContainer.innerHTML = `${data.joinText} <a href="#contact">Join our team</a>.`;
     }
 }
 
-function renderGallery(galleryData) {
-    const section = document.getElementById('gallery');
-    if (!section || !galleryData || !galleryData.images || galleryData.images.length === 0) {
+/* ================================================================
+   GALLERY
+================================================================ */
+function renderGallery(data) {
+    const section = document.getElementById("gallery");
+    if (!section || !data || !Array.isArray(data.images) || data.images.length === 0) {
         if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    const container = section.querySelector('[data-populate="gallery"]');
-    container.innerHTML = galleryData.images.map(image => `
-        <li><img src="${image.src}" alt="${image.alt}"></li>
-    `).join('');
+    const containerEl = section.querySelector('[data-populate="gallery"]');
+    if (containerEl) {
+        containerEl.innerHTML = data.images.map(i => `<li><img src="${i.src}" alt="${i.alt}"></li>`).join("");
+    }
 }
 
-function renderFaq(faqData) {
-    const section = document.getElementById('faq');
-    if (!section || !faqData || !faqData.questions || faqData.questions.length === 0) {
+/* ================================================================
+   FAQ
+================================================================ */
+function renderFaq(data) {
+    const section = document.getElementById("faq");
+    if (!section || !data || !Array.isArray(data.questions) || data.questions.length === 0) {
         if (section) section.hidden = true;
         return;
     }
     section.hidden = false;
 
-    const container = section.querySelector('[data-populate="faq"]');
-    container.innerHTML = faqData.questions.map(faq => `
-        <details>
-            <summary>${faq.question}</summary>
-            <p>${faq.answer}</p>
-        </details>
-    `).join('');
+    const containerEl = section.querySelector('[data-populate="faq"]');
+    if (containerEl) {
+        containerEl.innerHTML = data.questions.map(q => `
+            <details>
+                <summary>${q.question}</summary>
+                <p>${q.answer}</p>
+            </details>`).join("");
+    }
 }
 
-function renderLocation(locationData) {
-    const section = document.getElementById('contact');
-    if (!section || !locationData) return;
+/* ================================================================
+   LOCATION (NATIVE VIDEO PLAYER)
+================================================================ */
+function renderLocation(data) {
+    const section = document.getElementById("contact");
+    if (!section || !data) return;
 
-    section.querySelector('[data-populate="location-title"]').textContent = locationData.title || '';
-    section.querySelector('[data-populate="location-address"]').innerHTML = locationData.address || '';
+    const titleEl = section.querySelector('[data-populate="location-title"]');
+    const addressEl = section.querySelector('[data-populate="location-address"]');
     
-    const mapContainer = section.querySelector('[data-populate="location-map"]');
-    if (mapContainer && locationData.mapUrl) {
-        mapContainer.innerHTML = `<iframe class="contact-map" src="${locationData.mapUrl}" loading="lazy"></iframe>`;
+    if (titleEl) titleEl.textContent = data.title || "";
+    if (addressEl) addressEl.innerHTML = data.address || "";
+
+    const media = section.querySelector('[data-populate="location-map"]');
+    if (media && data.videoUrl) {
+        // Use native HTML5 video player for location
+        media.innerHTML = `
+        <video 
+            src="${data.videoUrl}" 
+            controls 
+            muted 
+            playsinline 
+            preload="metadata"
+            class="contact-map"
+        ></video>`;
+    } else if (media && data.mapUrl) {
+        // Fallback to iframe map if no video provided
+        media.innerHTML = `<iframe class="contact-map" src="${data.mapUrl}" loading="lazy"></iframe>`;
     }
 }
 
-
-// --- UI Interactions & Utilities ---
-
+/* ================================================================
+   EVENT LISTENERS
+================================================================ */
 export function setupEventListeners() {
-    // Mobile Navigation
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('is-open');
-            const isExpanded = navMenu.classList.contains('is-open');
-            navToggle.setAttribute('aria-expanded', isExpanded);
+        navToggle.addEventListener("click", () => {
+            navMenu.classList.toggle("is-open");
+            navToggle.setAttribute("aria-expanded", navMenu.classList.contains("is-open"));
         });
     }
 
-    // Schedule Tabs (delegated event listener)
+    // Schedule tabs interaction
     const scheduleContainer = document.querySelector('.schedule');
     if (scheduleContainer) {
         scheduleContainer.addEventListener('click', (e) => {
@@ -413,81 +568,62 @@ export function setupEventListeners() {
     }
 }
 
+/* ================================================================
+   SCROLL ANIMATIONS
+================================================================ */
 export function setupScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.section-header, .about-grid, .video-embed-wrapper, .schedule-tabs, .event-category-card, .speaker-card, .news-card, .ticket-card, .team-card, .gallery-grid li, .faq-groups, .contact-grid, .hero-title, .hero-meta, .hero-cta, .countdown');
+    if (!("IntersectionObserver" in window)) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+    const els = document.querySelectorAll(".animate-on-scroll");
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add("is-visible");
+                obs.unobserve(e.target);
             }
         });
-    }, {
-        threshold: 0.1
-    });
+    }, { threshold: 0.1 });
 
-    animatedElements.forEach(el => {
-        if (!el.classList.contains('animate-on-scroll')) {
-            el.classList.add('animate-on-scroll');
-        }
-        observer.observe(el);
-    });
+    els.forEach(el => obs.observe(el));
 }
 
+/* ================================================================
+   UTILITIES
+================================================================ */
 export function setFooterYear() {
-    const footerYear = document.getElementById('footer-year');
-    if (footerYear) {
-        footerYear.textContent = new Date().getFullYear();
-    }
+    const y = document.getElementById("footer-year");
+    if (y) y.textContent = new Date().getFullYear();
 }
 
-export function showFatalError(message) {
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.innerHTML = `<h1 class="hero-title" style="color: var(--color-accent);">${message}</h1>`;
-    }
+export function showFatalError(msg) {
+    const hero = document.querySelector(".hero-content");
+    if (hero) hero.innerHTML = `<h1>${msg}</h1>`;
 }
 
-export function initCountdown(targetDateString) {
-    const countdownContainer = document.getElementById('countdown');
-    if (!countdownContainer || !targetDateString) {
-        if(countdownContainer) countdownContainer.hidden = true;
-        return;
-    };
-    countdownContainer.hidden = false;
-    // Ensure the countdown container has the right structure
-    countdownContainer.innerHTML = `
-        <div class="countdown-segment"><span class="countdown-value">0</span><span class="countdown-label">Days</span></div>
-        <div class="countdown-segment"><span class="countdown-value">0</span><span class="countdown-label">Hours</span></div>
-        <div class="countdown-segment"><span class="countdown-value">0</span><span class="countdown-label">Minutes</span></div>
-        <div class="countdown-segment"><span class="countdown-value">0</span><span class="countdown-label">Seconds</span></div>
-    `;
+export function initCountdown(dateStr) {
+    const el = document.getElementById("countdown");
+    if (!el || !dateStr) return;
 
-    const targetDate = new Date(targetDateString).getTime();
-    let interval;
+    const target = new Date(dateStr).getTime();
+    if (isNaN(target)) return;
 
-    function updateTimer() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            countdownContainer.innerHTML = `<p class="event-live-message">This Event is Live!</p>`;
-            if (interval) clearInterval(interval);
+    setInterval(() => {
+        const diff = target - Date.now();
+        if (diff <= 0) {
+            el.textContent = "Event Live!";
             return;
         }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        countdownContainer.querySelector('.countdown-segment:nth-child(1) .countdown-value').textContent = days;
-        countdownContainer.querySelector('.countdown-segment:nth-child(2) .countdown-value').textContent = hours;
-        countdownContainer.querySelector('.countdown-segment:nth-child(3) .countdown-value').textContent = minutes;
-        countdownContainer.querySelector('.countdown-segment:nth-child(4) .countdown-value').textContent = seconds;
-    }
-
-    updateTimer();
-    interval = setInterval(updateTimer, 1000);
+        el.innerHTML = `
+            <div class="countdown-segment"><span class="countdown-value">${days}</span><span class="countdown-label">Days</span></div>
+            <div class="countdown-segment"><span class="countdown-value">${hours}</span><span class="countdown-label">Hours</span></div>
+            <div class="countdown-segment"><span class="countdown-value">${minutes}</span><span class="countdown-label">Minutes</span></div>
+            <div class="countdown-segment"><span class="countdown-value">${seconds}</span><span class="countdown-label">Seconds</span></div>
+        `;
+    }, 1000);
 }
