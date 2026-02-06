@@ -156,21 +156,25 @@
                     <button type="button" id="add-stat-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add Stat</button>
                 </fieldset>
     
-                <fieldset class="form-section">
-                    <legend class="form-legend">Highlights Video</legend>
-                    <div class="input-wrapper">
-                      <input type="text" id="highlightsTitle" class="form-input" placeholder=" ">
-                      <label for="highlightsTitle" class="form-label">Highlights Section Title</label>
-                    </div>
-                    <div class="input-wrapper">
-                      <input type="url" id="highlightsVideoUrl" class="form-input" placeholder=" ">
-                      <label for="highlightsVideoUrl" class="form-label">YouTube Embed URL</label>
-                    </div>
-                    <div class="input-wrapper">
-                      <input type="text" id="highlightsCaption" class="form-input" placeholder=" ">
-                      <label for="highlightsCaption" class="form-label">Video Caption</label>
-                    </div>
-                </fieldset>
+<fieldset class="form-section">
+    <legend class="form-legend">Highlights Video</legend>
+    
+    <div class="input-wrapper">
+      <input type="text" id="highlightsTitle" class="form-input" placeholder=" ">
+      <label for="highlightsTitle" class="form-label">Highlights Section Title</label>
+    </div>
+
+    <div id="highlight-videos-container">
+        <div class="input-wrapper video-entry">
+          <input type="url" class="form-input highlight-video-url" placeholder=" ">
+          <label class="form-label">YouTube Embed URL</label>
+        </div>
+    </div>
+
+    <button type="button" id="add-highlight-video-btn" class="btn-add">
+        + Add More Video
+    </button>
+</fieldset>
     
                 <fieldset class="form-section">
                     <legend class="form-legend">Event Categories</legend>
@@ -339,6 +343,25 @@
       <input type="text" class="form-input-sm stat-value" placeholder="Value (e.g., 10+)">
       <input type="text" class="form-input-sm stat-label" placeholder="Label (e.g., years running)">
       <button type="button" class="remove-btn"><i class="fa-solid fa-trash"></i></button>
+    </div>
+  </template>
+
+<template id="highlight-video-template">
+    <div class="dynamic-item-card video-entry" style="margin-bottom: 20px; border-left: 4px solid #007bff; padding-left: 15px;">
+        <div class="dynamic-header" style="display: flex; justify-content: space-between;">
+            <strong>Video Entry</strong>
+            <button type="button" class="remove-btn" style="color: red; cursor: pointer; border: none; background: none; font-size: 1.2rem;">&times;</button>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="url" class="form-input highlight-video-url" placeholder=" ">
+            <label class="form-label">YouTube Embed URL</label>
+        </div>
+
+        <div class="input-wrapper" style="margin-top: 10px;">
+            <input type="text" class="form-input highlight-video-caption" placeholder=" ">
+            <label class="form-label">Video Caption (e.g. Opening Ceremony)</label>
+        </div>
     </div>
   </template>
 

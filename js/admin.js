@@ -1,14 +1,14 @@
 /**
  * =================================================================
- * |   ADMIN DASHBOARD - V10.2 (UPDATED FOR ARRAY VIDEOS)          |
+ * |   ADMIN DASHBOARD JAVASCRIPT - V10.1 (FINAL & COMPLETE)       |
  * =================================================================
- * |   ✔ Saves highlights.videoUrls[] (multiple videos)            |
- * |   ✔ Saves location.videoUrl (native video)                    |
- * |   ✔ Full compatibility with UI Module V5.4                    |
- * |   ✔ New: Dynamic video URL management                         |
+ * |   The final, complete, and unabridged script for the expert-  |
+ * |   redesigned admin panel. Includes full CRUD, role-based auth,|
+ * |   and advanced UX features like custom modals and focus states|
  * =================================================================
  */
 
+// Import necessary Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import {
     getAuth,
@@ -33,6 +33,7 @@ import {
     orderBy
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
 const firebaseConfig = {
@@ -49,6 +50,7 @@ const firebaseConfig = {
     const db = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
 
+    // --- COMPLETE UI Element References ---
     const ui = {
         views: {
             login: document.getElementById('login-view'),
@@ -80,9 +82,9 @@ const firebaseConfig = {
             addVolunteer: document.getElementById('add-volunteer-btn'),
             addGalleryImage: document.getElementById('add-gallery-image-btn'),
             addFaq: document.getElementById('add-faq-btn'),
-            addHighlightVideo: document.getElementById('add-highlight-video-btn'),
             submitEvent: document.getElementById('submit-event-btn'),
             cancelEdit: document.getElementById('cancel-edit-btn'),
+            addHighlightVideo: document.getElementById('add-highlight-video-btn'),
         },
         containers: {
             cta: document.getElementById('hero-cta-container'),
@@ -166,45 +168,16 @@ const firebaseConfig = {
         ui.buttons.addVolunteer.addEventListener('click', () => addDynamicItem('team-member-template', ui.containers.teamVolunteers));
         ui.buttons.addGalleryImage.addEventListener('click', () => addDynamicItem('gallery-image-template', ui.containers.gallery));
         ui.buttons.addFaq.addEventListener('click', () => addDynamicItem('faq-template', ui.containers.faq));
-        ui.buttons.addHighlightVideo.addEventListener('click', () => addDynamicItem('highlight-video-template', ui.containers.highlightVideos));
         ui.views.dashboard.addEventListener('click', handleDashboardClicks);
         ui.modal.confirmBtn.addEventListener('click', executeDelete);
         ui.modal.cancelBtn.addEventListener('click', hideModal);
+        ui.buttons.addHighlightVideo.addEventListener('click', () => {addDynamicItem('highlight-video-template', ui.containers.highlightVideos);
+});
     }
     
-    async function handleLogin(e) { 
-        e.preventDefault(); 
-        try { 
-            await signInWithEmailAndPassword(auth, e.target.querySelector('#login-email').value, e.target.querySelector('#login-password').value); 
-        } catch (error) { 
-            showMessage(`Login Failed: ${error.message}`, 'error'); 
-        } 
-    }
-    
-    async function handleSignup(e) { 
-        e.preventDefault(); 
-        try { 
-            const cred = await createUserWithEmailAndPassword(auth, e.target.querySelector('#signup-email').value, e.target.querySelector('#signup-password').value); 
-            await setDoc(doc(db, 'users', cred.user.uid), { email: cred.user.email, role: 'user' }); 
-            showMessage('Sign-up successful. Please wait for admin approval.', 'success'); 
-        } catch (error) { 
-            showMessage(`Sign-up Failed: ${error.message}`, 'error'); 
-        } 
-    }
-    
-    async function signInWithGoogle(isSignUp) { 
-        try { 
-            const result = await signInWithPopup(auth, googleProvider); 
-            const userDocRef = doc(db, 'users', result.user.uid); 
-            const userDoc = await getDoc(userDocRef); 
-            if (!userDoc.exists() && isSignUp) { 
-                await setDoc(userDocRef, { email: result.user.email, role: 'user' }); 
-                showMessage('Sign-up successful. Wait for admin approval.', 'success'); 
-            } 
-        } catch (error) { 
-            showMessage(`Google Sign-In Error: ${error.message}`, 'error'); 
-        } 
-    }
+    async function handleLogin(e) { e.preventDefault(); try { await signInWithEmailAndPassword(auth, e.target.querySelector('#login-email').value, e.target.querySelector('#login-password').value); } catch (error) { showMessage(`Login Failed: ${error.message}`, 'error'); } }
+    async function handleSignup(e) { e.preventDefault(); try { const cred = await createUserWithEmailAndPassword(auth, e.target.querySelector('#signup-email').value, e.target.querySelector('#signup-password').value); await setDoc(doc(db, 'users', cred.user.uid), { email: cred.user.email, role: 'user' }); showMessage('Sign-up successful. Please wait for admin approval.', 'success'); } catch (error) { showMessage(`Sign-up Failed: ${error.message}`, 'error'); } }
+    async function signInWithGoogle(isSignUp) { try { const result = await signInWithPopup(auth, googleProvider); const userDocRef = doc(db, 'users', result.user.uid); const userDoc = await getDoc(userDocRef); if (!userDoc.exists() && isSignUp) { await setDoc(userDocRef, { email: result.user.email, role: 'user' }); showMessage('Sign-up successful. Wait for admin approval.', 'success'); } } catch (error) { showMessage(`Google Sign-In Error: ${error.message}`, 'error'); } }
 
     async function loadAndDisplayEvents() {
         ui.currentEventsList.innerHTML = '<p class="loading-text">Loading events...</p>';
@@ -314,42 +287,12 @@ const firebaseConfig = {
         setFocusMode(false);
     }
 
-    function clearForm() { 
-        ui.forms.event.reset(); 
-        Object.values(ui.containers).forEach(c => { c.innerHTML = ''; }); 
-    }
-    
-    function formatISOForInput(iso) { 
-        if (!iso) return ''; 
-        const d = new Date(iso); 
-        d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); 
-        return d.toISOString().slice(0, 16); 
-    }
-    
-    function addDynamicItem(templateId, container) { 
-        const t = document.getElementById(templateId); 
-        if (t && container) container.appendChild(t.content.cloneNode(true)); 
-    }
-    
-    function showMessage(message, type = 'success') { 
-        ui.messageBox.textContent = message; 
-        ui.messageBox.className = 'message-box show'; 
-        ui.messageBox.classList.add(type); 
-        setTimeout(() => ui.messageBox.classList.remove('show'), 4000); 
-    }
-    
-    function showModal(title, message) { 
-        ui.modal.title.textContent = title; 
-        ui.modal.message.textContent = message; 
-        ui.modal.overlay.classList.remove('hidden'); 
-        ui.modal.overlay.setAttribute('aria-hidden', 'false'); 
-    }
-    
-    function hideModal() { 
-        ui.modal.overlay.classList.add('hidden'); 
-        ui.modal.overlay.setAttribute('aria-hidden', 'true'); 
-    }
-    
+    function clearForm() { ui.forms.event.reset(); Object.values(ui.containers).forEach(c => { c.innerHTML = ''; }); }
+    function formatISOForInput(iso) { if (!iso) return ''; const d = new Date(iso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); }
+    function addDynamicItem(templateId, container) { const t = document.getElementById(templateId); if (t && container) container.appendChild(t.content.cloneNode(true)); }
+    function showMessage(message, type = 'success') { ui.messageBox.textContent = message; ui.messageBox.className = 'message-box show'; ui.messageBox.classList.add(type); setTimeout(() => ui.messageBox.classList.remove('show'), 4000); }
+    function showModal(title, message) { ui.modal.title.textContent = title; ui.modal.message.textContent = message; ui.modal.overlay.classList.remove('hidden'); ui.modal.overlay.setAttribute('aria-hidden', 'false'); }
+    function hideModal() { ui.modal.overlay.classList.add('hidden'); ui.modal.overlay.setAttribute('aria-hidden', 'true'); }
     function setFocusMode(isFocused) {
         if (isFocused) {
             ui.layout.formColumn.classList.add('is-focused');
@@ -361,296 +304,74 @@ const firebaseConfig = {
     }
     
     function populateForm(data) {
-        const setVal = (id, val) => { 
-            const el = document.getElementById(id);
-            if(el) el.value = val || '';
-        };
-        
-        setVal('eventName', data.eventName); 
-        setVal('eventTagline', data.eventTagline); 
-        setVal('eventStartDate', formatISOForInput(data.eventStartDate)); 
-        setVal('eventEndDate', formatISOForInput(data.eventEndDate));
-        
-        if(data.meta) { 
-            setVal('metaTitle', data.meta.title); 
-            setVal('metaDescription', data.meta.description); 
-        }
-        
-        if(data.hero) { 
-            setVal('heroTitle', data.hero.title); 
-            setVal('locationString', data.hero.locationString); 
-            setVal('heroVideoUrl', data.hero.heroVideoUrl); 
-        }
-        
-        if(data.about) { 
-            setVal('aboutTitle', data.about.title); 
-            setVal('aboutTagline', data.about.tagline); 
-            setVal('aboutDescription', data.about.description ? data.about.description.join(' | ') : ''); 
-        }
-        
-        // NEW: Load highlights title (videoUrls handled separately)
-        if(data.highlights) { 
-            setVal('highlightsTitle', data.highlights.title);
-        }
-        
-        if(data.eventCategories) { 
-            setVal('categoriesTitle', data.eventCategories.title); 
-        }
-        
-        if(data.schedule) { 
-            setVal('schedulePdfUrl', data.schedule.pdfUrl); 
-        }
-        
-        if(data.speakers) { 
-            setVal('speakersTitle', data.speakers.title); 
-        }
-        
-        if(data.news) { 
-            setVal('newsTitle', data.news.title); 
-        }
-        
-        if(data.tickets) { 
-            setVal('ticketsTitle', data.tickets.title); 
-        }
-        
-        if(data.team) { 
-            setVal('teamTitle', data.team.title); 
-            setVal('teamJoinText', data.team.joinText); 
-            if(data.team.core) setVal('teamCoreTitle', data.team.core.title); 
-            if(data.team.volunteers) setVal('teamVolunteersTitle', data.team.volunteers.title); 
-        }
-        
-        if(data.gallery) { 
-            setVal('galleryTitle', data.gallery.title); 
-        }
-        
-        if(data.faq) { 
-            setVal('faqTitle', data.faq.title); 
-        }
-        
-        if(data.location) { 
-            setVal('locationTitle', data.location.title); 
-            setVal('locationAddress', data.location.address); 
-            setVal('locationVideoUrl', data.location.videoUrl); 
-        }
+        const setVal = (id, val) => { if(document.getElementById(id)) document.getElementById(id).value = val || '' };
+        setVal('eventName', data.eventName); setVal('eventTagline', data.eventTagline); setVal('eventStartDate', formatISOForInput(data.eventStartDate)); setVal('eventEndDate', formatISOForInput(data.eventEndDate));
+        if(data.meta) { setVal('metaTitle', data.meta.title); setVal('metaDescription', data.meta.description); }
+        if(data.hero) { setVal('heroTitle', data.hero.title); setVal('locationString', data.hero.locationString); setVal('heroVideoUrl', data.hero.heroVideoUrl); }
+        if(data.about) { setVal('aboutTitle', data.about.title); setVal('aboutTagline', data.about.tagline); setVal('aboutDescription', data.about.description ? data.about.description.join(' | ') : ''); }
+        // 1. Set the main section title (Static ID)
+// Safe Loading for Highlights
+if (data.highlights) {
+    // 1. Set Title (Safe check)
+    setVal('highlightsTitle', data.highlights.title || '');
 
-        const populateDynamic = (items, templateId, container, filler) => { 
-            if (items) items.forEach(item => { 
-                addDynamicItem(templateId, container); 
-                filler(container.lastElementChild, item); 
-            }); 
-        };
+    // 2. Set Videos (Safe check for the array)
+    if (data.highlights.videoUrls && Array.isArray(data.highlights.videoUrls)) {
+        ui.containers.highlightVideos.innerHTML = ''; // Clear container
         
-        if(data.hero) populateDynamic(data.hero.cta, 'hero-cta-template', ui.containers.cta, (el, item) => { 
-            el.querySelector('.cta-text').value = item.text; 
-            el.querySelector('.cta-url').value = item.url; 
-            el.querySelector('.cta-class').value = item.class; 
+        data.highlights.videoUrls.forEach(video => {
+            addDynamicItem('highlight-video-template', ui.containers.highlightVideos);
+            const lastAdded = ui.containers.highlightVideos.lastElementChild;
+            
+            // Handle both Object {url, caption} and legacy String formats
+            const videoUrl = typeof video === 'object' ? video.url : video;
+            const videoCaption = typeof video === 'object' ? video.caption : '';
+
+            lastAdded.querySelector('.highlight-video-url').value = videoUrl || '';
+            lastAdded.querySelector('.highlight-video-caption').value = videoCaption || '';
         });
-        
-        if(data.about && data.about.history) populateDynamic(data.about.history.stats, 'about-stat-template', ui.containers.stats, (el, item) => { 
-            el.querySelector('.stat-value').value = item.value; 
-            el.querySelector('.stat-label').value = item.label; 
-        });
-        
-        // NEW: Populate highlight videos array
-        if(data.highlights && data.highlights.videoUrls) {
-            populateDynamic(data.highlights.videoUrls, 'highlight-video-template', ui.containers.highlightVideos, (el, url) => {
-                el.querySelector('.highlight-video-url').value = url;
-            });
-        }
-        
-        if(data.eventCategories) populateDynamic(data.eventCategories.categories, 'category-template', ui.containers.categories, (el, item) => { 
-            el.querySelector('.category-icon').value = item.icon; 
-            el.querySelector('.category-title').value = item.title; 
-            el.querySelector('.category-description').value = item.description; 
-        });
-        
-        if(data.speakers) populateDynamic(data.speakers.guests, 'speaker-template', ui.containers.speakers, (el, item) => { 
-            el.querySelector('.speaker-name').value = item.name; 
-            el.querySelector('.speaker-role').value = item.role; 
-            el.querySelector('.speaker-img').value = item.img; 
-        });
-        
-        if(data.news) populateDynamic(data.news.articles, 'news-template', ui.containers.news, (el, item) => { 
-            el.querySelector('.news-title').value = item.title; 
-            el.querySelector('.news-excerpt').value = item.excerpt; 
-            el.querySelector('.news-date').value = item.date; 
-            el.querySelector('.news-category').value = item.category; 
-        });
-        
-        if(data.tickets) populateDynamic(data.tickets.packages, 'ticket-template', ui.containers.tickets, (el, item) => { 
-            el.querySelector('.ticket-name').value = item.name; 
-            el.querySelector('.ticket-price').value = item.price; 
-            el.querySelector('.ticket-features').value = item.features.join('\n'); 
-            el.querySelector('.ticket-featured').checked = item.isFeatured; 
-        });
-        
-        if(data.team && data.team.core) populateDynamic(data.team.core.members, 'team-member-template', ui.containers.teamCore, (el, item) => { 
-            el.querySelector('.member-name').value = item.name; 
-            el.querySelector('.member-role').value = item.role; 
-            el.querySelector('.member-img').value = item.img; 
-        });
-        
-        if(data.team && data.team.volunteers) populateDynamic(data.team.volunteers.members, 'team-member-template', ui.containers.teamVolunteers, (el, item) => { 
-            el.querySelector('.member-name').value = item.name; 
-            el.querySelector('.member-role').value = item.role; 
-            el.querySelector('.member-img').value = item.img; 
-        });
-        
-        if(data.gallery) populateDynamic(data.gallery.images, 'gallery-image-template', ui.containers.gallery, (el, item) => { 
-            el.querySelector('.gallery-src').value = item.src; 
-            el.querySelector('.gallery-alt').value = item.alt; 
-        });
-        
-        if(data.faq) populateDynamic(data.faq.questions, 'faq-template', ui.containers.faq, (el, item) => { 
-            el.querySelector('.faq-question').value = item.question; 
-            el.querySelector('.faq-answer').value = item.answer; 
-            el.querySelector('.faq-category').value = item.category; 
-        });
-        
-        if (data.schedule && data.schedule.days) data.schedule.days.forEach(day => { 
-            addDynamicItem('schedule-day-template', ui.containers.scheduleDays); 
-            const dayEl = ui.containers.scheduleDays.lastElementChild; 
-            dayEl.querySelector('.day-title').value = day.day; 
-            dayEl.querySelector('.day-date').value = day.date; 
-            populateDynamic(day.events, 'schedule-event-template', dayEl.querySelector('.day-events-container'), (el, item) => { 
-                el.querySelector('.event-time').value = item.time; 
-                el.querySelector('.event-title').value = item.title; 
-                el.querySelector('.event-details').value = item.details; 
-            }); 
-        });
+    }
+}        if(data.eventCategories) { setVal('categoriesTitle', data.eventCategories.title); }
+        if(data.schedule) { setVal('schedulePdfUrl', data.schedule.pdfUrl); }
+        if(data.speakers) { setVal('speakersTitle', data.speakers.title); }
+        if(data.news) { setVal('newsTitle', data.news.title); }
+        if(data.tickets) { setVal('ticketsTitle', data.tickets.title); }
+        if(data.team) { setVal('teamTitle', data.team.title); setVal('teamJoinText', data.team.joinText); if(data.team.core) setVal('teamCoreTitle', data.team.core.title); if(data.team.volunteers) setVal('teamVolunteersTitle', data.team.volunteers.title); }
+        if(data.gallery) { setVal('galleryTitle', data.gallery.title); }
+        if(data.faq) { setVal('faqTitle', data.faq.title); }
+        if(data.location) { setVal('locationTitle', data.location.title); setVal('locationAddress', data.location.address); setVal('locationMapUrl', data.location.mapUrl); }
+
+        const populateDynamic = (items, templateId, container, filler) => { if (items) items.forEach(item => { addDynamicItem(templateId, container); filler(container.lastElementChild, item); }); };
+        if(data.hero) populateDynamic(data.hero.cta, 'hero-cta-template', ui.containers.cta, (el, item) => { el.querySelector('.cta-text').value = item.text; el.querySelector('.cta-url').value = item.url; el.querySelector('.cta-class').value = item.class; });
+        if(data.about && data.about.history) populateDynamic(data.about.history.stats, 'about-stat-template', ui.containers.stats, (el, item) => { el.querySelector('.stat-value').value = item.value; el.querySelector('.stat-label').value = item.label; });
+        if(data.eventCategories) populateDynamic(data.eventCategories.categories, 'category-template', ui.containers.categories, (el, item) => { el.querySelector('.category-icon').value = item.icon; el.querySelector('.category-title').value = item.title; el.querySelector('.category-description').value = item.description; });
+        if(data.speakers) populateDynamic(data.speakers.guests, 'speaker-template', ui.containers.speakers, (el, item) => { el.querySelector('.speaker-name').value = item.name; el.querySelector('.speaker-role').value = item.role; el.querySelector('.speaker-img').value = item.img; });
+        if(data.news) populateDynamic(data.news.articles, 'news-template', ui.containers.news, (el, item) => { el.querySelector('.news-title').value = item.title; el.querySelector('.news-excerpt').value = item.excerpt; el.querySelector('.news-date').value = item.date; el.querySelector('.news-category').value = item.category; });
+        if(data.tickets) populateDynamic(data.tickets.packages, 'ticket-template', ui.containers.tickets, (el, item) => { el.querySelector('.ticket-name').value = item.name; el.querySelector('.ticket-price').value = item.price; el.querySelector('.ticket-features').value = item.features.join('\n'); el.querySelector('.ticket-featured').checked = item.isFeatured; });
+        if(data.team && data.team.core) populateDynamic(data.team.core.members, 'team-member-template', ui.containers.teamCore, (el, item) => { el.querySelector('.member-name').value = item.name; el.querySelector('.member-role').value = item.role; el.querySelector('.member-img').value = item.img; });
+        if(data.team && data.team.volunteers) populateDynamic(data.team.volunteers.members, 'team-member-template', ui.containers.teamVolunteers, (el, item) => { el.querySelector('.member-name').value = item.name; el.querySelector('.member-role').value = item.role; el.querySelector('.member-img').value = item.img; });
+        if(data.gallery) populateDynamic(data.gallery.images, 'gallery-image-template', ui.containers.gallery, (el, item) => { el.querySelector('.gallery-src').value = item.src; el.querySelector('.gallery-alt').value = item.alt; });
+        if(data.faq) populateDynamic(data.faq.questions, 'faq-template', ui.containers.faq, (el, item) => { el.querySelector('.faq-question').value = item.question; el.querySelector('.faq-answer').value = item.answer; el.querySelector('.faq-category').value = item.category; });
+        if (data.schedule && data.schedule.days) data.schedule.days.forEach(day => { addDynamicItem('schedule-day-template', ui.containers.scheduleDays); const dayEl = ui.containers.scheduleDays.lastElementChild; dayEl.querySelector('.day-title').value = day.day; dayEl.querySelector('.day-date').value = day.date; populateDynamic(day.events, 'schedule-event-template', dayEl.querySelector('.day-events-container'), (el, item) => { el.querySelector('.event-time').value = item.time; el.querySelector('.event-title').value = item.title; el.querySelector('.event-details').value = item.details; }); });
     }
 
     const gatherEventData = () => {
-        const getVal = (id) => {
-            const el = document.getElementById(id);
-            return el ? el.value.trim() : '';
-        };
-        
+        const getVal = (id) => document.getElementById(id).value.trim();
         return {
-            eventName: getVal('eventName'), 
-            eventTagline: getVal('eventTagline'), 
-            eventStartDate: new Date(getVal('eventStartDate')).toISOString(), 
-            eventEndDate: new Date(getVal('eventEndDate')).toISOString(),
-            meta: { 
-                title: getVal('metaTitle'), 
-                description: getVal('metaDescription') 
-            },
-            hero: { 
-                title: getVal('heroTitle'), 
-                locationString: getVal('locationString'), 
-                heroVideoUrl: getVal('heroVideoUrl'), 
-                cta: Array.from(ui.containers.cta.children).map(item => ({ 
-                    text: item.querySelector('.cta-text').value, 
-                    url: item.querySelector('.cta-url').value, 
-                    class: item.querySelector('.cta-class').value 
-                })) 
-            },
-            about: { 
-                title: getVal('aboutTitle'), 
-                tagline: getVal('aboutTagline'), 
-                description: getVal('aboutDescription').split('|').map(p => p.trim()), 
-                history: { 
-                    stats: Array.from(ui.containers.stats.children).map(item => ({ 
-                        value: item.querySelector('.stat-value').value, 
-                        label: item.querySelector('.stat-label').value 
-                    })) 
-                } 
-            },
-            // NEW: Collect highlights as array
-            highlights: { 
-                title: getVal('highlightsTitle'),
-                videoUrls: Array.from(ui.containers.highlightVideos.children).map(item => 
-                    item.querySelector('.highlight-video-url').value.trim()
-                ).filter(url => url) // Remove empty entries
-            },
-            eventCategories: { 
-                title: getVal('categoriesTitle'), 
-                categories: Array.from(ui.containers.categories.children).map(item => ({ 
-                    icon: item.querySelector('.category-icon').value, 
-                    title: item.querySelector('.category-title').value, 
-                    description: item.querySelector('.category-description').value 
-                })) 
-            },
-            schedule: { 
-                pdfUrl: getVal('schedulePdfUrl'), 
-                days: Array.from(ui.containers.scheduleDays.children).map(day => ({ 
-                    day: day.querySelector('.day-title').value, 
-                    date: day.querySelector('.day-date').value, 
-                    events: Array.from(day.querySelector('.day-events-container').children).map(evt => ({ 
-                        time: evt.querySelector('.event-time').value, 
-                        title: evt.querySelector('.event-title').value, 
-                        details: evt.querySelector('.event-details').value 
-                    })) 
-                })) 
-            },
-            speakers: { 
-                title: getVal('speakersTitle'), 
-                guests: Array.from(ui.containers.speakers.children).map(item => ({ 
-                    name: item.querySelector('.speaker-name').value, 
-                    role: item.querySelector('.speaker-role').value, 
-                    img: item.querySelector('.speaker-img').value 
-                })) 
-            },
-            news: { 
-                title: getVal('newsTitle'), 
-                articles: Array.from(ui.containers.news.children).map(item => ({ 
-                    title: item.querySelector('.news-title').value, 
-                    excerpt: item.querySelector('.news-excerpt').value, 
-                    date: item.querySelector('.news-date').value, 
-                    category: item.querySelector('.news-category').value 
-                })) 
-            },
-            tickets: { 
-                title: getVal('ticketsTitle'), 
-                packages: Array.from(ui.containers.tickets.children).map(item => ({ 
-                    name: item.querySelector('.ticket-name').value, 
-                    price: item.querySelector('.ticket-price').value, 
-                    features: item.querySelector('.ticket-features').value.split('\n').map(f => f.trim()), 
-                    isFeatured: item.querySelector('.ticket-featured').checked 
-                })) 
-            },
-            team: { 
-                title: getVal('teamTitle'), 
-                joinText: getVal('teamJoinText'), 
-                core: { 
-                    title: getVal('teamCoreTitle'), 
-                    members: Array.from(ui.containers.teamCore.children).map(item => ({ 
-                        name: item.querySelector('.member-name').value, 
-                        role: item.querySelector('.member-role').value, 
-                        img: item.querySelector('.member-img').value 
-                    })) 
-                }, 
-                volunteers: { 
-                    title: getVal('teamVolunteersTitle'), 
-                    members: Array.from(ui.containers.teamVolunteers.children).map(item => ({ 
-                        name: item.querySelector('.member-name').value, 
-                        role: item.querySelector('.member-role').value, 
-                        img: item.querySelector('.member-img').value 
-                    })) 
-                } 
-            },
-            gallery: { 
-                title: getVal('galleryTitle'), 
-                images: Array.from(ui.containers.gallery.children).map(item => ({ 
-                    src: item.querySelector('.gallery-src').value, 
-                    alt: item.querySelector('.gallery-alt').value 
-                })) 
-            },
-            faq: { 
-                title: getVal('faqTitle'), 
-                questions: Array.from(ui.containers.faq.children).map(item => ({ 
-                    question: item.querySelector('.faq-question').value, 
-                    answer: item.querySelector('.faq-answer').value, 
-                    category: item.querySelector('.faq-category').value 
-                })) 
-            },
-            // NEW: Use videoUrl instead of mapUrl
-            location: { 
-                title: getVal('locationTitle'), 
-                address: getVal('locationAddress'), 
-                videoUrl: getVal('locationVideoUrl')
-            }
+            eventName: getVal('eventName'), eventTagline: getVal('eventTagline'), eventStartDate: new Date(getVal('eventStartDate')).toISOString(), eventEndDate: new Date(getVal('eventEndDate')).toISOString(),
+            meta: { title: getVal('metaTitle'), description: getVal('metaDescription') },
+            hero: { title: getVal('heroTitle'), locationString: getVal('locationString'), heroVideoUrl: getVal('heroVideoUrl'), cta: Array.from(ui.containers.cta.children).map(item => ({ text: item.querySelector('.cta-text').value, url: item.querySelector('.cta-url').value, class: item.querySelector('.cta-class').value })) },
+            about: { title: getVal('aboutTitle'), tagline: getVal('aboutTagline'), description: getVal('aboutDescription').split('|').map(p => p.trim()), history: { stats: Array.from(ui.containers.stats.children).map(item => ({ value: item.querySelector('.stat-value').value, label: item.querySelector('.stat-label').value })) } },
+            highlights: { title: getVal('highlightsTitle'), videoUrls: Array.from(ui.containers.highlightVideos.children).map(item => ({url: item.querySelector('.highlight-video-url').value.trim(), caption: item.querySelector('.highlight-video-caption').value.trim()})).filter(video => video.url !== "")},
+            eventCategories: { title: getVal('categoriesTitle'), categories: Array.from(ui.containers.categories.children).map(item => ({ icon: item.querySelector('.category-icon').value, title: item.querySelector('.category-title').value, description: item.querySelector('.category-description').value })) },
+            schedule: { pdfUrl: getVal('schedulePdfUrl'), days: Array.from(ui.containers.scheduleDays.children).map(day => ({ day: day.querySelector('.day-title').value, date: day.querySelector('.day-date').value, events: Array.from(day.querySelector('.day-events-container').children).map(evt => ({ time: evt.querySelector('.event-time').value, title: evt.querySelector('.event-title').value, details: evt.querySelector('.event-details').value })) })) },
+            speakers: { title: getVal('speakersTitle'), guests: Array.from(ui.containers.speakers.children).map(item => ({ name: item.querySelector('.speaker-name').value, role: item.querySelector('.speaker-role').value, img: item.querySelector('.speaker-img').value })) },
+            news: { title: getVal('newsTitle'), articles: Array.from(ui.containers.news.children).map(item => ({ title: item.querySelector('.news-title').value, excerpt: item.querySelector('.news-excerpt').value, date: item.querySelector('.news-date').value, category: item.querySelector('.news-category').value })) },
+            tickets: { title: getVal('ticketsTitle'), packages: Array.from(ui.containers.tickets.children).map(item => ({ name: item.querySelector('.ticket-name').value, price: item.querySelector('.ticket-price').value, features: item.querySelector('.ticket-features').value.split('\n').map(f => f.trim()), isFeatured: item.querySelector('.ticket-featured').checked })) },
+            team: { title: getVal('teamTitle'), joinText: getVal('teamJoinText'), core: { title: getVal('teamCoreTitle'), members: Array.from(ui.containers.teamCore.children).map(item => ({ name: item.querySelector('.member-name').value, role: item.querySelector('.member-role').value, img: item.querySelector('.member-img').value })) }, volunteers: { title: getVal('teamVolunteersTitle'), members: Array.from(ui.containers.teamVolunteers.children).map(item => ({ name: item.querySelector('.member-name').value, role: item.querySelector('.member-role').value, img: item.querySelector('.member-img').value })) } },
+            gallery: { title: getVal('galleryTitle'), images: Array.from(ui.containers.gallery.children).map(item => ({ src: item.querySelector('.gallery-src').value, alt: item.querySelector('.gallery-alt').value })) },
+            faq: { title: getVal('faqTitle'), questions: Array.from(ui.containers.faq.children).map(item => ({ question: item.querySelector('.faq-question').value, answer: item.querySelector('.faq-answer').value, category: item.querySelector('.faq-category').value })) },
+            location: { title: getVal('locationTitle'), address: getVal('locationAddress'), mapUrl: getVal('locationMapUrl') }
         };
     };
 
@@ -658,3 +379,7 @@ const firebaseConfig = {
     onAuthStateChanged(auth, handleAuthState);
     setupEventListeners();
 });
+
+
+
+
