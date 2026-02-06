@@ -1,11 +1,11 @@
 /**
  * =================================================================
- * |   UI MODULE - V5.4 FIXED (VIDEO LOADING ISSUE RESOLVED)       |
+ * |   UI MODULE - V5.5 (WITH VIDEO CONTROLS)                      |
  * =================================================================
- * |   ✔ Fixed highlights section targeting                        |
- * |   ✔ Fixed video rendering and playback                        |
- * |   ✔ Added extensive debugging logs                            |
- * |   ✔ Multiple fallback strategies                              |
+ * |   ✔ Added controls to highlight videos                        |
+ * |   ✔ Videos start muted but user can unmute                    |
+ * |   ✔ Play/pause, volume, fullscreen controls                   |
+ * |   ✔ Better user experience                                    |
  * =================================================================
  */
 
@@ -52,7 +52,7 @@ function renderMeta(meta) {
 }
 
 /* ================================================================
-   HERO (WITH VIDEO BACKGROUND)
+   HERO (WITH VIDEO BACKGROUND - NO CONTROLS)
 ================================================================ */
 function renderHero(hero) {
     const section = document.getElementById("home");
@@ -91,6 +91,7 @@ function renderHero(hero) {
         ).join("");
     }
 
+    // Hero video should NOT have controls (background video)
     if (video && source && hero.heroVideoUrl) {
         source.src = hero.heroVideoUrl;
 
@@ -99,6 +100,7 @@ function renderHero(hero) {
         video.loop = true;
         video.playsInline = true;
         video.preload = "auto";
+        video.controls = false; // No controls for hero background video
 
         video.setAttribute("muted", "");
         video.setAttribute("playsinline", "");
@@ -149,7 +151,7 @@ function renderAbout(about) {
 }
 
 /* ================================================================
-   HIGHLIGHTS (ARRAY OF VIDEOS - GRID LAYOUT) - FIXED
+   HIGHLIGHTS (WITH VIDEO CONTROLS)
 ================================================================ */
 function renderHighlights(highlights) {
     console.log("🎥 renderHighlights called with:", highlights);
@@ -185,7 +187,6 @@ function renderHighlights(highlights) {
     
     if (!grid) {
         console.error("❌ Could not find grid container! Creating one...");
-        // Create the grid if it doesn't exist
         grid = document.createElement("div");
         grid.id = "highlights-grid";
         grid.className = "highlights-grid";
@@ -225,7 +226,7 @@ function renderHighlights(highlights) {
         console.log("✅ Set highlights title:", highlights.title);
     }
 
-    // Render video grid
+    // Render video grid WITH CONTROLS
     const videoHTML = highlights.videoUrls.map((url, i) => {
         // Convert Dropbox share links to direct download links
         let directUrl = url;
@@ -245,33 +246,40 @@ function renderHighlights(highlights) {
         <div class="video-card animate-on-scroll ${orientation}">
             <video
                 src="${directUrl}"
+                controls
                 muted
-                autoplay
                 loop
                 playsinline
-                preload="auto"
+                preload="metadata"
             ></video>
         </div>`;
     }).join("");
     
-    console.log("✅ Generated video HTML, inserting into grid...");
+    console.log("✅ Generated video HTML with controls, inserting into grid...");
     grid.innerHTML = videoHTML;
     console.log("✅ Grid innerHTML updated");
 
-    // Ensure videos start playing after DOM insertion
+    // Optional: Auto-play on scroll (videos start paused, user can play)
     setTimeout(() => {
         const videos = grid.querySelectorAll("video");
-        console.log(`🎬 Found ${videos.length} video elements, attempting to play...`);
+        console.log(`🎬 Found ${videos.length} video elements with controls`);
         
+        // Add click-to-play functionality
         videos.forEach((v, index) => {
-            console.log(`▶️ Playing video ${index}:`, v.src);
-            v.play().catch(err => {
-                console.error(`❌ Video ${index} autoplay failed:`, err);
+            v.addEventListener('loadedmetadata', () => {
+                console.log(`✅ Video ${index} loaded and ready`);
+            });
+            
+            // Optional: Add play on hover
+            v.addEventListener('mouseenter', () => {
+                if (v.paused) {
+                    v.play().catch(() => {});
+                }
             });
         });
     }, 100);
     
-    console.log("✅ Highlights section render complete!");
+    console.log("✅ Highlights section render complete with controls!");
 }
 
 /* ================================================================
@@ -311,7 +319,6 @@ function renderSchedule(schedule) {
         tabs.after(panel);
     });
 
-    // Add PDF download if available
     const downloadContainer = section.querySelector('.schedule-download');
     if (downloadContainer && schedule.pdfUrl) {
         downloadContainer.innerHTML = `<a href="${schedule.pdfUrl}" download class="btn btn-outline">Download Full Schedule (PDF)</a>`;
@@ -500,7 +507,7 @@ function renderFaq(data) {
 }
 
 /* ================================================================
-   LOCATION (NATIVE VIDEO PLAYER)
+   LOCATION (WITH VIDEO CONTROLS)
 ================================================================ */
 function renderLocation(data) {
     const section = document.getElementById("contact");
@@ -514,18 +521,18 @@ function renderLocation(data) {
 
     const media = section.querySelector('[data-populate="location-map"]');
     if (media && data.videoUrl) {
-        // Use native HTML5 video player for location
+        // Location video WITH controls
         media.innerHTML = `
         <video 
             src="${data.videoUrl}" 
-            controls 
-            muted 
-            playsinline 
+            controls
+            muted
+            playsinline
             preload="metadata"
             class="contact-map"
         ></video>`;
     } else if (media && data.mapUrl) {
-        // Fallback to iframe map if no video provided
+        // Fallback to iframe map
         media.innerHTML = `<iframe class="contact-map" src="${data.mapUrl}" loading="lazy"></iframe>`;
     }
 }
@@ -544,7 +551,6 @@ export function setupEventListeners() {
         });
     }
 
-    // Schedule tabs interaction
     const scheduleContainer = document.querySelector('.schedule');
     if (scheduleContainer) {
         scheduleContainer.addEventListener('click', (e) => {
