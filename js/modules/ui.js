@@ -155,7 +155,7 @@ function renderAbout(about) {
 ================================================================ */
 function renderHighlights(highlights) {
     console.log("🎥 renderHighlights called with:", highlights);
-    
+
     // Try multiple possible section IDs
     let section = document.getElementById("highlights");
     if (!section) {
@@ -166,14 +166,14 @@ function renderHighlights(highlights) {
         console.warn("⚠️ #video not found, trying .highlights selector");
         section = document.querySelector(".highlights");
     }
-    
+
     if (!section) {
         console.error("❌ Could not find highlights section with any selector!");
         return;
     }
-    
+
     console.log("✅ Found highlights section:", section);
-    
+
     // Try multiple possible grid container IDs
     let grid = section.querySelector("#highlights-grid");
     if (!grid) {
@@ -184,7 +184,7 @@ function renderHighlights(highlights) {
         console.warn("⚠️ .highlights-grid not found, trying [data-populate='highlights-video']");
         grid = section.querySelector("[data-populate='highlights-video']");
     }
-    
+
     if (!grid) {
         console.error("❌ Could not find grid container! Creating one...");
         grid = document.createElement("div");
@@ -193,30 +193,30 @@ function renderHighlights(highlights) {
         section.appendChild(grid);
         console.log("✅ Created new grid container");
     }
-    
+
     console.log("✅ Found grid container:", grid);
-    
+
     // Validate highlights data
     if (!highlights) {
         console.error("❌ No highlights data provided");
         section.hidden = true;
         return;
     }
-    
+
     if (!Array.isArray(highlights.videoUrls)) {
         console.error("❌ highlights.videoUrls is not an array:", highlights.videoUrls);
         section.hidden = true;
         return;
     }
-    
+
     if (highlights.videoUrls.length === 0) {
         console.error("❌ highlights.videoUrls is empty");
         section.hidden = true;
         return;
     }
-    
+
     console.log(`✅ Found ${highlights.videoUrls.length} video URLs:`, highlights.videoUrls);
-    
+
     section.hidden = false;
 
     // Update section title if provided
@@ -227,34 +227,56 @@ function renderHighlights(highlights) {
     }
 
     // Render video grid WITH CONTROLS
-    const videoHTML = highlights.videoUrls.map((url, i) => {
-        // Convert Dropbox share links to direct download links
-        let directUrl = url;
-        if (url.includes('dropbox.com')) {
-            directUrl = url
-                .replace("dl=0", "raw=1")
-                .replace("www.dropbox.com", "dl.dropboxusercontent.com");
-            console.log(`🔗 Converted Dropbox URL ${i}:`, directUrl);
+const videoHTML = highlights.videoUrls.map((item, i) => {
+    // Support both string and object formats
+    let url = typeof item === "string" ? item : item?.url;
+
+    if (!url || typeof url !== "string") {
+        console.warn("Invalid video URL at index", i, item);
+        return "";
+    }
+
+    let directUrl = url;
+
+    // Dropbox
+    if (url.includes("dropbox.com")) {
+        directUrl = url
+            .replace("dl=0", "raw=1")
+            .replace("www.dropbox.com", "dl.dropboxusercontent.com");
+    }
+
+    // Cloudinary player
+    else if (url.includes("player.cloudinary.com")) {
+        const params = new URL(url).searchParams;
+        const cloud = params.get("cloud_name");
+        const publicId = params.get("public_id");
+
+        if (cloud && publicId) {
+            directUrl = `https://res.cloudinary.com/${cloud}/video/upload/f_auto,q_auto/${publicId}`;
         }
-        
-        // Alternate between landscape and portrait for visual variety
-        const orientation = i % 2 === 0 ? "landscape" : "portrait";
-        
-        console.log(`📹 Creating video card ${i}: ${orientation}`);
-        
-        return `
-        <div class="video-card animate-on-scroll ${orientation}">
-            <video
-                src="${directUrl}"
-                controls
-                muted
-                loop
-                playsinline
-                preload="metadata"
-            ></video>
-        </div>`;
-    }).join("");
-    
+    }
+
+    // Direct Cloudinary
+    else if (url.includes("res.cloudinary.com")) {
+        directUrl = url.replace("/upload/", "/upload/f_auto,q_auto/");
+    }
+
+    const orientation = i % 2 === 0 ? "landscape" : "portrait";
+
+    return `
+    <div class="video-card animate-on-scroll ${orientation}">
+        <video
+            src="${directUrl}"
+            controls
+            muted
+            playsinline
+            preload="metadata"
+        ></video>
+    </div>`;
+}).join("");
+
+
+
     console.log("✅ Generated video HTML with controls, inserting into grid...");
     grid.innerHTML = videoHTML;
     console.log("✅ Grid innerHTML updated");
@@ -263,22 +285,22 @@ function renderHighlights(highlights) {
     setTimeout(() => {
         const videos = grid.querySelectorAll("video");
         console.log(`🎬 Found ${videos.length} video elements with controls`);
-        
+
         // Add click-to-play functionality
         videos.forEach((v, index) => {
             v.addEventListener('loadedmetadata', () => {
                 console.log(`✅ Video ${index} loaded and ready`);
             });
-            
+
             // Optional: Add play on hover
-            v.addEventListener('mouseenter', () => {
-                if (v.paused) {
-                    v.play().catch(() => {});
-                }
-            });
+            // v.addEventListener('mouseenter', () => {
+            //     if (v.paused) {
+            //         v.play().catch(() => { });
+            //     }
+            // });
         });
     }, 100);
-    
+
     console.log("✅ Highlights section render complete with controls!");
 }
 
@@ -341,7 +363,7 @@ function renderEventCategories(data) {
 
     const titleEl = section.querySelector('[data-populate="categories-title"]');
     const containerEl = section.querySelector('[data-populate="event-categories"]');
-    
+
     if (titleEl) titleEl.textContent = data.title || "";
     if (containerEl) {
         containerEl.innerHTML = data.categories.map(c => `
@@ -515,7 +537,7 @@ function renderLocation(data) {
 
     const titleEl = section.querySelector('[data-populate="location-title"]');
     const addressEl = section.querySelector('[data-populate="location-address"]');
-    
+
     if (titleEl) titleEl.textContent = data.title || "";
     if (addressEl) addressEl.innerHTML = data.address || "";
 
@@ -619,7 +641,7 @@ export function initCountdown(dateStr) {
             el.textContent = "Event Live!";
             return;
         }
-        
+
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
