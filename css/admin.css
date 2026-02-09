@@ -188,6 +188,21 @@ body.dashboard-active { display: grid; grid-template-columns: 240px 1fr; overflo
 /* === MESSAGE BOX === */
 #message-box { font-weight: 600; }
 
+.show{
+    position: fixed;        /* stay centered even when scrolling */
+    z-index: 1000;
+    background: #22a52e;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  /* true center */
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
 /* === CUSTOM SCROLLBAR === */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--color-background-primary); }

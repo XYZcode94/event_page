@@ -251,10 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const eventId = ui.editingEventId.value;
                 const eventDocRef = doc(db, 'events', eventId);
                 await updateDoc(eventDocRef, eventData);
-                showMessage('Event updated successfully!', 'success');
+                showMessage('Event updated successfully! <i class="fa-solid fa-thumbs-up"></i>', 'success');
             } else {
                 await addDoc(collection(db, 'events'), eventData);
-                showMessage('Event created successfully!', 'success');
+                showMessage('Event created successfully! <i class="fa-solid fa-thumbs-up"></i>', 'success');
             }
             resetFormState();
             loadAndDisplayEvents();
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearForm() { ui.forms.event.reset(); Object.values(ui.containers).forEach(c => { c.innerHTML = ''; }); }
     function formatISOForInput(iso) { if (!iso) return ''; const d = new Date(iso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); }
     function addDynamicItem(templateId, container) { const t = document.getElementById(templateId); if (t && container) container.appendChild(t.content.cloneNode(true)); }
-    function showMessage(message, type = 'success') { ui.messageBox.textContent = message; ui.messageBox.className = 'message-box show'; ui.messageBox.classList.add(type); setTimeout(() => ui.messageBox.classList.remove('show'), 4000); }
+    function showMessage(message, type = 'success') { ui.messageBox.innerHTML = message; ui.messageBox.className = 'message-box show'; ui.messageBox.classList.add(type); setTimeout(() => ui.messageBox.classList.remove('show'), 2000); }
     function showModal(title, message) { ui.modal.title.textContent = title; ui.modal.message.textContent = message; ui.modal.overlay.classList.remove('hidden'); ui.modal.overlay.setAttribute('aria-hidden', 'false'); }
     function hideModal() { ui.modal.overlay.classList.add('hidden'); ui.modal.overlay.setAttribute('aria-hidden', 'true'); }
     function setFocusMode(isFocused) {
