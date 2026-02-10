@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function confirmDeleteEvent(eventId) {
         eventIdToDelete = eventId;
-        showModal('Confirm Deletion', 'Are you sure you want to permanently delete this event? This action cannot be undone.');
+        showModal('Confirm Deletion', 'Are you sure you want to permanently delete this event ?');
     }
 
     async function executeDelete() {
@@ -291,7 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function clearForm() { ui.forms.event.reset(); Object.values(ui.containers).forEach(c => { c.innerHTML = ''; }); }
     function formatISOForInput(iso) { if (!iso) return ''; const d = new Date(iso); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); }
     function addDynamicItem(templateId, container) { const t = document.getElementById(templateId); if (t && container) container.appendChild(t.content.cloneNode(true)); }
-    function showMessage(message, type = 'success') { ui.messageBox.innerHTML = message; ui.messageBox.className = 'message-box show'; ui.messageBox.classList.add(type); setTimeout(() => ui.messageBox.classList.remove('show'), 2000); }
+    function showMessage(message, type = 'success') { ui.messageBox.innerHTML = message; ui.messageBox.className = 'message-box show'; ui.messageBox.classList.add(type); setTimeout(() => { ui.messageBox.classList.remove('show'); ui.messageBox.innerHTML = ""; }, 2000);
+ }
     function showModal(title, message) { ui.modal.title.textContent = title; ui.modal.message.textContent = message; ui.modal.overlay.classList.remove('hidden'); ui.modal.overlay.setAttribute('aria-hidden', 'false'); }
     function hideModal() { ui.modal.overlay.classList.add('hidden'); ui.modal.overlay.setAttribute('aria-hidden', 'true'); }
     function setFocusMode(isFocused) {
@@ -363,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
             meta: { title: getVal('metaTitle'), description: getVal('metaDescription') },
             hero: { title: getVal('heroTitle'), locationString: getVal('locationString'), heroVideoUrl: getVal('heroVideoUrl'), cta: Array.from(ui.containers.cta.children).map(item => ({ text: item.querySelector('.cta-text').value, url: item.querySelector('.cta-url').value, class: item.querySelector('.cta-class').value })) },
             about: { title: getVal('aboutTitle'), tagline: getVal('aboutTagline'), description: getVal('aboutDescription').split('|').map(p => p.trim()), history: { stats: Array.from(ui.containers.stats.children).map(item => ({ value: item.querySelector('.stat-value').value, label: item.querySelector('.stat-label').value })) } },
-            highlights: { title: getVal('highlightsTitle'), videoUrls: Array.from(ui.containers.highlightVideos.children).map(item => ({ url: item.querySelector('.highlight-video-url').value.trim(), caption: item.querySelector('.highlight-video-caption').value.trim() })).filter(video => video.url !== "") },
+            highlights: { title: document.getElementById('highlightsTitle')?.value || "", videoUrls: Array.from(ui.containers.highlightVideos.children).map(item => { const urlInput = item.querySelector('.highlight-video-url'); const captionInput = item.querySelector('.highlight-video-caption'); return { url: urlInput ? urlInput.value.trim() : "", caption: captionInput ? captionInput.value.trim() : "" }; }).filter(video => video.url !== "")},
             eventCategories: { title: getVal('categoriesTitle'), categories: Array.from(ui.containers.categories.children).map(item => ({ icon: item.querySelector('.category-icon').value, title: item.querySelector('.category-title').value, description: item.querySelector('.category-description').value })) },
             schedule: { pdfUrl: getVal('schedulePdfUrl'), days: Array.from(ui.containers.scheduleDays.children).map(day => ({ day: day.querySelector('.day-title').value, date: day.querySelector('.day-date').value, events: Array.from(day.querySelector('.day-events-container').children).map(evt => ({ time: evt.querySelector('.event-time').value, title: evt.querySelector('.event-title').value, details: evt.querySelector('.event-details').value })) })) },
             speakers: { title: getVal('speakersTitle'), guests: Array.from(ui.containers.speakers.children).map(item => ({ name: item.querySelector('.speaker-name').value, role: item.querySelector('.speaker-role').value, img: item.querySelector('.speaker-img').value })) },
